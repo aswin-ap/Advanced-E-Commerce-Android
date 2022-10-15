@@ -9,6 +9,10 @@ public class Validation {
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
+    public static boolean isNotNullOrEmpty(String text) {
+        return (text != null && !TextUtils.isEmpty(text));
+    }
+
     public static boolean isValidPassword(String email) {
         return email.length() >= 6;
     }

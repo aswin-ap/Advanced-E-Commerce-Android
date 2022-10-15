@@ -46,7 +46,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:tabGravity="fill"
+        app:tabIndicatorHeight="4dp"
         app:tabMode="fixed"
+        app:tabTextAppearance="@style/tabTextStyle"
         app:tabTextColor="@color/black"
         tools:layout_editor_absoluteX="0dp" />
 
