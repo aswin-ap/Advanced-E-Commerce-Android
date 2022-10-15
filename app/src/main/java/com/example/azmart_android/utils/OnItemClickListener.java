@@ -1,4 +1,4 @@
-package com.example.pos_android.utils;
+package com.example.azmart_android.utils;
 
 public interface OnItemClickListener {
     public void onItemClick(Integer position);

@@ -1,4 +1,4 @@
-package com.example.pos_android.utils;
+package com.example.azmart_android.utils;
 
 import android.text.TextUtils;
 import android.util.Patterns;

@@ -1,4 +1,4 @@
-package com.example.pos_android.network.api_manager;
+package com.example.azmart_android.network.api_manager;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;

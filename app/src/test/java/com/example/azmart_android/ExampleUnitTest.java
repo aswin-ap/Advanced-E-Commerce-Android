@@ -1,4 +1,4 @@
-package com.example.pos_android;
+package com.example.azmart_android;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.pos_android.utils;
+package com.example.azmart_android.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

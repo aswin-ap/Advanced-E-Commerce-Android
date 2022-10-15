@@ -1,4 +1,4 @@
-package com.example.pos_android.view;
+package com.example.azmart_android.view;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.pos_android.R;
+import com.example.azmart_android.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 

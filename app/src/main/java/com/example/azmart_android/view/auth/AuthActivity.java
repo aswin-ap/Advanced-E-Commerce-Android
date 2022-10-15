@@ -1,4 +1,4 @@
-package com.example.pos_android.view.auth;
+package com.example.azmart_android.view.auth;
 
 import android.os.Bundle;
 
@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.pos_android.R;
-import com.example.pos_android.databinding.ActivityAuthBinding;
+import com.example.azmart_android.R;
+import com.example.azmart_android.databinding.ActivityAuthBinding;
 import com.google.android.material.tabs.TabLayout;
 
 public class AuthActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.pos_android.view.auth;
+package com.example.azmart_android.view.auth;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.pos_android.R;
+import com.example.azmart_android.R;
+
 
 public class SignupFragment extends Fragment {
 

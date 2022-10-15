@@ -1,4 +1,4 @@
-package com.example.pos_android.view;
+package com.example.azmart_android.view;
 
 
 import android.app.Dialog;
@@ -8,7 +8,8 @@ import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.pos_android.R;
+import com.example.azmart_android.R;
+
 
 public class BaseActivity extends AppCompatActivity {
 

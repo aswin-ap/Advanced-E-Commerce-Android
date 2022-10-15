@@ -1,4 +1,4 @@
-package com.example.pos_android.view;
+package com.example.azmart_android.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.pos_android.R;
-import com.example.pos_android.view.auth.AuthActivity;
+import com.example.azmart_android.R;
+import com.example.azmart_android.view.auth.AuthActivity;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {

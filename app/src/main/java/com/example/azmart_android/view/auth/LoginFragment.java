@@ -1,4 +1,4 @@
-package com.example.pos_android.view.auth;
+package com.example.azmart_android.view.auth;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.example.pos_android.databinding.FragmentLoginBinding;
-import com.example.pos_android.utils.Validation;
-import com.example.pos_android.view.BaseFragment;
+import com.example.azmart_android.databinding.FragmentLoginBinding;
+import com.example.azmart_android.utils.Validation;
+import com.example.azmart_android.view.BaseFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
