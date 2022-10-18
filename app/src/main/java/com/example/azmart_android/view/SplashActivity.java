@@ -1,14 +1,16 @@
 package com.example.azmart_android.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.azmart_android.R;
+import com.example.azmart_android.data.prefrence.SessionManager;
 import com.example.azmart_android.view.auth.AuthActivity;
+import com.example.azmart_android.view.home.HomeActivity;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
@@ -18,13 +20,19 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        SessionManager sessionManager = new SessionManager(this);
         new Handler().postDelayed(() -> {
-
-            Intent i = new Intent(SplashActivity.this,
-                    AuthActivity.class);
-            startActivity(i);
-            finishAffinity();
-
+            if (sessionManager.isLoggedIn()) {
+                Intent i = new Intent(SplashActivity.this,
+                        HomeActivity.class);
+                startActivity(i);
+                finishAffinity();
+            } else {
+                Intent i = new Intent(SplashActivity.this,
+                        AuthActivity.class);
+                startActivity(i);
+                finishAffinity();
+            }
         }, SPLASH_SCREEN_TIME_OUT);
     }
 }
