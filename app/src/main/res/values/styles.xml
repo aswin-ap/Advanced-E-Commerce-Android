@@ -10,7 +10,7 @@
     <style name="authMaterialTextInputTheme" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextColor">@color/black</item>
         <item name="boxStrokeColor">@color/black</item>
-        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidth">0.5dp</item>
         <item name="boxStrokeWidthFocused">1dp</item>
         <item name="boxCornerRadiusBottomEnd">15dp</item>
         <item name="boxCornerRadiusBottomStart">25dp</item>
@@ -18,9 +18,26 @@
         <item name="boxCornerRadiusTopStart">15dp</item>
     </style>
 
+    <style name="searchMaterialTextInputTheme" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/black</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="boxStrokeWidth">0.8dp</item>
+        <item name="boxStrokeWidthFocused">0.8dp</item>
+        <item name="boxCornerRadiusBottomEnd">15dp</item>
+        <item name="boxCornerRadiusBottomStart">15dp</item>
+        <item name="boxCornerRadiusTopEnd">15dp</item>
+        <item name="boxCornerRadiusTopStart">15dp</item>
+    </style>
+
     <style name="tabTextStyle" parent="Widget.Design.TabLayout">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="Widget.Design.TabLayout">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>

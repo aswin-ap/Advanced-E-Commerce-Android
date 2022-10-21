@@ -1,4 +1,7 @@
 package com.example.azmart_android.network.api_manager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -6,7 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiCleint {
+public class ApiClient {
 
     private static Retrofit retrofit1 = null;
 
@@ -16,6 +19,9 @@ public class ApiCleint {
         return retrofit1;
     }
 
+    static Gson gson = new GsonBuilder()
+            .setLenient()
+            .create();
 
 
     private static OkHttpClient okClient() {
@@ -35,7 +41,7 @@ public class ApiCleint {
                     //.baseUrl(BuildConfig.BASEURL_STAGING)
                     .client(okClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit1;

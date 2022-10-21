@@ -9,9 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.azmart_android.view.auth.LoginFragment;
 import com.example.azmart_android.view.auth.SignupFragment;
 
-public class MyViewPagerAdapter extends FragmentStateAdapter {
+public class AuthViewPagerAdapter extends FragmentStateAdapter {
 
-    public MyViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public AuthViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 
