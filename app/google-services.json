@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "336267693710",
+    "project_id": "e-commerce-66888",
+    "storage_bucket": "e-commerce-66888.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336267693710:android:a0b513855bc933b78ec3df",
+        "android_client_info": {
+          "package_name": "com.example.azmart_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336267693710-2ucpg4kv9p593vt4c0dnfhj9iufn4kkj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5z0I2OepRb3gmcN-Bp3o4ljlpstVwxKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336267693710-2ucpg4kv9p593vt4c0dnfhj9iufn4kkj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
