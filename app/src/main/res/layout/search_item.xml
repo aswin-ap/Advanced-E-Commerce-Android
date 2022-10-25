@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
 
     <ImageView
         android:id="@+id/iv_product"
@@ -26,16 +28,16 @@
         tools:text="TextView" />
 
     <TextView
-        android:id="@+id/iv_price"
+        android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:text="USD $ 41.00"
         android:textColor="#494949"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/iv_product"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="USD $ 41.00" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,15 @@
 package com.example.azmart_android.view.search;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.example.azmart_android.adapter.SearchAdapter;
 import com.example.azmart_android.contracts.SearchContract;
 import com.example.azmart_android.databinding.FragmentSearchBinding;
 import com.example.azmart_android.model.SearchResponse;
@@ -15,26 +18,16 @@ import com.example.azmart_android.view.BaseFragment;
 
 
 public class SearchFragment extends BaseFragment implements SearchContract.View {
-
-    private static final String SEARCH_KEYWORD = "searchText";
     private String searchKeyword;
     private FragmentSearchBinding binding;
     private SearchPresenter searchPresenter;
-
-    public static SearchFragment newInstance(String text) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(SEARCH_KEYWORD, fragment.searchKeyword);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private SearchAdapter searchAdapter;
+    private SearchResponse searchResponseList;
+    private boolean isFirstTime = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            searchKeyword = getArguments().getString(SEARCH_KEYWORD);
-        }
         searchPresenter = new SearchPresenter(this);
     }
 
@@ -43,31 +36,52 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-        initView();
         return binding.getRoot();
     }
 
-    private void initView() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView();
+    }
 
+    private void initView() {
+        searchKeyword = SearchFragmentArgs.fromBundle(getArguments()).getSearch();
+        Log.d("Search", "onViewCreated: " + searchKeyword);
+
+        searchPresenter.getItemsBySearch(searchKeyword);
     }
 
     @Override
     public void showLoading() {
-        showLoadingDialog(requireContext());
+        binding.progressCircularLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.rvSearch.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-        hideLoadingDialog();
+        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+        binding.rvSearch.setVisibility(View.GONE);
     }
 
     @Override
     public void showApiErrorWarning(String string) {
+        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+        binding.rvSearch.setVisibility(View.GONE);
         showToast(requireContext(), string);
     }
 
     @Override
     public void showSearchResponse(SearchResponse searchResponse) {
-
+        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+        binding.rvSearch.setVisibility(View.VISIBLE);
+        showToast(requireContext(), "Success");
+        searchResponseList = searchResponse;
+        if (isFirstTime) {
+            searchAdapter = new SearchAdapter(searchResponseList);
+            binding.rvSearch.setHasFixedSize(true);
+            binding.rvSearch.setAdapter(searchAdapter);
+        }
+        //searchAdapter.updateSearchListItems(searchResponseList.getDocs());
     }
 }

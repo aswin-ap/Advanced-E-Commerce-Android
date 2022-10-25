@@ -105,1032 +105,1033 @@ public class SearchResponse {
     public int getTotalRecordCount() {
         return totalRecordCount;
     }
-}
 
-class Evaluation {
+    public class Docs {
+
+        @SerializedName("app_sale_price")
+        double appSalePrice;
+
+        @SerializedName("app_sale_price_currency")
+        String appSalePriceCurrency;
+
+        @SerializedName("discount_rate")
+        int discountRate;
+
+        @SerializedName("evaluate_rate")
+        double evaluateRate;
+
+        @SerializedName("product_id")
+        String productId;
+
+        @SerializedName("product_main_image_url")
+        String productMainImageUrl;
+
+        @SerializedName("product_title")
+        String productTitle;
+
+        @SerializedName("lastest_volume")
+        String lastestVolume;
+
+        @SerializedName("metadata")
+        Metadata metadata;
+
+        @SerializedName("product_detail_url")
+        String productDetailUrl;
 
-    @SerializedName("starWidth")
-    int starWidth;
+        @SerializedName("keywords")
+        String keywords;
+
+
+        public void setAppSalePrice(double appSalePrice) {
+            this.appSalePrice = appSalePrice;
+        }
+        public double getAppSalePrice() {
+            return appSalePrice;
+        }
+
+        public void setAppSalePriceCurrency(String appSalePriceCurrency) {
+            this.appSalePriceCurrency = appSalePriceCurrency;
+        }
+        public String getAppSalePriceCurrency() {
+            return appSalePriceCurrency;
+        }
+
+        public void setDiscountRate(int discountRate) {
+            this.discountRate = discountRate;
+        }
+        public int getDiscountRate() {
+            return discountRate;
+        }
+
+        public void setEvaluateRate(double evaluateRate) {
+            this.evaluateRate = evaluateRate;
+        }
+        public double getEvaluateRate() {
+            return evaluateRate;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductMainImageUrl(String productMainImageUrl) {
+            this.productMainImageUrl = productMainImageUrl;
+        }
+        public String getProductMainImageUrl() {
+            return productMainImageUrl;
+        }
 
-    @SerializedName("starUrl")
-    String starUrl;
+        public void setProductTitle(String productTitle) {
+            this.productTitle = productTitle;
+        }
+        public String getProductTitle() {
+            return productTitle;
+        }
+
+        public void setLastestVolume(String lastestVolume) {
+            this.lastestVolume = lastestVolume;
+        }
+        public String getLastestVolume() {
+            return lastestVolume;
+        }
+
+        public void setMetadata(Metadata metadata) {
+            this.metadata = metadata;
+        }
+        public Metadata getMetadata() {
+            return metadata;
+        }
+
+        public void setProductDetailUrl(String productDetailUrl) {
+            this.productDetailUrl = productDetailUrl;
+        }
+        public String getProductDetailUrl() {
+            return productDetailUrl;
+        }
 
-    @SerializedName("starRating")
-    double starRating;
+        public void setKeywords(String keywords) {
+            this.keywords = keywords;
+        }
+        public String getKeywords() {
+            return keywords;
+        }
 
-    @SerializedName("starHeight")
-    int starHeight;
-
-
-    public void setStarWidth(int starWidth) {
-        this.starWidth = starWidth;
-    }
-    public int getStarWidth() {
-        return starWidth;
-    }
-
-    public void setStarUrl(String starUrl) {
-        this.starUrl = starUrl;
-    }
-    public String getStarUrl() {
-        return starUrl;
-    }
-
-    public void setStarRating(double starRating) {
-        this.starRating = starRating;
-    }
-    public double getStarRating() {
-        return starRating;
-    }
-
-    public void setStarHeight(int starHeight) {
-        this.starHeight = starHeight;
-    }
-    public int getStarHeight() {
-        return starHeight;
     }
 
-}
+    class Evaluation {
 
-class Image {
+        @SerializedName("starWidth")
+        int starWidth;
 
-    @SerializedName("imgUrl")
-    String imgUrl;
+        @SerializedName("starUrl")
+        String starUrl;
 
-    @SerializedName("imgWidth")
-    int imgWidth;
+        @SerializedName("starRating")
+        double starRating;
 
-    @SerializedName("imgHeight")
-    int imgHeight;
+        @SerializedName("starHeight")
+        int starHeight;
 
-    @SerializedName("imgType")
-    String imgType;
 
+        public void setStarWidth(int starWidth) {
+            this.starWidth = starWidth;
+        }
+        public int getStarWidth() {
+            return starWidth;
+        }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-    public String getImgUrl() {
-        return imgUrl;
-    }
+        public void setStarUrl(String starUrl) {
+            this.starUrl = starUrl;
+        }
+        public String getStarUrl() {
+            return starUrl;
+        }
 
-    public void setImgWidth(int imgWidth) {
-        this.imgWidth = imgWidth;
-    }
-    public int getImgWidth() {
-        return imgWidth;
-    }
+        public void setStarRating(double starRating) {
+            this.starRating = starRating;
+        }
+        public double getStarRating() {
+            return starRating;
+        }
 
-    public void setImgHeight(int imgHeight) {
-        this.imgHeight = imgHeight;
-    }
-    public int getImgHeight() {
-        return imgHeight;
-    }
+        public void setStarHeight(int starHeight) {
+            this.starHeight = starHeight;
+        }
+        public int getStarHeight() {
+            return starHeight;
+        }
 
-    public void setImgType(String imgType) {
-        this.imgType = imgType;
     }
-    public String getImgType() {
-        return imgType;
-    }
 
-}
+    class Image {
 
-class Exposure {
+        @SerializedName("imgUrl")
+        String imgUrl;
 
-    @SerializedName("selling_point")
-    String sellingPoint;
+        @SerializedName("imgWidth")
+        int imgWidth;
 
-
-    public void setSellingPoint(String sellingPoint) {
-        this.sellingPoint = sellingPoint;
-    }
-    public String getSellingPoint() {
-        return sellingPoint;
-    }
+        @SerializedName("imgHeight")
+        int imgHeight;
 
-}
+        @SerializedName("imgType")
+        String imgType;
 
-class PdpParams {
 
-    @SerializedName("pdp_cdi")
-    String pdpCdi;
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
+        }
+        public String getImgUrl() {
+            return imgUrl;
+        }
 
-    @SerializedName("pdp_npi")
-    String pdpNpi;
+        public void setImgWidth(int imgWidth) {
+            this.imgWidth = imgWidth;
+        }
+        public int getImgWidth() {
+            return imgWidth;
+        }
 
+        public void setImgHeight(int imgHeight) {
+            this.imgHeight = imgHeight;
+        }
+        public int getImgHeight() {
+            return imgHeight;
+        }
 
-    public void setPdpCdi(String pdpCdi) {
-        this.pdpCdi = pdpCdi;
-    }
-    public String getPdpCdi() {
-        return pdpCdi;
-    }
+        public void setImgType(String imgType) {
+            this.imgType = imgType;
+        }
+        public String getImgType() {
+            return imgType;
+        }
 
-    public void setPdpNpi(String pdpNpi) {
-        this.pdpNpi = pdpNpi;
     }
-    public String getPdpNpi() {
-        return pdpNpi;
-    }
 
-}
+    class Exposure {
 
-class Click {
+        @SerializedName("selling_point")
+        String sellingPoint;
 
-    @SerializedName("haveSellingPoint")
-    String haveSellingPoint;
 
+        public void setSellingPoint(String sellingPoint) {
+            this.sellingPoint = sellingPoint;
+        }
+        public String getSellingPoint() {
+            return sellingPoint;
+        }
 
-    public void setHaveSellingPoint(String haveSellingPoint) {
-        this.haveSellingPoint = haveSellingPoint;
     }
-    public String getHaveSellingPoint() {
-        return haveSellingPoint;
-    }
-
-}
 
-class UtLogMap {
+    class PdpParams {
 
-    @SerializedName("original_price_type")
-    String originalPriceType;
+        @SerializedName("pdp_cdi")
+        String pdpCdi;
 
-    @SerializedName("formatted_price")
-    String formattedPrice;
+        @SerializedName("pdp_npi")
+        String pdpNpi;
 
-    @SerializedName("csp")
-    String csp;
 
-    @SerializedName("x_object_type")
-    String xObjectType;
+        public void setPdpCdi(String pdpCdi) {
+            this.pdpCdi = pdpCdi;
+        }
+        public String getPdpCdi() {
+            return pdpCdi;
+        }
 
-    @SerializedName("hit_19_forbidden")
-    boolean hit19Forbidden;
+        public void setPdpNpi(String pdpNpi) {
+            this.pdpNpi = pdpNpi;
+        }
+        public String getPdpNpi() {
+            return pdpNpi;
+        }
 
-    @SerializedName("is_detail_next")
-    String isDetailNext;
-
-    @SerializedName("sku_id")
-    String skuId;
-
-    @SerializedName("mixrank_success")
-    String mixrankSuccess;
+    }
 
-    @SerializedName("sku_ic_tags")
-    String skuIcTags;
+    class Click {
 
-    @SerializedName("is_adult_certified")
-    boolean isAdultCertified;
+        @SerializedName("haveSellingPoint")
+        String haveSellingPoint;
 
-    @SerializedName("mixrank_enable")
-    String mixrankEnable;
 
-    @SerializedName("ump_atmospheres")
-    String umpAtmospheres;
+        public void setHaveSellingPoint(String haveSellingPoint) {
+            this.haveSellingPoint = haveSellingPoint;
+        }
+        public String getHaveSellingPoint() {
+            return haveSellingPoint;
+        }
 
-    @SerializedName("oip")
-    String oip;
+    }
 
-    @SerializedName("selling_point")
-    String sellingPoint;
+    class UtLogMap {
 
-    @SerializedName("original_price_strategy")
-    String originalPriceStrategy;
+        @SerializedName("original_price_type")
+        String originalPriceType;
 
-    @SerializedName("x_object_id")
-    String xObjectId;
+        @SerializedName("formatted_price")
+        String formattedPrice;
 
+        @SerializedName("csp")
+        String csp;
 
-    public void setOriginalPriceType(String originalPriceType) {
-        this.originalPriceType = originalPriceType;
-    }
-    public String getOriginalPriceType() {
-        return originalPriceType;
-    }
+        @SerializedName("x_object_type")
+        String xObjectType;
 
-    public void setFormattedPrice(String formattedPrice) {
-        this.formattedPrice = formattedPrice;
-    }
-    public String getFormattedPrice() {
-        return formattedPrice;
-    }
+        @SerializedName("hit_19_forbidden")
+        boolean hit19Forbidden;
 
-    public void setCsp(String csp) {
-        this.csp = csp;
-    }
-    public String getCsp() {
-        return csp;
-    }
+        @SerializedName("is_detail_next")
+        String isDetailNext;
 
-    public void setXObjectType(String xObjectType) {
-        this.xObjectType = xObjectType;
-    }
-    public String getXObjectType() {
-        return xObjectType;
-    }
+        @SerializedName("sku_id")
+        String skuId;
 
-    public void setHit19Forbidden(boolean hit19Forbidden) {
-        this.hit19Forbidden = hit19Forbidden;
-    }
-    public boolean getHit19Forbidden() {
-        return hit19Forbidden;
-    }
+        @SerializedName("mixrank_success")
+        String mixrankSuccess;
 
-    public void setIsDetailNext(String isDetailNext) {
-        this.isDetailNext = isDetailNext;
-    }
-    public String getIsDetailNext() {
-        return isDetailNext;
-    }
+        @SerializedName("sku_ic_tags")
+        String skuIcTags;
 
-    public void setSkuId(String skuId) {
-        this.skuId = skuId;
-    }
-    public String getSkuId() {
-        return skuId;
-    }
+        @SerializedName("is_adult_certified")
+        boolean isAdultCertified;
 
-    public void setMixrankSuccess(String mixrankSuccess) {
-        this.mixrankSuccess = mixrankSuccess;
-    }
-    public String getMixrankSuccess() {
-        return mixrankSuccess;
-    }
+        @SerializedName("mixrank_enable")
+        String mixrankEnable;
 
-    public void setSkuIcTags(String skuIcTags) {
-        this.skuIcTags = skuIcTags;
-    }
-    public String getSkuIcTags() {
-        return skuIcTags;
-    }
+        @SerializedName("ump_atmospheres")
+        String umpAtmospheres;
 
-    public void setIsAdultCertified(boolean isAdultCertified) {
-        this.isAdultCertified = isAdultCertified;
-    }
-    public boolean getIsAdultCertified() {
-        return isAdultCertified;
-    }
+        @SerializedName("oip")
+        String oip;
 
-    public void setMixrankEnable(String mixrankEnable) {
-        this.mixrankEnable = mixrankEnable;
-    }
-    public String getMixrankEnable() {
-        return mixrankEnable;
-    }
+        @SerializedName("selling_point")
+        String sellingPoint;
 
-    public void setUmpAtmospheres(String umpAtmospheres) {
-        this.umpAtmospheres = umpAtmospheres;
-    }
-    public String getUmpAtmospheres() {
-        return umpAtmospheres;
-    }
+        @SerializedName("original_price_strategy")
+        String originalPriceStrategy;
 
-    public void setOip(String oip) {
-        this.oip = oip;
-    }
-    public String getOip() {
-        return oip;
-    }
+        @SerializedName("x_object_id")
+        String xObjectId;
 
-    public void setSellingPoint(String sellingPoint) {
-        this.sellingPoint = sellingPoint;
-    }
-    public String getSellingPoint() {
-        return sellingPoint;
-    }
 
-    public void setOriginalPriceStrategy(String originalPriceStrategy) {
-        this.originalPriceStrategy = originalPriceStrategy;
-    }
-    public String getOriginalPriceStrategy() {
-        return originalPriceStrategy;
-    }
+        public void setOriginalPriceType(String originalPriceType) {
+            this.originalPriceType = originalPriceType;
+        }
+        public String getOriginalPriceType() {
+            return originalPriceType;
+        }
 
-    public void setXObjectId(String xObjectId) {
-        this.xObjectId = xObjectId;
-    }
-    public String getXObjectId() {
-        return xObjectId;
-    }
+        public void setFormattedPrice(String formattedPrice) {
+            this.formattedPrice = formattedPrice;
+        }
+        public String getFormattedPrice() {
+            return formattedPrice;
+        }
 
-}
+        public void setCsp(String csp) {
+            this.csp = csp;
+        }
+        public String getCsp() {
+            return csp;
+        }
 
-class Trace {
+        public void setXObjectType(String xObjectType) {
+            this.xObjectType = xObjectType;
+        }
+        public String getXObjectType() {
+            return xObjectType;
+        }
 
-    @SerializedName("exposure")
-    Exposure exposure;
+        public void setHit19Forbidden(boolean hit19Forbidden) {
+            this.hit19Forbidden = hit19Forbidden;
+        }
+        public boolean getHit19Forbidden() {
+            return hit19Forbidden;
+        }
 
-    @SerializedName("custom")
-    Custom custom;
+        public void setIsDetailNext(String isDetailNext) {
+            this.isDetailNext = isDetailNext;
+        }
+        public String getIsDetailNext() {
+            return isDetailNext;
+        }
 
-    @SerializedName("detailPage")
-    DetailPage detailPage;
+        public void setSkuId(String skuId) {
+            this.skuId = skuId;
+        }
+        public String getSkuId() {
+            return skuId;
+        }
 
-    @SerializedName("pdpParams")
-    PdpParams pdpParams;
+        public void setMixrankSuccess(String mixrankSuccess) {
+            this.mixrankSuccess = mixrankSuccess;
+        }
+        public String getMixrankSuccess() {
+            return mixrankSuccess;
+        }
 
-    @SerializedName("click")
-    Click click;
+        public void setSkuIcTags(String skuIcTags) {
+            this.skuIcTags = skuIcTags;
+        }
+        public String getSkuIcTags() {
+            return skuIcTags;
+        }
 
-    @SerializedName("utLogMap")
-    UtLogMap utLogMap;
+        public void setIsAdultCertified(boolean isAdultCertified) {
+            this.isAdultCertified = isAdultCertified;
+        }
+        public boolean getIsAdultCertified() {
+            return isAdultCertified;
+        }
 
+        public void setMixrankEnable(String mixrankEnable) {
+            this.mixrankEnable = mixrankEnable;
+        }
+        public String getMixrankEnable() {
+            return mixrankEnable;
+        }
 
-    public void setExposure(Exposure exposure) {
-        this.exposure = exposure;
-    }
-    public Exposure getExposure() {
-        return exposure;
-    }
+        public void setUmpAtmospheres(String umpAtmospheres) {
+            this.umpAtmospheres = umpAtmospheres;
+        }
+        public String getUmpAtmospheres() {
+            return umpAtmospheres;
+        }
 
-    public void setCustom(Custom custom) {
-        this.custom = custom;
-    }
-    public Custom getCustom() {
-        return custom;
-    }
+        public void setOip(String oip) {
+            this.oip = oip;
+        }
+        public String getOip() {
+            return oip;
+        }
 
-    public void setDetailPage(DetailPage detailPage) {
-        this.detailPage = detailPage;
-    }
-    public DetailPage getDetailPage() {
-        return detailPage;
-    }
+        public void setSellingPoint(String sellingPoint) {
+            this.sellingPoint = sellingPoint;
+        }
+        public String getSellingPoint() {
+            return sellingPoint;
+        }
 
-    public void setPdpParams(PdpParams pdpParams) {
-        this.pdpParams = pdpParams;
-    }
-    public PdpParams getPdpParams() {
-        return pdpParams;
-    }
+        public void setOriginalPriceStrategy(String originalPriceStrategy) {
+            this.originalPriceStrategy = originalPriceStrategy;
+        }
+        public String getOriginalPriceStrategy() {
+            return originalPriceStrategy;
+        }
 
-    public void setClick(Click click) {
-        this.click = click;
-    }
-    public Click getClick() {
-        return click;
-    }
+        public void setXObjectId(String xObjectId) {
+            this.xObjectId = xObjectId;
+        }
+        public String getXObjectId() {
+            return xObjectId;
+        }
 
-    public void setUtLogMap(UtLogMap utLogMap) {
-        this.utLogMap = utLogMap;
-    }
-    public UtLogMap getUtLogMap() {
-        return utLogMap;
     }
 
-}
+    class Trace {
 
-class DetailPage { }
+        @SerializedName("exposure")
+        Exposure exposure;
 
-class Custom { }
+        @SerializedName("custom")
+        Custom custom;
 
-class Trade {
+        @SerializedName("detailPage")
+        DetailPage detailPage;
 
-    @SerializedName("tradeDesc")
-    String tradeDesc;
+        @SerializedName("pdpParams")
+        PdpParams pdpParams;
 
+        @SerializedName("click")
+        Click click;
 
-    public void setTradeDesc(String tradeDesc) {
-        this.tradeDesc = tradeDesc;
-    }
-    public String getTradeDesc() {
-        return tradeDesc;
-    }
-
-}
+        @SerializedName("utLogMap")
+        UtLogMap utLogMap;
 
-class Title {
 
-    @SerializedName("displayTitle")
-    String displayTitle;
+        public void setExposure(Exposure exposure) {
+            this.exposure = exposure;
+        }
+        public Exposure getExposure() {
+            return exposure;
+        }
 
-    @SerializedName("shortTitle")
-    boolean shortTitle;
+        public void setCustom(Custom custom) {
+            this.custom = custom;
+        }
+        public Custom getCustom() {
+            return custom;
+        }
 
-    @SerializedName("seoTitle")
-    String seoTitle;
+        public void setDetailPage(DetailPage detailPage) {
+            this.detailPage = detailPage;
+        }
+        public DetailPage getDetailPage() {
+            return detailPage;
+        }
 
+        public void setPdpParams(PdpParams pdpParams) {
+            this.pdpParams = pdpParams;
+        }
+        public PdpParams getPdpParams() {
+            return pdpParams;
+        }
 
-    public void setDisplayTitle(String displayTitle) {
-        this.displayTitle = displayTitle;
-    }
-
-    public String getDisplayTitle() {
-        return displayTitle;
-    }
+        public void setClick(Click click) {
+            this.click = click;
+        }
+        public Click getClick() {
+            return click;
+        }
 
-    public void setShortTitle(boolean shortTitle) {
-        this.shortTitle = shortTitle;
-    }
+        public void setUtLogMap(UtLogMap utLogMap) {
+            this.utLogMap = utLogMap;
+        }
+        public UtLogMap getUtLogMap() {
+            return utLogMap;
+        }
 
-    public boolean getShortTitle() {
-        return shortTitle;
     }
 
-    public void setSeoTitle(String seoTitle) {
-        this.seoTitle = seoTitle;
-    }
+    class DetailPage { }
 
-    public String getSeoTitle() {
-        return seoTitle;
-    }
-}
+    class Custom { }
 
-class SalePrice {
+    class Trade {
 
-    @SerializedName("formattedPrice")
-    String formattedPrice;
+        @SerializedName("tradeDesc")
+        String tradeDesc;
 
-    @SerializedName("minPriceDiscount")
-    int minPriceDiscount;
 
-    @SerializedName("minPrice")
-    double minPrice;
+        public void setTradeDesc(String tradeDesc) {
+            this.tradeDesc = tradeDesc;
+        }
+        public String getTradeDesc() {
+            return tradeDesc;
+        }
 
-    @SerializedName("priceType")
-    String priceType;
+    }
 
-    @SerializedName("discount")
-    int discount;
+    class Title {
 
-    @SerializedName("minPriceType")
-    int minPriceType;
+        @SerializedName("displayTitle")
+        String displayTitle;
 
-    @SerializedName("currencyCode")
-    String currencyCode;
+        @SerializedName("shortTitle")
+        boolean shortTitle;
 
+        @SerializedName("seoTitle")
+        String seoTitle;
 
-    public void setFormattedPrice(String formattedPrice) {
-        this.formattedPrice = formattedPrice;
-    }
-    public String getFormattedPrice() {
-        return formattedPrice;
-    }
 
-    public void setMinPriceDiscount(int minPriceDiscount) {
-        this.minPriceDiscount = minPriceDiscount;
-    }
-    public int getMinPriceDiscount() {
-        return minPriceDiscount;
-    }
+        public void setDisplayTitle(String displayTitle) {
+            this.displayTitle = displayTitle;
+        }
 
-    public void setMinPrice(double minPrice) {
-        this.minPrice = minPrice;
-    }
-    public double getMinPrice() {
-        return minPrice;
-    }
+        public String getDisplayTitle() {
+            return displayTitle;
+        }
 
-    public void setPriceType(String priceType) {
-        this.priceType = priceType;
-    }
-    public String getPriceType() {
-        return priceType;
-    }
+        public void setShortTitle(boolean shortTitle) {
+            this.shortTitle = shortTitle;
+        }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-    public int getDiscount() {
-        return discount;
-    }
+        public boolean getShortTitle() {
+            return shortTitle;
+        }
 
-    public void setMinPriceType(int minPriceType) {
-        this.minPriceType = minPriceType;
-    }
-    public int getMinPriceType() {
-        return minPriceType;
-    }
+        public void setSeoTitle(String seoTitle) {
+            this.seoTitle = seoTitle;
+        }
 
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
-    }
-    public String getCurrencyCode() {
-        return currencyCode;
+        public String getSeoTitle() {
+            return seoTitle;
+        }
     }
 
-}
+    class SalePrice {
 
-class Prices {
+        @SerializedName("formattedPrice")
+        String formattedPrice;
 
-    @SerializedName("builderType")
-    String builderType;
+        @SerializedName("minPriceDiscount")
+        int minPriceDiscount;
 
-    @SerializedName("taxRate")
-    String taxRate;
+        @SerializedName("minPrice")
+        double minPrice;
 
-    @SerializedName("pricesStyle")
-    String pricesStyle;
+        @SerializedName("priceType")
+        String priceType;
 
-    @SerializedName("salePrice")
-    SalePrice salePrice;
+        @SerializedName("discount")
+        int discount;
 
-    @SerializedName("prefix")
-    String prefix;
+        @SerializedName("minPriceType")
+        int minPriceType;
 
-    @SerializedName("currencySymbol")
-    String currencySymbol;
+        @SerializedName("currencyCode")
+        String currencyCode;
 
-    @SerializedName("skuId")
-    String skuId;
 
+        public void setFormattedPrice(String formattedPrice) {
+            this.formattedPrice = formattedPrice;
+        }
+        public String getFormattedPrice() {
+            return formattedPrice;
+        }
 
-    public void setBuilderType(String builderType) {
-        this.builderType = builderType;
-    }
-    public String getBuilderType() {
-        return builderType;
-    }
+        public void setMinPriceDiscount(int minPriceDiscount) {
+            this.minPriceDiscount = minPriceDiscount;
+        }
+        public int getMinPriceDiscount() {
+            return minPriceDiscount;
+        }
 
-    public void setTaxRate(String taxRate) {
-        this.taxRate = taxRate;
-    }
-    public String getTaxRate() {
-        return taxRate;
-    }
+        public void setMinPrice(double minPrice) {
+            this.minPrice = minPrice;
+        }
+        public double getMinPrice() {
+            return minPrice;
+        }
 
-    public void setPricesStyle(String pricesStyle) {
-        this.pricesStyle = pricesStyle;
-    }
-    public String getPricesStyle() {
-        return pricesStyle;
-    }
+        public void setPriceType(String priceType) {
+            this.priceType = priceType;
+        }
+        public String getPriceType() {
+            return priceType;
+        }
 
-    public void setSalePrice(SalePrice salePrice) {
-        this.salePrice = salePrice;
-    }
-    public SalePrice getSalePrice() {
-        return salePrice;
-    }
+        public void setDiscount(int discount) {
+            this.discount = discount;
+        }
+        public int getDiscount() {
+            return discount;
+        }
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-    public String getPrefix() {
-        return prefix;
-    }
+        public void setMinPriceType(int minPriceType) {
+            this.minPriceType = minPriceType;
+        }
+        public int getMinPriceType() {
+            return minPriceType;
+        }
 
-    public void setCurrencySymbol(String currencySymbol) {
-        this.currencySymbol = currencySymbol;
-    }
-    public String getCurrencySymbol() {
-        return currencySymbol;
-    }
+        public void setCurrencyCode(String currencyCode) {
+            this.currencyCode = currencyCode;
+        }
+        public String getCurrencyCode() {
+            return currencyCode;
+        }
 
-    public void setSkuId(String skuId) {
-        this.skuId = skuId;
     }
-    public String getSkuId() {
-        return skuId;
-    }
-
-}
 
-class TagStyle { }
+    class Prices {
 
-class TagContent {
+        @SerializedName("builderType")
+        String builderType;
 
-    @SerializedName("tagStyle")
-    TagStyle tagStyle;
+        @SerializedName("taxRate")
+        String taxRate;
 
-    @SerializedName("displayTagType")
-    String displayTagType;
+        @SerializedName("pricesStyle")
+        String pricesStyle;
 
-    @SerializedName("tagText")
-    String tagText;
+        @SerializedName("salePrice")
+        SalePrice salePrice;
 
+        @SerializedName("prefix")
+        String prefix;
 
-    public void setTagStyle(TagStyle tagStyle) {
-        this.tagStyle = tagStyle;
-    }
-    public TagStyle getTagStyle() {
-        return tagStyle;
-    }
-
-    public void setDisplayTagType(String displayTagType) {
-        this.displayTagType = displayTagType;
-    }
-    public String getDisplayTagType() {
-        return displayTagType;
-    }
-
-    public void setTagText(String tagText) {
-        this.tagText = tagText;
-    }
-    public String getTagText() {
-        return tagText;
-    }
-
-}
+        @SerializedName("currencySymbol")
+        String currencySymbol;
 
-class SellingPoints {
+        @SerializedName("skuId")
+        String skuId;
 
-    @SerializedName("tagStyleType")
-    String tagStyleType;
 
-    @SerializedName("tagContent")
-    TagContent tagContent;
+        public void setBuilderType(String builderType) {
+            this.builderType = builderType;
+        }
+        public String getBuilderType() {
+            return builderType;
+        }
 
-    @SerializedName("position")
-    int position;
+        public void setTaxRate(String taxRate) {
+            this.taxRate = taxRate;
+        }
+        public String getTaxRate() {
+            return taxRate;
+        }
 
-    @SerializedName("sellingPointTagId")
-    String sellingPointTagId;
+        public void setPricesStyle(String pricesStyle) {
+            this.pricesStyle = pricesStyle;
+        }
+        public String getPricesStyle() {
+            return pricesStyle;
+        }
 
-    @SerializedName("group")
-    int group;
-
-
-    public void setTagStyleType(String tagStyleType) {
-        this.tagStyleType = tagStyleType;
-    }
-    public String getTagStyleType() {
-        return tagStyleType;
-    }
+        public void setSalePrice(SalePrice salePrice) {
+            this.salePrice = salePrice;
+        }
+        public SalePrice getSalePrice() {
+            return salePrice;
+        }
 
-    public void setTagContent(TagContent tagContent) {
-        this.tagContent = tagContent;
-    }
-    public TagContent getTagContent() {
-        return tagContent;
-    }
+        public void setPrefix(String prefix) {
+            this.prefix = prefix;
+        }
+        public String getPrefix() {
+            return prefix;
+        }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
-    public int getPosition() {
-        return position;
-    }
+        public void setCurrencySymbol(String currencySymbol) {
+            this.currencySymbol = currencySymbol;
+        }
+        public String getCurrencySymbol() {
+            return currencySymbol;
+        }
 
-    public void setSellingPointTagId(String sellingPointTagId) {
-        this.sellingPointTagId = sellingPointTagId;
-    }
-    public String getSellingPointTagId() {
-        return sellingPointTagId;
-    }
+        public void setSkuId(String skuId) {
+            this.skuId = skuId;
+        }
+        public String getSkuId() {
+            return skuId;
+        }
 
-    public void setGroup(int group) {
-        this.group = group;
     }
-    public int getGroup() {
-        return group;
-    }
-
-}
-
-class Metadata {
 
-    @SerializedName("evaluation")
-    Evaluation evaluation;
+    class TagStyle { }
 
-    @SerializedName("lunchTime")
-    String lunchTime;
+    class TagContent {
 
-    @SerializedName("image")
-    Image image;
+        @SerializedName("tagStyle")
+        TagStyle tagStyle;
 
-    @SerializedName("itemType")
-    String itemType;
+        @SerializedName("displayTagType")
+        String displayTagType;
 
-    @SerializedName("trace")
-    Trace trace;
+        @SerializedName("tagText")
+        String tagText;
 
-    @SerializedName("trade")
-    Trade trade;
 
-    @SerializedName("nativeCardType")
-    String nativeCardType;
+        public void setTagStyle(TagStyle tagStyle) {
+            this.tagStyle = tagStyle;
+        }
+        public TagStyle getTagStyle() {
+            return tagStyle;
+        }
 
-    @SerializedName("productId")
-    String productId;
+        public void setDisplayTagType(String displayTagType) {
+            this.displayTagType = displayTagType;
+        }
+        public String getDisplayTagType() {
+            return displayTagType;
+        }
 
-    @SerializedName("title")
-    Title title;
+        public void setTagText(String tagText) {
+            this.tagText = tagText;
+        }
+        public String getTagText() {
+            return tagText;
+        }
 
-    @SerializedName("prices")
-    Prices prices;
+    }
 
-    @SerializedName("sellingPoints")
-    List<SellingPoints> sellingPoints;
+    class SellingPoints {
 
-    @SerializedName("productType")
-    String productType;
+        @SerializedName("tagStyleType")
+        String tagStyleType;
 
+        @SerializedName("tagContent")
+        TagContent tagContent;
 
-    public void setEvaluation(Evaluation evaluation) {
-        this.evaluation = evaluation;
-    }
-    public Evaluation getEvaluation() {
-        return evaluation;
-    }
+        @SerializedName("position")
+        int position;
 
-    public void setLunchTime(String lunchTime) {
-        this.lunchTime = lunchTime;
-    }
-    public String getLunchTime() {
-        return lunchTime;
-    }
+        @SerializedName("sellingPointTagId")
+        String sellingPointTagId;
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
-    public Image getImage() {
-        return image;
-    }
+        @SerializedName("group")
+        int group;
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
-    public String getItemType() {
-        return itemType;
-    }
 
-    public void setTrace(Trace trace) {
-        this.trace = trace;
-    }
-    public Trace getTrace() {
-        return trace;
-    }
+        public void setTagStyleType(String tagStyleType) {
+            this.tagStyleType = tagStyleType;
+        }
+        public String getTagStyleType() {
+            return tagStyleType;
+        }
 
-    public void setTrade(Trade trade) {
-        this.trade = trade;
-    }
-    public Trade getTrade() {
-        return trade;
-    }
+        public void setTagContent(TagContent tagContent) {
+            this.tagContent = tagContent;
+        }
+        public TagContent getTagContent() {
+            return tagContent;
+        }
 
-    public void setNativeCardType(String nativeCardType) {
-        this.nativeCardType = nativeCardType;
-    }
-    public String getNativeCardType() {
-        return nativeCardType;
-    }
+        public void setPosition(int position) {
+            this.position = position;
+        }
+        public int getPosition() {
+            return position;
+        }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-    public String getProductId() {
-        return productId;
-    }
+        public void setSellingPointTagId(String sellingPointTagId) {
+            this.sellingPointTagId = sellingPointTagId;
+        }
+        public String getSellingPointTagId() {
+            return sellingPointTagId;
+        }
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-    public Title getTitle() {
-        return title;
-    }
+        public void setGroup(int group) {
+            this.group = group;
+        }
+        public int getGroup() {
+            return group;
+        }
 
-    public void setPrices(Prices prices) {
-        this.prices = prices;
     }
-    public Prices getPrices() {
-        return prices;
-    }
 
-    public void setSellingPoints(List<SellingPoints> sellingPoints) {
-        this.sellingPoints = sellingPoints;
-    }
-    public List<SellingPoints> getSellingPoints() {
-        return sellingPoints;
-    }
+    class Metadata {
 
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-    public String getProductType() {
-        return productType;
-    }
+        @SerializedName("evaluation")
+        Evaluation evaluation;
 
-}
+        @SerializedName("lunchTime")
+        String lunchTime;
 
-class Docs {
+        @SerializedName("image")
+        Image image;
 
-    @SerializedName("app_sale_price")
-    double appSalePrice;
+        @SerializedName("itemType")
+        String itemType;
 
-    @SerializedName("app_sale_price_currency")
-    String appSalePriceCurrency;
+        @SerializedName("trace")
+        Trace trace;
 
-    @SerializedName("discount_rate")
-    int discountRate;
+        @SerializedName("trade")
+        Trade trade;
 
-    @SerializedName("evaluate_rate")
-    double evaluateRate;
+        @SerializedName("nativeCardType")
+        String nativeCardType;
 
-    @SerializedName("product_id")
-    String productId;
+        @SerializedName("productId")
+        String productId;
 
-    @SerializedName("product_main_image_url")
-    String productMainImageUrl;
+        @SerializedName("title")
+        Title title;
 
-    @SerializedName("product_title")
-    String productTitle;
+        @SerializedName("prices")
+        Prices prices;
 
-    @SerializedName("lastest_volume")
-    String lastestVolume;
+        @SerializedName("sellingPoints")
+        List<SellingPoints> sellingPoints;
 
-    @SerializedName("metadata")
-    Metadata metadata;
+        @SerializedName("productType")
+        String productType;
 
-    @SerializedName("product_detail_url")
-    String productDetailUrl;
 
-    @SerializedName("keywords")
-    String keywords;
+        public void setEvaluation(Evaluation evaluation) {
+            this.evaluation = evaluation;
+        }
+        public Evaluation getEvaluation() {
+            return evaluation;
+        }
 
+        public void setLunchTime(String lunchTime) {
+            this.lunchTime = lunchTime;
+        }
+        public String getLunchTime() {
+            return lunchTime;
+        }
 
-    public void setAppSalePrice(double appSalePrice) {
-        this.appSalePrice = appSalePrice;
-    }
-    public double getAppSalePrice() {
-        return appSalePrice;
-    }
+        public void setImage(Image image) {
+            this.image = image;
+        }
+        public Image getImage() {
+            return image;
+        }
 
-    public void setAppSalePriceCurrency(String appSalePriceCurrency) {
-        this.appSalePriceCurrency = appSalePriceCurrency;
-    }
-    public String getAppSalePriceCurrency() {
-        return appSalePriceCurrency;
-    }
+        public void setItemType(String itemType) {
+            this.itemType = itemType;
+        }
+        public String getItemType() {
+            return itemType;
+        }
 
-    public void setDiscountRate(int discountRate) {
-        this.discountRate = discountRate;
-    }
-    public int getDiscountRate() {
-        return discountRate;
-    }
+        public void setTrace(Trace trace) {
+            this.trace = trace;
+        }
+        public Trace getTrace() {
+            return trace;
+        }
 
-    public void setEvaluateRate(double evaluateRate) {
-        this.evaluateRate = evaluateRate;
-    }
-    public double getEvaluateRate() {
-        return evaluateRate;
-    }
+        public void setTrade(Trade trade) {
+            this.trade = trade;
+        }
+        public Trade getTrade() {
+            return trade;
+        }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-    public String getProductId() {
-        return productId;
-    }
+        public void setNativeCardType(String nativeCardType) {
+            this.nativeCardType = nativeCardType;
+        }
+        public String getNativeCardType() {
+            return nativeCardType;
+        }
 
-    public void setProductMainImageUrl(String productMainImageUrl) {
-        this.productMainImageUrl = productMainImageUrl;
-    }
-    public String getProductMainImageUrl() {
-        return productMainImageUrl;
-    }
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
+        public String getProductId() {
+            return productId;
+        }
 
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
-    }
-    public String getProductTitle() {
-        return productTitle;
-    }
+        public void setTitle(Title title) {
+            this.title = title;
+        }
+        public Title getTitle() {
+            return title;
+        }
 
-    public void setLastestVolume(String lastestVolume) {
-        this.lastestVolume = lastestVolume;
-    }
-    public String getLastestVolume() {
-        return lastestVolume;
-    }
+        public void setPrices(Prices prices) {
+            this.prices = prices;
+        }
+        public Prices getPrices() {
+            return prices;
+        }
 
-    public void setMetadata(Metadata metadata) {
-        this.metadata = metadata;
-    }
-    public Metadata getMetadata() {
-        return metadata;
-    }
+        public void setSellingPoints(List<SellingPoints> sellingPoints) {
+            this.sellingPoints = sellingPoints;
+        }
+        public List<SellingPoints> getSellingPoints() {
+            return sellingPoints;
+        }
 
-    public void setProductDetailUrl(String productDetailUrl) {
-        this.productDetailUrl = productDetailUrl;
-    }
-    public String getProductDetailUrl() {
-        return productDetailUrl;
-    }
+        public void setProductType(String productType) {
+            this.productType = productType;
+        }
+        public String getProductType() {
+            return productType;
+        }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
     }
-    public String getKeywords() {
-        return keywords;
-    }
 
-}
+    class SearchEngine {
 
-class SearchEngine {
+        @SerializedName("shipFromCountry")
+        String shipFromCountry;
 
-    @SerializedName("shipFromCountry")
-    String shipFromCountry;
+        @SerializedName("keywords")
+        String keywords;
 
-    @SerializedName("keywords")
-    String keywords;
+        @SerializedName("page")
+        int page;
 
-    @SerializedName("page")
-    int page;
+        @SerializedName("isFastShipping")
+        boolean isFastShipping;
 
-    @SerializedName("isFastShipping")
-    boolean isFastShipping;
+        @SerializedName("isFreeShipping")
+        boolean isFreeShipping;
 
-    @SerializedName("isFreeShipping")
-    boolean isFreeShipping;
+        @SerializedName("isPopular")
+        boolean isPopular;
 
-    @SerializedName("isPopular")
-    boolean isPopular;
+        @SerializedName("target_currency")
+        String targetCurrency;
 
-    @SerializedName("target_currency")
-    String targetCurrency;
+        @SerializedName("shipToCountry")
+        String shipToCountry;
 
-    @SerializedName("shipToCountry")
-    String shipToCountry;
+        @SerializedName("pricerange")
+        String pricerange;
 
-    @SerializedName("pricerange")
-    String pricerange;
+        @SerializedName("sortType")
+        String sortType;
 
-    @SerializedName("sortType")
-    String sortType;
+        @SerializedName("sortOrder")
+        String sortOrder;
 
-    @SerializedName("sortOrder")
-    String sortOrder;
 
+        public void setShipFromCountry(String shipFromCountry) {
+            this.shipFromCountry = shipFromCountry;
+        }
+        public String getShipFromCountry() {
+            return shipFromCountry;
+        }
 
-    public void setShipFromCountry(String shipFromCountry) {
-        this.shipFromCountry = shipFromCountry;
-    }
-    public String getShipFromCountry() {
-        return shipFromCountry;
-    }
+        public void setKeywords(String keywords) {
+            this.keywords = keywords;
+        }
+        public String getKeywords() {
+            return keywords;
+        }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
-    }
-    public String getKeywords() {
-        return keywords;
-    }
+        public void setPage(int page) {
+            this.page = page;
+        }
+        public int getPage() {
+            return page;
+        }
 
-    public void setPage(int page) {
-        this.page = page;
-    }
-    public int getPage() {
-        return page;
-    }
+        public void setIsFastShipping(boolean isFastShipping) {
+            this.isFastShipping = isFastShipping;
+        }
+        public boolean getIsFastShipping() {
+            return isFastShipping;
+        }
 
-    public void setIsFastShipping(boolean isFastShipping) {
-        this.isFastShipping = isFastShipping;
-    }
-    public boolean getIsFastShipping() {
-        return isFastShipping;
-    }
+        public void setIsFreeShipping(boolean isFreeShipping) {
+            this.isFreeShipping = isFreeShipping;
+        }
+        public boolean getIsFreeShipping() {
+            return isFreeShipping;
+        }
 
-    public void setIsFreeShipping(boolean isFreeShipping) {
-        this.isFreeShipping = isFreeShipping;
-    }
-    public boolean getIsFreeShipping() {
-        return isFreeShipping;
-    }
+        public void setIsPopular(boolean isPopular) {
+            this.isPopular = isPopular;
+        }
+        public boolean getIsPopular() {
+            return isPopular;
+        }
 
-    public void setIsPopular(boolean isPopular) {
-        this.isPopular = isPopular;
-    }
-    public boolean getIsPopular() {
-        return isPopular;
-    }
+        public void setTargetCurrency(String targetCurrency) {
+            this.targetCurrency = targetCurrency;
+        }
+        public String getTargetCurrency() {
+            return targetCurrency;
+        }
 
-    public void setTargetCurrency(String targetCurrency) {
-        this.targetCurrency = targetCurrency;
-    }
-    public String getTargetCurrency() {
-        return targetCurrency;
-    }
+        public void setShipToCountry(String shipToCountry) {
+            this.shipToCountry = shipToCountry;
+        }
+        public String getShipToCountry() {
+            return shipToCountry;
+        }
 
-    public void setShipToCountry(String shipToCountry) {
-        this.shipToCountry = shipToCountry;
-    }
-    public String getShipToCountry() {
-        return shipToCountry;
-    }
+        public void setPricerange(String pricerange) {
+            this.pricerange = pricerange;
+        }
+        public String getPricerange() {
+            return pricerange;
+        }
 
-    public void setPricerange(String pricerange) {
-        this.pricerange = pricerange;
-    }
-    public String getPricerange() {
-        return pricerange;
-    }
+        public void setSortType(String sortType) {
+            this.sortType = sortType;
+        }
+        public String getSortType() {
+            return sortType;
+        }
 
-    public void setSortType(String sortType) {
-        this.sortType = sortType;
-    }
-    public String getSortType() {
-        return sortType;
-    }
+        public void setSortOrder(String sortOrder) {
+            this.sortOrder = sortOrder;
+        }
+        public String getSortOrder() {
+            return sortOrder;
+        }
 
-    public void setSortOrder(String sortOrder) {
-        this.sortOrder = sortOrder;
-    }
-    public String getSortOrder() {
-        return sortOrder;
     }
 
 }
