@@ -5,13 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.viewpager2.widget.ViewPager2;
-
 import com.example.azmart_android.adapter.DealsViewPagerAdapter;
 import com.example.azmart_android.contracts.HomeContract;
 import com.example.azmart_android.databinding.FragmentHomeBinding;
+import com.example.azmart_android.model.CategoriesResponse;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.view.BaseFragment;
+import com.smarteist.autoimageslider.SliderView;
+
+import java.util.List;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
     private FragmentHomeBinding binding;
@@ -21,7 +23,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new HomePresenter();
+        presenter = new HomePresenter(this);
         adapter = new DealsViewPagerAdapter(presenter.dealsList);
     }
 
@@ -34,37 +36,37 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     private void initView() {
-        binding.dealsViewpager.setAdapter(adapter);
-        binding.dealsViewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        binding.dealsSliderView.setSliderAdapter(adapter);
+        binding.dealsSliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
+        binding.dealsSliderView.setScrollTimeInSec(4);
+        binding.dealsSliderView.setAutoCycle(true);
+        binding.dealsSliderView.startAutoCycle();
+        binding.etSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+       // presenter.getCategories();
     }
 
     @Override
-    public void showProgressBar() {
-
+    public void showLoading() {
+        showLoadingDialog(requireContext());
     }
 
     @Override
-    public void hideProgressBar() {
-
+    public void hideLoading() {
+        hideLoadingDialog();
     }
 
     @Override
     public void showApiErrorWarning(String string) {
-
+        showToast(requireContext(), string);
     }
 
     @Override
-    public void showWarningMessage(String message) {
-
-    }
-
-    @Override
-    public void showSuccess(String message) {
-
-    }
-
-    @Override
-    public void showInputWarning() {
+    public void showCategoriesResponse(List<CategoriesResponse> categoriesResponseList) {
 
     }
 }

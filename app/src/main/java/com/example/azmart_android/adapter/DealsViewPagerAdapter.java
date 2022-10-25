@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.azmart_android.databinding.DealsLayoutBinding;
+import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.List;
 
-public class DealsViewPagerAdapter extends RecyclerView.Adapter<DealsViewPagerAdapter.DealsViewHolder> {
+public class DealsViewPagerAdapter extends SliderViewAdapter<DealsViewPagerAdapter.DealsViewHolder> {
     List<String> imageList;
 
     public DealsViewPagerAdapter(List<String> imageList) {
@@ -21,7 +22,7 @@ public class DealsViewPagerAdapter extends RecyclerView.Adapter<DealsViewPagerAd
 
     @NonNull
     @Override
-    public DealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
         return new DealsViewHolder(DealsLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false));
     }
@@ -32,11 +33,11 @@ public class DealsViewPagerAdapter extends RecyclerView.Adapter<DealsViewPagerAd
     }
 
     @Override
-    public int getItemCount() {
+    public int getCount() {
         return imageList.size();
     }
 
-    public class DealsViewHolder extends RecyclerView.ViewHolder {
+    public class DealsViewHolder extends SliderViewAdapter.ViewHolder {
         private DealsLayoutBinding dealsLayoutBinding;
 
         public DealsViewHolder(DealsLayoutBinding itemView) {

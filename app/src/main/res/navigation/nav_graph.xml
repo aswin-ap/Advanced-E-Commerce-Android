@@ -9,7 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.azmart_android.view.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <argument
+            android:name="searchText"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.azmart_android.view.home.CartFragment"
@@ -25,4 +32,9 @@
         android:name="com.example.azmart_android.view.home.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.azmart_android.view.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

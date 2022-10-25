@@ -1,13 +1,16 @@
 package com.example.azmart_android.contracts;
 
+import com.example.azmart_android.model.CategoriesResponse;
+
+import java.util.List;
+
 public interface HomeContract {
     interface View extends BaseView {
-        void showSuccess(String message);
-        void showInputWarning();
-
+        void showCategoriesResponse(List<CategoriesResponse> categoriesResponseList);
     }
 
     interface Presenter extends BasePresenter {
-        void CallLOGIN(String user, String password);
+        void getCategories();
+        void onResultCategoriesResponse(List<CategoriesResponse> categoriesResponse);
     }
 }
