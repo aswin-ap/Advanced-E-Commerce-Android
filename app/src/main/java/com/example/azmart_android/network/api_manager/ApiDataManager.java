@@ -2,9 +2,9 @@ package com.example.azmart_android.network.api_manager;
 
 import android.util.Log;
 
-import com.example.azmart_android.model.BestProductsResponse;
-import com.example.azmart_android.model.CategoriesResponse;
-import com.example.azmart_android.model.SearchResponse;
+import com.example.azmart_android.data.model.BestProductsResponse;
+import com.example.azmart_android.data.model.CategoriesResponse;
+import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.presenter.SearchPresenter;
 

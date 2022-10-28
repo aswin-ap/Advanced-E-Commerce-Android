@@ -1,6 +1,6 @@
 package com.example.azmart_android.contracts;
 
-import com.example.azmart_android.model.SearchResponse;
+import com.example.azmart_android.data.model.SearchResponse;
 
 public interface SearchContract {
     interface View extends BaseView {

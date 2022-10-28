@@ -1,4 +1,4 @@
-package com.example.azmart_android.model;
+package com.example.azmart_android.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

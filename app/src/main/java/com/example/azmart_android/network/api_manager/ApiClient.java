@@ -28,7 +28,8 @@ public class ApiClient {
                     Request request = chain.request();
                     Request newRequest = request.newBuilder()
                             .addHeader("x-rapidapi-host", "magic-aliexpress1.p.rapidapi.com")
-                            .addHeader("x-rapidapi-key", "620382942bmsh9db47da95b73ee2p1fa611jsn6bf26de851b1")
+                            //.addHeader("x-rapidapi-key", "620382942bmsh9db47da95b73ee2p1fa611jsn6bf26de851b1")
+                            .addHeader("x-rapidapi-key", "1016dbd964msh96d4653c4c3c82bp119f9fjsn29132d20b88d")
                             .build();
                     return chain.proceed(newRequest);
                 })

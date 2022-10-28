@@ -1,4 +1,4 @@
-package com.example.azmart_android.model;
+package com.example.azmart_android.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -221,7 +221,7 @@ public class SearchResponse {
 
     }
 
-    class Evaluation {
+    public class Evaluation {
 
         @SerializedName("starWidth")
         int starWidth;
@@ -266,7 +266,7 @@ public class SearchResponse {
 
     }
 
-    class Image {
+    public class Image {
 
         @SerializedName("imgUrl")
         String imgUrl;
@@ -311,7 +311,7 @@ public class SearchResponse {
 
     }
 
-    class Exposure {
+    public class Exposure {
 
         @SerializedName("selling_point")
         String sellingPoint;
@@ -326,7 +326,7 @@ public class SearchResponse {
 
     }
 
-    class PdpParams {
+    public class PdpParams {
 
         @SerializedName("pdp_cdi")
         String pdpCdi;
@@ -351,7 +351,7 @@ public class SearchResponse {
 
     }
 
-    class Click {
+    public class Click {
 
         @SerializedName("haveSellingPoint")
         String haveSellingPoint;
@@ -366,7 +366,7 @@ public class SearchResponse {
 
     }
 
-    class UtLogMap {
+    public class UtLogMap {
 
         @SerializedName("original_price_type")
         String originalPriceType;
@@ -531,7 +531,7 @@ public class SearchResponse {
 
     }
 
-    class Trace {
+    public class Trace {
 
         @SerializedName("exposure")
         Exposure exposure;
@@ -596,11 +596,11 @@ public class SearchResponse {
 
     }
 
-    class DetailPage { }
+    public class DetailPage { }
 
-    class Custom { }
+    public class Custom { }
 
-    class Trade {
+    public class Trade {
 
         @SerializedName("tradeDesc")
         String tradeDesc;
@@ -615,7 +615,7 @@ public class SearchResponse {
 
     }
 
-    class Title {
+    public class Title {
 
         @SerializedName("displayTitle")
         String displayTitle;
@@ -652,7 +652,7 @@ public class SearchResponse {
         }
     }
 
-    class SalePrice {
+    public class SalePrice {
 
         @SerializedName("formattedPrice")
         String formattedPrice;
@@ -727,7 +727,7 @@ public class SearchResponse {
 
     }
 
-    class Prices {
+    public class Prices {
 
         @SerializedName("builderType")
         String builderType;
@@ -802,9 +802,9 @@ public class SearchResponse {
 
     }
 
-    class TagStyle { }
+    public class TagStyle { }
 
-    class TagContent {
+    public class TagContent {
 
         @SerializedName("tagStyle")
         TagStyle tagStyle;
@@ -839,7 +839,7 @@ public class SearchResponse {
 
     }
 
-    class SellingPoints {
+    public class SellingPoints {
 
         @SerializedName("tagStyleType")
         String tagStyleType;
@@ -894,7 +894,7 @@ public class SearchResponse {
 
     }
 
-    class Metadata {
+    public class Metadata {
 
         @SerializedName("evaluation")
         Evaluation evaluation;
@@ -1019,7 +1019,7 @@ public class SearchResponse {
 
     }
 
-    class SearchEngine {
+    public class SearchEngine {
 
         @SerializedName("shipFromCountry")
         String shipFromCountry;

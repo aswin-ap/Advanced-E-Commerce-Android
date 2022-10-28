@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.azmart_android.R;
-import com.example.azmart_android.data.prefrence.SessionManager;
+import com.example.azmart_android.data.preference.SessionManager;
 import com.example.azmart_android.databinding.FragmentLoginBinding;
 import com.example.azmart_android.utils.NetworkManager;
 import com.example.azmart_android.utils.Validation;

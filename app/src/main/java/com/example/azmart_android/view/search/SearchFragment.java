@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import com.example.azmart_android.adapter.SearchAdapter;
 import com.example.azmart_android.contracts.SearchContract;
 import com.example.azmart_android.databinding.FragmentSearchBinding;
-import com.example.azmart_android.model.SearchResponse;
+import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.presenter.SearchPresenter;
 import com.example.azmart_android.view.BaseFragment;
 
@@ -48,6 +48,9 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     private void initView() {
         searchKeyword = SearchFragmentArgs.fromBundle(getArguments()).getSearch();
         Log.d("Search", "onViewCreated: " + searchKeyword);
+        binding.ivBack.setOnClickListener(view -> {
+            requireActivity().onBackPressed();
+        });
 
         searchPresenter.getItemsBySearch(searchKeyword);
     }
@@ -75,7 +78,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     public void showSearchResponse(SearchResponse searchResponse) {
         binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
         binding.rvSearch.setVisibility(View.VISIBLE);
-        showToast(requireContext(), "Success");
+        binding.tvResults.setText("Results "+searchResponse.getTotalRecordCount());
         searchResponseList = searchResponse;
         if (isFirstTime) {
             searchAdapter = new SearchAdapter(searchResponseList);
