@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.azmart_android.R;
-import com.example.azmart_android.data.prefrence.SessionManager;
+import com.example.azmart_android.data.preference.SessionManager;
 import com.example.azmart_android.databinding.FragmentProfileBinding;
 import com.example.azmart_android.view.auth.AuthActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

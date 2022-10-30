@@ -10,8 +10,8 @@ import androidx.navigation.Navigation;
 
 import com.example.azmart_android.adapter.DealsViewPagerAdapter;
 import com.example.azmart_android.contracts.HomeContract;
-import com.example.azmart_android.databinding.FragmentHomeBinding;
 import com.example.azmart_android.data.model.CategoriesResponse;
+import com.example.azmart_android.databinding.FragmentHomeBinding;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.utils.Validation;
 import com.example.azmart_android.view.BaseFragment;
@@ -30,6 +30,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         super.onCreate(savedInstanceState);
         presenter = new HomePresenter(this);
         adapter = new DealsViewPagerAdapter(presenter.dealsList);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (binding.etSearch.getText().toString() != null) {
+            binding.etSearch.setText("");
+        }
     }
 
     @Override
@@ -58,7 +66,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             }
             return false;
         });
-        presenter.getCategories();
+        // presenter.getCategories();
     }
 
     @Override

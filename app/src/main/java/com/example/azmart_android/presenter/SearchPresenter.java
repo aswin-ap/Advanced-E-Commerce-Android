@@ -27,6 +27,7 @@ public class SearchPresenter implements SearchContract.Presenter {
 
     @Override
     public void onSearchResultResponse(SearchResponse onSearchResponse) {
+
         if (onSearchResponse.getDocs().size() > 0) {
             mView.showSearchResponse(onSearchResponse);
         } else
