@@ -1,4 +1,4 @@
-package com.example.azmart_android.model;
+package com.example.azmart_android.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -24,7 +24,7 @@ public class BestProductsResponse {
     private String firstLevelCategoryName;
     @SerializedName("hot_product_commission_rate")
     @Expose
-    private Integer hotProductCommissionRate;
+    private Double hotProductCommissionRate;
     @SerializedName("product_detail_url")
     @Expose
     private String productDetailUrl;
@@ -147,11 +147,11 @@ public class BestProductsResponse {
         this.firstLevelCategoryName = firstLevelCategoryName;
     }
 
-    public Integer getHotProductCommissionRate() {
+    public Double getHotProductCommissionRate() {
         return hotProductCommissionRate;
     }
 
-    public void setHotProductCommissionRate(Integer hotProductCommissionRate) {
+    public void setHotProductCommissionRate(Double hotProductCommissionRate) {
         this.hotProductCommissionRate = hotProductCommissionRate;
     }
 

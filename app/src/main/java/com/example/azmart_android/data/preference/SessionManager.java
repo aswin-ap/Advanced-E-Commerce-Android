@@ -1,8 +1,7 @@
-package com.example.azmart_android.data.prefrence;
+package com.example.azmart_android.data.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class SessionManager {
 

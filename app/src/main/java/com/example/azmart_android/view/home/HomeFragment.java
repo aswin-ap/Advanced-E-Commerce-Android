@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+
+import androidx.navigation.Navigation;
 
 import com.example.azmart_android.adapter.DealsViewPagerAdapter;
 import com.example.azmart_android.contracts.HomeContract;
 import com.example.azmart_android.databinding.FragmentHomeBinding;
-import com.example.azmart_android.model.CategoriesResponse;
+import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.presenter.HomePresenter;
+import com.example.azmart_android.utils.Validation;
 import com.example.azmart_android.view.BaseFragment;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -18,6 +22,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment implements HomeContract.View {
     private FragmentHomeBinding binding;
     private HomePresenter presenter;
+    private String searchText;
     private DealsViewPagerAdapter adapter;
 
     @Override
@@ -41,13 +46,19 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         binding.dealsSliderView.setScrollTimeInSec(4);
         binding.dealsSliderView.setAutoCycle(true);
         binding.dealsSliderView.startAutoCycle();
-        binding.etSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
+        binding.etSearch.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchText = binding.etSearch.getText().toString();
+                if (Validation.isNotNullOrEmpty(searchText))
+                    Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment(searchText));
+                else
+                    showSnackBar(requireView(), "Search field can't be empty");
+                return true;
             }
+            return false;
         });
-       // presenter.getCategories();
+        presenter.getCategories();
     }
 
     @Override

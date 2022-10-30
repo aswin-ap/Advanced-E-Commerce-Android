@@ -1,6 +1,6 @@
 package com.example.azmart_android.contracts;
 
-import com.example.azmart_android.model.CategoriesResponse;
+import com.example.azmart_android.data.model.CategoriesResponse;
 
 import java.util.List;
 

@@ -1,8 +1,9 @@
 package com.example.azmart_android.presenter;
 
 import com.example.azmart_android.contracts.HomeContract;
-import com.example.azmart_android.model.CategoriesResponse;
+import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.network.api_manager.ApiDataManager;
+import com.example.azmart_android.utils.NetworkManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,13 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void getCategories() {
+      /*  if (NetworkManager.isNetworkAvailable(mContext)) {
+            mView.showProgressBar();
+            mApiDataManager.LoginUser(user, password, this);
+        } else mView.showWarningMessage(mContext.getResources().getString(R.string.no_network));*/
         mView.showLoading();
-       mApiDataManager.getCategories(this);
+      // mApiDataManager.getCategories(this);
+       mApiDataManager.parallelApiCall();
     }
 
     @Override

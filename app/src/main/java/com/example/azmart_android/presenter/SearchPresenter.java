@@ -1,7 +1,7 @@
 package com.example.azmart_android.presenter;
 
 import com.example.azmart_android.contracts.SearchContract;
-import com.example.azmart_android.model.SearchResponse;
+import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.network.api_manager.ApiDataManager;
 
 public class SearchPresenter implements SearchContract.Presenter {

@@ -1,8 +1,8 @@
 package com.example.azmart_android.network.api_manager;
 
-import com.example.azmart_android.model.BestProductsResponse;
-import com.example.azmart_android.model.CategoriesResponse;
-import com.example.azmart_android.model.SearchResponse;
+import com.example.azmart_android.data.model.BestProductsResponse;
+import com.example.azmart_android.data.model.CategoriesResponse;
+import com.example.azmart_android.data.model.SearchResponse;
 
 import java.util.List;
 
