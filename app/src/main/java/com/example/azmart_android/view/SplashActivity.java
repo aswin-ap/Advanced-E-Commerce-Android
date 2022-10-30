@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                 finishAffinity();
             } else {
                 Intent i = new Intent(SplashActivity.this,
-                        HomeActivity.class);
+                        AuthActivity.class);
                 startActivity(i);
                 finishAffinity();
             }
