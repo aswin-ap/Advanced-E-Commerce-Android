@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.data.model.SearchResponse;
+import com.example.azmart_android.presenter.CategoryPresenter;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.presenter.SearchPresenter;
 
@@ -131,4 +132,43 @@ public class ApiDataManager {
         }
     }
 
+    public void getCategoryList(CategoryPresenter presenter) {
+
+        try {
+            if (apiInterFace == null)
+                apiInterFace = ApiClient.getClientServerApi().create(ApiInterFace.class);
+
+            apiInterFace
+                    .getCategoriesList()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Observer<List<CategoriesResponse>>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                        }
+
+                        @Override
+                        public void onNext(List<CategoriesResponse> categoriesResponse) {
+                            presenter.onCategoryResultResponse(categoriesResponse);
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "onError: " + e.getMessage());
+                            presenter.onApiError(e.getMessage());
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+
+
+        } catch (Exception e) {
+            presenter.onApiError(e.getMessage());
+            Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+        }
+
+    }
 }

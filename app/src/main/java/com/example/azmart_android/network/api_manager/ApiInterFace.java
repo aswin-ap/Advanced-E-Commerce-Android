@@ -29,5 +29,7 @@ public interface ApiInterFace {
             @Query("name") String searchText
     );
 
+    @GET("api/v2/categories")
+    Observable<List<CategoriesResponse>> getCategoriesList();
 
 }
