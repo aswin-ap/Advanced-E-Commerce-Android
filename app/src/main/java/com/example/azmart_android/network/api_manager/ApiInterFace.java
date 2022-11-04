@@ -3,11 +3,13 @@ package com.example.azmart_android.network.api_manager;
 import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.data.model.SearchResponse;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterFace {
@@ -27,6 +29,11 @@ public interface ApiInterFace {
     @GET("api/products/search")
     Observable<SearchResponse> searchItems(
             @Query("name") String searchText
+    );
+
+    @GET("api/category/{categoryId}/products")
+    Observable<SearchResponse> getProductsByCategory(
+            @Path("categoryId") int categoryId
     );
 
     @GET("api/v2/categories")

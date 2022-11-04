@@ -1,5 +1,6 @@
 package com.example.azmart_android.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -48,15 +49,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         }
 
         void setData(SearchResponse.Docs docs) {
-            searchItemBinding.tvTitle.setText(docs.getProductTitle());
-            searchItemBinding.tvPrice.setText(docs.getMetadata().getPrices().getSalePrice().getFormattedPrice());
+            try {
+                searchItemBinding.tvTitle.setText(docs.getProductTitle());
+                Glide.with(searchItemBinding.getRoot().getContext())
+                        .load(docs.getProductMainImageUrl())
+                        .placeholder(R.drawable.ic_image_placeholder)
+                        .error(R.drawable.ic_image_error)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(searchItemBinding.ivProduct);
+                searchItemBinding.tvPrice.setText(docs.getMetadata().getPrices().getSalePrice().getFormattedPrice());
 
-            Glide.with(searchItemBinding.getRoot().getContext())
-                    .load(docs.getProductMainImageUrl())
-                    .placeholder(R.drawable.ic_image_placeholder)
-                    .error(R.drawable.ic_image_error)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(searchItemBinding.ivProduct);
+            }catch (Exception e){
+                Log.e("error :",e.toString());
+            }
         }
     }
 

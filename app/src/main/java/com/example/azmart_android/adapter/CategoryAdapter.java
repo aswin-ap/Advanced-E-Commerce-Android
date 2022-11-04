@@ -1,5 +1,6 @@
 package com.example.azmart_android.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.databinding.CategoryItemBinding;
+import com.example.azmart_android.view.Products.ProductsActivity;
 
 import java.util.List;
 
@@ -51,7 +53,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), categoriesResponse.getCategoryName(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(view.getContext(), categoriesResponse.getCategoryName(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), ProductsActivity.class);
+                    intent.putExtra("categoryId",categoriesResponse.getApiCategoryId());
+                    view.getContext().startActivity(intent);
                 }
             });
 

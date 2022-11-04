@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.azmart_android.R;
 import com.example.azmart_android.data.preference.SessionManager;
 import com.example.azmart_android.view.auth.AuthActivity;
+import com.example.azmart_android.view.categories.CategoryActivity;
 import com.example.azmart_android.view.home.HomeActivity;
 
 @SuppressLint("CustomSplashScreen")
@@ -29,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
                 finishAffinity();
             } else {
                 Intent i = new Intent(SplashActivity.this,
-                        AuthActivity.class);
+                        CategoryActivity.class);
                 startActivity(i);
                 finishAffinity();
             }
