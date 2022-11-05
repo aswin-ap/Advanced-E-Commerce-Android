@@ -11,7 +11,6 @@
         layout="@layout/circular_progress_layout"
         android:visibility="gone" />
 
-
     <LinearLayout
         android:id="@+id/seearch_list_layout"
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/white">
+            android:background="@color/green_500">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -45,16 +44,59 @@
             android:padding="10dp"
             android:text="" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_search"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srf_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/search_item" />
+
+            </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Products Not Found!"
+        android:textSize="@dimen/product_not_found"
+        android:textColor="@color/green_700"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_network_worning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/search_item" />
-
+            android:text="You are in offline"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@color/green_700"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
