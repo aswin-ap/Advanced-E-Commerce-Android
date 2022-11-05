@@ -41,4 +41,30 @@
             android:name="search"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.azmart_android.view.categories.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+
+        <action
+            android:id="@+id/action_categoryFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.example.azmart_android.view.Products.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products">
+        <argument
+            android:name="caregoryId"
+            app:argType="integer" />
+        <argument
+            android:name="categoryName"
+            app:argType="string"/>
+    </fragment>
 </navigation>

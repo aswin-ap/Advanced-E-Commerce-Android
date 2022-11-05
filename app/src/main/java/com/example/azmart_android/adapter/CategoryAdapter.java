@@ -4,21 +4,23 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.databinding.CategoryItemBinding;
-import com.example.azmart_android.view.Products.ProductsActivity;
+import com.example.azmart_android.view.Products.ProductsFragment;
+import com.example.azmart_android.view.categories.CategoryFragment;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
     List<CategoriesResponse> categoriesResponseList;
-    public CategoryAdapter(List<CategoriesResponse> categoriesResponseList) {
+    CategoryFragment categoryFragment;
+    public CategoryAdapter(List<CategoriesResponse> categoriesResponseList, CategoryFragment categoryFragment) {
         this.categoriesResponseList=categoriesResponseList;
+        this.categoryFragment=categoryFragment;
     }
 
     @NonNull
@@ -53,10 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Toast.makeText(view.getContext(), categoriesResponse.getCategoryName(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(view.getContext(), ProductsActivity.class);
-                    intent.putExtra("categoryId",categoriesResponse.getApiCategoryId());
-                    view.getContext().startActivity(intent);
+                    categoryFragment.navigateToProducts(categoriesResponse.getApiCategoryId(),categoriesResponse.getCategoryName());
                 }
             });
 

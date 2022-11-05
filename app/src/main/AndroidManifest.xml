@@ -16,12 +16,6 @@
         android:theme="@style/Theme.POSAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".view.Products.ProductsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.categories.CategoryActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.home.HomeActivity"
             android:exported="false">
             <meta-data
