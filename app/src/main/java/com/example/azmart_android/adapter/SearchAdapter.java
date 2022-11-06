@@ -9,18 +9,30 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.azmart_android.R;
-import com.example.azmart_android.databinding.SearchItemBinding;
 import com.example.azmart_android.data.model.SearchResponse;
+import com.example.azmart_android.databinding.SearchItemBinding;
 
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
     SearchResponse searchResponseList;
+    RequestOptions options;
 
     public SearchAdapter(SearchResponse searchResponseList) {
         this.searchResponseList = searchResponseList;
+         options = new RequestOptions()
+                 .override(150,150)
+                .centerCrop()
+                .placeholder(R.drawable.ic_image_placeholder)
+                .error(R.drawable.ic_image_error)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH);
+
     }
 
     @NonNull
@@ -40,6 +52,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         return searchResponseList != null ? searchResponseList.getDocs().size() : 0;
     }
 
+    public void updateSearchListItems(List<SearchResponse.Docs> searchResponseList) {
+        final SearchDiffCallback diffCallback = new SearchDiffCallback(this.searchResponseList.getDocs(), searchResponseList);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.searchResponseList.getDocs().clear();
+        this.searchResponseList.getDocs().addAll(searchResponseList);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
     public class SearchViewHolder extends RecyclerView.ViewHolder {
         private SearchItemBinding searchItemBinding;
 
@@ -51,27 +72,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         void setData(SearchResponse.Docs docs) {
             try {
                 searchItemBinding.tvTitle.setText(docs.getProductTitle());
+                searchItemBinding.ratingItem.setRating((float) docs.getMetadata().getEvaluation().getStarRating());
                 Glide.with(searchItemBinding.getRoot().getContext())
-                        .load(docs.getProductMainImageUrl())
-                        .placeholder(R.drawable.ic_image_placeholder)
-                        .error(R.drawable.ic_image_error)
+                        .load(docs.getMetadata().getImage().getImgUrl())
+                        //.load(docs.getProductMainImageUrl())
+                        .apply(options)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(searchItemBinding.ivProduct);
                 searchItemBinding.tvPrice.setText(docs.getMetadata().getPrices().getSalePrice().getFormattedPrice());
 
-            }catch (Exception e){
-                Log.e("error :",e.toString());
+            } catch (Exception e) {
+                Log.e("error :", e.toString());
             }
         }
-    }
-
-    public void updateSearchListItems(List<SearchResponse.Docs> searchResponseList) {
-        final SearchDiffCallback diffCallback = new SearchDiffCallback(this.searchResponseList.getDocs(), searchResponseList);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        this.searchResponseList.getDocs().clear();
-        this.searchResponseList.getDocs().addAll(searchResponseList);
-        diffResult.dispatchUpdatesTo(this);
     }
 }
 

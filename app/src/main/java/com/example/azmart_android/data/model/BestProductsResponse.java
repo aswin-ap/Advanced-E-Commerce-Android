@@ -370,6 +370,22 @@ public class BestProductsResponse {
     public void setV(Integer v) {
         this.v = v;
     }
+
+    public class ProductSmallImageUrls {
+
+        @SerializedName("string")
+        @Expose
+        private List<String> string = null;
+
+        public List<String> getString() {
+            return string;
+        }
+
+        public void setString(List<String> string) {
+            this.string = string;
+        }
+
+    }
 }
 
 class AvailableQuantity {
@@ -492,21 +508,6 @@ class Price {
 
 }
 
-class ProductSmallImageUrls {
-
-    @SerializedName("string")
-    @Expose
-    private List<String> string = null;
-
-    public List<String> getString() {
-        return string;
-    }
-
-    public void setString(List<String> string) {
-        this.string = string;
-    }
-
-}
 
 class Review {
 
