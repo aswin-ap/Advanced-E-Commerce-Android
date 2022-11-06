@@ -9,7 +9,7 @@ public interface ProductsContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getProducts(int categoryId);
+        void getProducts(String categoryId);
 
         void onProductsResultResponse(SearchResponse searchResponse);
     }

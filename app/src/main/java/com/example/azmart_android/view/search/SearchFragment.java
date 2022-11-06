@@ -1,5 +1,6 @@
 package com.example.azmart_android.view.search;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -81,7 +82,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
         binding.tvResults.setText("Results "+searchResponse.getTotalRecordCount());
         searchResponseList = searchResponse;
         if (isFirstTime) {
-            searchAdapter = new SearchAdapter(searchResponseList);
+            searchAdapter = new SearchAdapter(searchResponseList, requireContext());
             binding.rvSearch.setHasFixedSize(true);
             binding.rvSearch.setAdapter(searchAdapter);
         }

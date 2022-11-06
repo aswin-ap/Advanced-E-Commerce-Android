@@ -62,9 +62,31 @@
         tools:layout="@layout/fragment_products">
         <argument
             android:name="caregoryId"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="categoryName"
             app:argType="string"/>
+
+        <action
+            android:id="@+id/action_productsFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.azmart_android.view.Products.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product">
+        <argument
+            android:name="ProductId"
+            app:argType="string" />
+        <argument
+            android:name="ProductName"
+            app:argType="string"/>
+    </fragment>
+
 </navigation>

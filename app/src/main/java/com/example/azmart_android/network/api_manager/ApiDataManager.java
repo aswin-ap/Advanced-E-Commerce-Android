@@ -4,9 +4,11 @@ import android.util.Log;
 
 import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
+import com.example.azmart_android.data.model.ProductDetails.ProductDetailsResponse;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.presenter.CategoryPresenter;
 import com.example.azmart_android.presenter.HomePresenter;
+import com.example.azmart_android.presenter.ProductPresenter;
 import com.example.azmart_android.presenter.ProductsPresenter;
 import com.example.azmart_android.presenter.SearchPresenter;
 
@@ -173,7 +175,7 @@ public class ApiDataManager {
 
     }
 
-    public void getProductByCategory(ProductsPresenter presenter, int categoryId) {
+    public void getProductsByCategory(ProductsPresenter presenter, String categoryId) {
         try {
             if (apiInterFace == null)
                 apiInterFace = ApiClient.getClientServerApi().create(ApiInterFace.class);
@@ -190,6 +192,43 @@ public class ApiDataManager {
                         @Override
                         public void onNext(SearchResponse searchResponse) {
                             presenter.onProductsResultResponse(searchResponse);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "onError: " + e.getMessage());
+                            presenter.onApiError(e.getMessage());
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+
+
+        } catch (Exception e) {
+            presenter.onApiError(e.getMessage());
+            Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+        }
+    }
+
+    public void getProductByCategory(ProductPresenter presenter, String productId) {
+        try {
+            if (apiInterFace == null)
+                apiInterFace = ApiClient.getClientServerApi().create(ApiInterFace.class);
+
+            apiInterFace
+                    .getProductByProductId(productId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Observer<ProductDetailsResponse>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                        }
+
+                        @Override
+                        public void onNext(ProductDetailsResponse productDetailsResponse) {
+                            presenter.onProductResultResponse(productDetailsResponse);
                         }
 
                         @Override

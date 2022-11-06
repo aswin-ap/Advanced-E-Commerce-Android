@@ -13,18 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.azmart_android.R;
-import com.example.azmart_android.databinding.SearchItemBinding;
 import com.example.azmart_android.data.model.SearchResponse;
+import com.example.azmart_android.databinding.SearchItemBinding;
+import com.example.azmart_android.view.Products.ProductsFragment;
 
 import java.util.List;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.SearchViewHolder> {
     SearchResponse searchResponseList;
-    Context context;
+    ProductsFragment productsFragment;
 
-    public SearchAdapter(SearchResponse searchResponseList, Context context) {
+    public ProductsAdapter(SearchResponse searchResponseList, ProductsFragment productsFragment) {
         this.searchResponseList = searchResponseList;
-        this.context=context;
+        this.productsFragment=productsFragment;
     }
 
     @NonNull
@@ -70,6 +71,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    productsFragment.navigateToProduct(docs.getProductId(),docs.getProductTitle());
                 }
             });
 
@@ -83,42 +85,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         this.searchResponseList.getDocs().clear();
         this.searchResponseList.getDocs().addAll(searchResponseList);
         diffResult.dispatchUpdatesTo(this);
-    }
-}
-
-class SearchDiffCallback extends DiffUtil.Callback {
-
-    private final List<SearchResponse.Docs> mOldSearchList;
-    private final List<SearchResponse.Docs> mNewSearchList;
-
-    SearchDiffCallback(List<SearchResponse.Docs> mOldSearchList, List<SearchResponse.Docs> mNewSearchList) {
-        this.mOldSearchList = mOldSearchList;
-        this.mNewSearchList = mNewSearchList;
-    }
-
-    @Override
-    public int getOldListSize() {
-        return mOldSearchList != null ? mOldSearchList.size() : 0;
-    }
-
-    @Override
-    public int getNewListSize() {
-        return mNewSearchList != null ? mNewSearchList.size() : 0;
-    }
-
-    @Override
-    public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        /*return mOldSearchList.get(oldItemPosition).get == mNewSearchList.get(
-                newItemPosition).getDocs();*/
-        return true;
-    }
-
-    @Override
-    public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        final SearchResponse.Docs oldSearch = mOldSearchList.get(oldItemPosition);
-        final SearchResponse.Docs newSearch = mNewSearchList.get(newItemPosition);
-
-        return oldSearch.equals(newSearch);
     }
 }
 

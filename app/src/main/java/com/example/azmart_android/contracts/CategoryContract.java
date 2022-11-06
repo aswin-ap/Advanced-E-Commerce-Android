@@ -17,4 +17,6 @@ public interface CategoryContract {
         void onCategoryResultResponse(List<CategoriesResponse> categoriesResponse);
     }
 
+
+
 }

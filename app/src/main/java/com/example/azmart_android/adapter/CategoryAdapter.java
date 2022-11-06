@@ -1,5 +1,6 @@
 package com.example.azmart_android.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    categoryFragment.navigateToProducts(categoriesResponse.getApiCategoryId(),categoriesResponse.getCategoryName());
+                    categoryFragment.navigateToProducts(categoriesResponse.getId(),categoriesResponse.getCategoryName());
                 }
             });
 

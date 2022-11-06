@@ -1,7 +1,6 @@
 package com.example.azmart_android.view.Products;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,29 +10,25 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.azmart_android.R;
+import com.example.azmart_android.adapter.ProductsAdapter;
 import com.example.azmart_android.adapter.SearchAdapter;
 import com.example.azmart_android.contracts.ProductsContract;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.databinding.FragmentProductsBinding;
 import com.example.azmart_android.presenter.ProductsPresenter;
 import com.example.azmart_android.utils.NetworkManager;
-import com.example.azmart_android.view.home.HomeActivity;
-import com.example.azmart_android.view.search.SearchFragmentArgs;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.azmart_android.view.categories.CategoryFragmentDirections;
 
 
 public class ProductsFragment extends Fragment implements ProductsContract.View {
 
     private FragmentProductsBinding binding;
     private ProductsPresenter productsPresenter;
-    private SearchAdapter searchAdapter;
+    private ProductsAdapter productsAdapter;
     private SearchResponse searchResponseList;
     private String categoryName;
 
@@ -68,7 +63,7 @@ public class ProductsFragment extends Fragment implements ProductsContract.View 
     private void initView() {
         categoryName=ProductsFragmentArgs.fromBundle(getArguments()).getCategoryName();
         binding.tvResults.setText(categoryName);
-        int categoryId = ProductsFragmentArgs.fromBundle(getArguments()).getCaregoryId();
+        String categoryId = ProductsFragmentArgs.fromBundle(getArguments()).getCaregoryId();
         if (NetworkManager.isNetworkAvailable(requireContext())) {
             binding.tvNetworkWorning.setVisibility(View.GONE);
             productsPresenter.getProducts(categoryId);
@@ -110,16 +105,21 @@ public class ProductsFragment extends Fragment implements ProductsContract.View 
             binding.tvNoData.setVisibility(View.VISIBLE);
         }else {
             searchResponseList = searchResponse;
-            searchAdapter = new SearchAdapter(searchResponseList);
+            productsAdapter = new ProductsAdapter(searchResponseList, this);
             binding.rvSearch.setHasFixedSize(true);
-            binding.rvSearch.setAdapter(searchAdapter);
+            binding.rvSearch.setAdapter(productsAdapter);
             binding.tvNoData.setVisibility(View.GONE);
-            searchAdapter.notifyDataSetChanged();
+            productsAdapter.notifyDataSetChanged();
         }
     }
 
     public void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void navigateToProduct(String productId, String productName) {
+        Navigation.findNavController(requireView()).navigate(ProductsFragmentDirections.actionProductsFragmentToProductFragment(productId,productName));
+
     }
 
 }

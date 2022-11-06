@@ -109,7 +109,7 @@ public class CategoryFragment extends Fragment implements CategoryContract.View 
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
-    public void navigateToProducts(Integer apiCategoryId, String categoryName) {
+    public void navigateToProducts(String apiCategoryId, String categoryName) {
         Navigation.findNavController(requireView()).navigate(CategoryFragmentDirections.actionCategoryFragmentToProductsFragment(apiCategoryId,categoryName));
 
     }

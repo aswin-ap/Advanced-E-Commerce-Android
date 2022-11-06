@@ -22,9 +22,9 @@ public class ProductsPresenter implements ProductsContract.Presenter {
     }
 
     @Override
-    public void getProducts(int categoryId) {
+    public void getProducts(String categoryId) {
         mView.showLoading();
-        mApiDataManager.getProductByCategory(this,categoryId);
+        mApiDataManager.getProductsByCategory(this,categoryId);
     }
 
     @Override

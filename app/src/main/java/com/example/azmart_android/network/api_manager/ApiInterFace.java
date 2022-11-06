@@ -2,6 +2,7 @@ package com.example.azmart_android.network.api_manager;
 
 import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
+import com.example.azmart_android.data.model.ProductDetails.ProductDetailsResponse;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
@@ -33,10 +34,15 @@ public interface ApiInterFace {
 
     @GET("api/category/{categoryId}/products")
     Observable<SearchResponse> getProductsByCategory(
-            @Path("categoryId") int categoryId
+            @Path("categoryId") String categoryId
     );
 
     @GET("api/v2/categories")
     Observable<List<CategoriesResponse>> getCategoriesList();
+
+    @GET("api/product/{productId}")
+    Observable<ProductDetailsResponse> getProductByProductId(
+            @Path("productId") String productId
+    );
 
 }
