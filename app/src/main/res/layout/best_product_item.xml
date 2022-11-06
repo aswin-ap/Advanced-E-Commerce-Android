@@ -33,29 +33,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="TextView" />
 
-        <RatingBar
-            android:id="@+id/rating_item"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:isIndicator="true"
-            android:progressTint="#FFC107"
-            app:layout_constraintStart_toEndOf="@+id/iv_product"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:rating="3" />
-
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
             android:textColor="#12B619"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/iv_product"
-            app:layout_constraintTop_toBottomOf="@+id/rating_item"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="USD $ 41.00" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
