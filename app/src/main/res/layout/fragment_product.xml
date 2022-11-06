@@ -95,22 +95,27 @@
 
                     <RatingBar
                         android:id="@+id/rb_rating"
+                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:isIndicator="true"
+                        android:paddingLeft="10dp"
                         android:rating="3.5"
-                        android:scaleX=".5"
-                        android:scaleY=".5"
-                        android:theme="@style/RatingBar" />
+                        android:progressTint="#FFC107"
+                         />
 
                     <TextView
                         android:id="@+id/tv_price"
-                        style="@style/titleTextStyle3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:paddingLeft="20dp"
-                        android:text="price" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#12B619"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/iv_product"
+                        app:layout_constraintTop_toBottomOf="@+id/rating_item"
+                        tools:text="USD $ 41.00" />
 
                 </LinearLayout>
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

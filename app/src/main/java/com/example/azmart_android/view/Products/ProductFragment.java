@@ -89,13 +89,12 @@ public class ProductFragment extends Fragment implements ProductContract.View {
     @Override
     public void showProductResponse(ProductDetailsResponse productDetailsResponse) {
         ProductViewPagerAdaptor productViewPagerAdaptor;
-        Log.e("images :" ,  productDetailsResponse.getProductSmallImageUrls().getString().toString() );
         productViewPagerAdaptor= new ProductViewPagerAdaptor(getActivity().getBaseContext(), productDetailsResponse.getProductSmallImageUrls().getString());
         binding.vpProductImage.setAdapter(productViewPagerAdaptor);
         binding.ciIndicator.attachTo(binding.vpProductImage);
         productViewPagerAdaptor.notifyDataSetChanged();
-
-        binding.rbRating.setRating(3);
+//        binding.rbRating.setRating((float) productDetailsResponse.getEvaluateRate());
+        binding.tvPrice.setText(productDetailsResponse.getMetadata().getPriceModule().getFormatedPrice());
         hideLoading();
         binding.llProduct.setVisibility(View.VISIBLE);
     }

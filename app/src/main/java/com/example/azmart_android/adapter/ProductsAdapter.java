@@ -56,6 +56,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Search
         void setData(SearchResponse.Docs docs, SearchViewHolder holder) {
             try {
                 searchItemBinding.tvTitle.setText(docs.getProductTitle());
+                searchItemBinding.ratingItem.setRating((float) docs.getMetadata().getEvaluation().getStarRating());
                 Glide.with(searchItemBinding.getRoot().getContext())
                         .load(docs.getProductMainImageUrl())
                         .placeholder(R.drawable.ic_image_placeholder)

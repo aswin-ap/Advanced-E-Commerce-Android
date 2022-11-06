@@ -18,16 +18,18 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.azmart_android.R;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.databinding.SearchItemBinding;
+import com.example.azmart_android.view.search.SearchFragment;
 
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
     SearchResponse searchResponseList;
-    Context context;
+    SearchFragment searchFragment;
     RequestOptions options;
 
-    public SearchAdapter(SearchResponse searchResponseList) {
+    public SearchAdapter(SearchResponse searchResponseList, SearchFragment searchFragment) {
         this.searchResponseList = searchResponseList;
+        this.searchFragment=searchFragment;
          options = new RequestOptions()
                  .override(150,150)
                 .centerCrop()
@@ -97,14 +99,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         }
     }
 
-    public void updateSearchListItems(List<SearchResponse.Docs> searchResponseList) {
-        final SearchDiffCallback diffCallback = new SearchDiffCallback(this.searchResponseList.getDocs(), searchResponseList);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        this.searchResponseList.getDocs().clear();
-        this.searchResponseList.getDocs().addAll(searchResponseList);
-        diffResult.dispatchUpdatesTo(this);
-    }
 }
 
 class SearchDiffCallback extends DiffUtil.Callback {

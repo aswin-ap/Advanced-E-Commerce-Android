@@ -82,7 +82,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
         binding.tvResults.setText("Results "+searchResponse.getTotalRecordCount());
         searchResponseList = searchResponse;
         if (isFirstTime) {
-            searchAdapter = new SearchAdapter(searchResponseList, requireContext());
+            searchAdapter = new SearchAdapter(searchResponseList, this);
             binding.rvSearch.setHasFixedSize(true);
             binding.rvSearch.setAdapter(searchAdapter);
         }
