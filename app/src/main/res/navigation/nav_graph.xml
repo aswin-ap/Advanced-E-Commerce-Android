@@ -19,6 +19,21 @@
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right" />
+
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -43,6 +58,14 @@
         <argument
             android:name="search"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_searchFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right" />
+
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"

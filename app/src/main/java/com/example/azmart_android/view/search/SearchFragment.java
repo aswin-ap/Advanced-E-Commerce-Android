@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 
 import com.example.azmart_android.adapter.SearchAdapter;
 import com.example.azmart_android.contracts.SearchContract;
@@ -16,6 +17,7 @@ import com.example.azmart_android.databinding.FragmentSearchBinding;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.presenter.SearchPresenter;
 import com.example.azmart_android.view.BaseFragment;
+import com.example.azmart_android.view.Products.ProductsFragmentDirections;
 
 
 public class SearchFragment extends BaseFragment implements SearchContract.View {
@@ -87,5 +89,10 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
             binding.rvSearch.setAdapter(searchAdapter);
         }
         //searchAdapter.updateSearchListItems(searchResponseList.getDocs());
+    }
+
+    public void navigateToProducts(String productId, String productName) {
+        Navigation.findNavController(requireView()).navigate(SearchFragmentDirections.actionSearchFragmentToProductFragment(productId,productName));
+
     }
 }

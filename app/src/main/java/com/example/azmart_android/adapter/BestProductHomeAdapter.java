@@ -64,6 +64,7 @@ public class BestProductHomeAdapter extends RecyclerView.Adapter<BestProductHome
                 @Override
                 public void onClick(View view) {
                     // homeFragment.find;
+                    homeFragment.navigateToProduct(categoriesResponse.getProductId(),categoriesResponse.getProductTitle());
                 }
             });
 

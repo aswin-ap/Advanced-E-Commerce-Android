@@ -56,8 +56,8 @@ public class ProductFragment extends Fragment implements ProductContract.View {
     }
 
     private void initView() {
-        String productName=ProductFragmentArgs.fromBundle(getArguments()).getProductName();
-        binding.tvProductName.setText(productName);
+//        String productName=ProductFragmentArgs.fromBundle(getArguments()).getProductName();
+//        binding.tvProductName.setText(productName);
         String productId = ProductFragmentArgs.fromBundle(getArguments()).getProductId();
         Log.e("productid :" ,productId  );
 
@@ -89,12 +89,14 @@ public class ProductFragment extends Fragment implements ProductContract.View {
     @Override
     public void showProductResponse(ProductDetailsResponse productDetailsResponse) {
         ProductViewPagerAdaptor productViewPagerAdaptor;
-        productViewPagerAdaptor= new ProductViewPagerAdaptor(getActivity().getBaseContext(), productDetailsResponse.getProductSmallImageUrls().getString());
+        productViewPagerAdaptor= new ProductViewPagerAdaptor(getActivity().getBaseContext(), productDetailsResponse.getMetadata().getImageModule().getImagePathList());
         binding.vpProductImage.setAdapter(productViewPagerAdaptor);
         binding.ciIndicator.attachTo(binding.vpProductImage);
         productViewPagerAdaptor.notifyDataSetChanged();
 //        binding.rbRating.setRating((float) productDetailsResponse.getEvaluateRate());
+        binding.tvProductName.setText( productDetailsResponse.getMetadata().getTitleModule().getProductTitle());
         binding.tvPrice.setText(productDetailsResponse.getMetadata().getPriceModule().getFormatedPrice());
+        binding.tvProductDescription.setText(productDetailsResponse.getMetadata().getTitleModule().getProductDescription());
         hideLoading();
         binding.llProduct.setVisibility(View.VISIBLE);
     }

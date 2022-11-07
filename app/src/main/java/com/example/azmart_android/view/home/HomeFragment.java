@@ -22,6 +22,7 @@ import com.example.azmart_android.databinding.FragmentHomeBinding;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.utils.Validation;
 import com.example.azmart_android.view.BaseFragment;
+import com.example.azmart_android.view.Products.ProductsFragmentDirections;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
@@ -170,5 +171,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     public void navigateToCategory() {
         // Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_categoryFragment);
+    }
+
+    public void navigateToProduct(Long productId, String productName) {
+        Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToProductFragment(productId.toString(),productName));
+
+    }
+
+    public void navigateToProducts(String apiCategoryId, String categoryName) {
+        Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToProductsFragment(apiCategoryId,categoryName));
+
     }
 }

@@ -57,6 +57,8 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
                 @Override
                 public void onClick(View view) {
                      // homeFragment.find;
+                    homeFragment.navigateToProducts(categoriesResponse.getId(),categoriesResponse.getCategoryName());
+
                 }
             });
 

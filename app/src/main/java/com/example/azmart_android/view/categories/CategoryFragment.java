@@ -49,6 +49,9 @@ public class CategoryFragment extends Fragment implements CategoryContract.View 
                 binding.srfCategory.setRefreshing(false);
             }
         });
+        binding.ivBack.setOnClickListener(view -> {
+            requireActivity().onBackPressed();
+        });
         return binding.getRoot();
     }
 

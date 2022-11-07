@@ -44,6 +44,9 @@ public class ProductsFragment extends Fragment implements ProductsContract.View 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProductsBinding.inflate(inflater, container, false);
+        binding.ivBack.setOnClickListener(view -> {
+            requireActivity().onBackPressed();
+        });
         return binding.getRoot();
     }
 
@@ -57,7 +60,10 @@ public class ProductsFragment extends Fragment implements ProductsContract.View 
                 binding.srfProduct.setRefreshing(false);
             }
         });
+
+
         initView();
+
     }
 
     private void initView() {
