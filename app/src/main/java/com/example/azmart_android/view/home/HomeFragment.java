@@ -132,6 +132,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             categoryHomeAdapter.notifyDataSetChanged();
         } else
             showToast(requireContext(), "Category Not found");
+
+        binding.shimmerCategory.setVisibility(View.GONE);
+        binding.rvCategory.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -144,6 +147,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             bestProductHomeAdapter.notifyDataSetChanged();
         } else
             showToast(requireContext(), "Best Products Not found");
+
+        binding.shimmerBestProducts.setVisibility(View.GONE);
+        binding.rvBestProducts.setVisibility(View.VISIBLE);
     }
 
     public int getRandomColor() {

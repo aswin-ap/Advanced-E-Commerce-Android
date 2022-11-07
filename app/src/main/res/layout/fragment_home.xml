@@ -124,27 +124,63 @@
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_category"
-                android:layout_width="match_parent"
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
+                android:layout_width="match_parent">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/shimmer_category">
+
+                    <include layout="@layout/shimmer_category_home_item"/>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/rv_category"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
 
             <TextView
-                style="@style/titleTextStyle"
+                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Best Products" />
+                style="@style/titleTextStyle"
+                android:text="Best Products"
+                android:layout_marginTop="20dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_best_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/shimmer_best_products">
+
+                    <include layout="@layout/shimmer_best_product_item"/>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/rv_best_products"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
 
