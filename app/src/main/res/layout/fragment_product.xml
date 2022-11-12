@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.Products.ProductFragment">
+    tools:context=".view.Products.ProductDetailFragment">
 
     <include
         android:id="@+id/progress_circular_layout"
@@ -36,9 +36,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginEnd="15dp"
                     android:gravity="end"
-                    android:layout_marginEnd="15dp">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/iv_wishlist"
@@ -50,8 +50,8 @@
                         android:id="@+id/iv_cart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_shopping_bag"
-                        android:layout_marginStart="15dp"/>
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/ic_shopping_bag" />
 
                 </LinearLayout>
 
@@ -60,16 +60,15 @@
         </androidx.appcompat.widget.Toolbar>
 
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srf_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/srf_product"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fillViewport="true">
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
                 <LinearLayout
                     android:id="@+id/ll_product"
@@ -106,37 +105,25 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:layout_centerInParent="true"
+                            android:layout_marginBottom="35dp"
                             app:dotsColor="#686868"
-                            app:dotsStrokeColor="#686868"
                             app:dotsCornerRadius="5dp"
                             app:dotsSize="10dp"
                             app:dotsSpacing="4dp"
+                            app:dotsStrokeColor="#686868"
                             app:dotsStrokeWidth="2dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginBottom="35dp"/>
+                            app:layout_constraintStart_toStartOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <RatingBar
-                        android:id="@+id/rb_rating"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:isIndicator="true"
-                        android:paddingLeft="10dp"
-                        android:rating="3.5"
-                        android:progressTint="#FFC107"
-                         />
 
                     <TextView
                         android:id="@+id/tv_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
                         android:textColor="#12B619"
-                        android:textSize="14sp"
+                        android:textSize="23sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/iv_product"
                         app:layout_constraintTop_toBottomOf="@+id/rating_item"
@@ -145,21 +132,88 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <RatingBar
+                            android:id="@+id/rb_rating"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:isIndicator="true"
+                            android:progressTint="#FFC107"
+                            android:rating="3.5" />
+
+                        <TextView
+                            android:id="@+id/tv_rating"
+                            style="@style/titleTextStyle3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/black"
+                            tools:text="Hello" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/btn_product_add_to_cart"
+                            style="@style/titleTextStyle2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/green_500"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Add to cart"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btn_product_buy"
+                            style="@style/titleTextStyle2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:background="@color/green_500"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Buy now"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
-                            android:background="#DDDDDD"/>
+                            android:background="#DDDDDD" />
 
                         <TextView
+                            style="@style/titleTextStyle2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/titleTextStyle2"
-                            android:text="Details"
                             android:padding="10dp"
-                            android:textColor="@color/black"/>
+                            android:text="Details"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_product_description"
@@ -175,54 +229,19 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
-                            android:background="#DDDDDD"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:id="@+id/tv_product_add_to_cart"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textStyle="bold"
-                                android:background="#FFC107"
-                                style="@style/titleTextStyle2"
-                                android:text="Add to cart"
-                                android:padding="10dp"
-                                android:textColor="@color/black"/>
-
-                            <TextView
-                                android:id="@+id/tv_product_buy"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text="Buy now"
-                                android:gravity="center"
-                                android:textStyle="bold"
-                                android:background="#FFC107"
-                                style="@style/titleTextStyle2"
-                                android:layout_marginLeft="5dp"
-                                android:padding="10dp"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
+                            android:background="#DDDDDD" />
 
                     </LinearLayout>
 
                 </LinearLayout>
-                </ScrollView>
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     </LinearLayout>
@@ -234,9 +253,9 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Products Not Found!"
-        android:textSize="@dimen/product_not_found"
         android:textColor="@color/green_700"
-        android:visibility="gone"/>
+        android:textSize="@dimen/product_not_found"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -248,14 +267,14 @@
             android:id="@+id/tv_network_worning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="You are in offline"
-            android:textSize="15sp"
+            android:background="@color/green_700"
             android:gravity="center"
             android:padding="5dp"
+            android:text="You are in offline"
             android:textColor="@color/white"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:background="@color/green_700"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 

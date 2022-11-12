@@ -44,7 +44,8 @@
                         android:hint="@string/search_text"
                         android:imeOptions="actionSearch"
                         android:inputType="textEmailAddress"
-                        android:textColorHint="@android:color/tab_indicator_text" />
+                        android:textColorHint="@android:color/tab_indicator_text"
+                        tools:ignore="TouchTargetSizeCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

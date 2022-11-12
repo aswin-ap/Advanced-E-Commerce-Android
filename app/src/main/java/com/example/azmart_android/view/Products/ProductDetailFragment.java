@@ -19,20 +19,24 @@ import com.example.azmart_android.contracts.ProductContract;
 import com.example.azmart_android.data.model.ProductDetails.ProductDetailsResponse;
 import com.example.azmart_android.databinding.FragmentProductBinding;
 import com.example.azmart_android.presenter.ProductPresenter;
-import com.example.azmart_android.presenter.ProductsPresenter;
 import com.example.azmart_android.utils.NetworkManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
+public class ProductDetailFragment extends Fragment implements ProductContract.View {
 
-public class ProductFragment extends Fragment implements ProductContract.View {
-
+    FirebaseUser currentUser;
     private ProductPresenter productPresenter;
     private FragmentProductBinding binding;
+    private ProductDetailsResponse productDetailsResponse;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        productPresenter=new ProductPresenter(this);
+        productPresenter = new ProductPresenter(this);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        ;
     }
 
     @Override
@@ -58,16 +62,24 @@ public class ProductFragment extends Fragment implements ProductContract.View {
     private void initView() {
 //        String productName=ProductFragmentArgs.fromBundle(getArguments()).getProductName();
 //        binding.tvProductName.setText(productName);
-        String productId = ProductFragmentArgs.fromBundle(getArguments()).getProductId();
-        Log.e("productid :" ,productId  );
+        String productId = ProductDetailFragmentArgs.fromBundle(getArguments()).getProductId();
+        Log.e("productid :", productId);
 
         if (NetworkManager.isNetworkAvailable(requireContext())) {
             binding.llProduct.setVisibility(View.GONE);
             binding.tvNetworkWorning.setVisibility(View.GONE);
             productPresenter.getProduct(productId);
-        } else{
+        } else {
             binding.tvNetworkWorning.setVisibility(View.VISIBLE);
         }
+        binding.btnProductAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productPresenter.addProductToCart(
+                        productDetailsResponse.getProductId(), currentUser.getUid()
+                );
+            }
+        });
     }
 
     @Override
@@ -88,17 +100,24 @@ public class ProductFragment extends Fragment implements ProductContract.View {
 
     @Override
     public void showProductResponse(ProductDetailsResponse productDetailsResponse) {
+        this.productDetailsResponse = productDetailsResponse;
         ProductViewPagerAdaptor productViewPagerAdaptor;
-        productViewPagerAdaptor= new ProductViewPagerAdaptor(getActivity().getBaseContext(), productDetailsResponse.getMetadata().getImageModule().getImagePathList());
+        productViewPagerAdaptor = new ProductViewPagerAdaptor(getActivity().getBaseContext(), productDetailsResponse.getMetadata().getImageModule().getImagePathList());
         binding.vpProductImage.setAdapter(productViewPagerAdaptor);
         binding.ciIndicator.attachTo(binding.vpProductImage);
         productViewPagerAdaptor.notifyDataSetChanged();
 //        binding.rbRating.setRating((float) productDetailsResponse.getEvaluateRate());
-        binding.tvProductName.setText( productDetailsResponse.getMetadata().getTitleModule().getProductTitle());
+        binding.tvProductName.setText(productDetailsResponse.getMetadata().getTitleModule().getProductTitle());
+        binding.tvRating.setText(productDetailsResponse.getFeedBackRating().getEvarageStar());
         binding.tvPrice.setText(productDetailsResponse.getMetadata().getPriceModule().getFormatedPrice());
         binding.tvProductDescription.setText(productDetailsResponse.getMetadata().getTitleModule().getProductDescription());
         hideLoading();
         binding.llProduct.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showAddedToCartResponse(String message) {
+        showToast(requireContext(), message);
     }
 
     public void showToast(Context context, String message) {

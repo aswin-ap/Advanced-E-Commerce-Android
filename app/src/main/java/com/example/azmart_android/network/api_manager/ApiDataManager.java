@@ -2,6 +2,8 @@ package com.example.azmart_android.network.api_manager;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.data.model.ProductDetails.ProductDetailsResponse;
@@ -11,6 +13,10 @@ import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.presenter.ProductPresenter;
 import com.example.azmart_android.presenter.ProductsPresenter;
 import com.example.azmart_android.presenter.SearchPresenter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +31,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ApiDataManager {
     private final String TAG = "OnNetworkResponse";
     ApiInterFace apiInterFace;
+    FirebaseFirestore firebaseFirestore;
 
     public void searchItemsByName(SearchPresenter presenter, String searchText) {
         try {
@@ -89,11 +96,12 @@ public class ApiDataManager {
                     ).observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<List<? extends Object>>() {
                         @Override
-                        public void onSubscribe(Disposable d) {}
+                        public void onSubscribe(Disposable d) {
+                        }
 
                         @Override
                         public void onNext(List<?> objects) {
-                            Log.d(TAG, "onNext: "+ objects.get(0));
+                            Log.d(TAG, "onNext: " + objects.get(0));
                             if (objects.get(0) instanceof BestProductsResponse) {
                                 presenter.getBestProductsResponse((List<BestProductsResponse>) objects);
                             } else
@@ -107,7 +115,8 @@ public class ApiDataManager {
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
 
 
@@ -229,6 +238,26 @@ public class ApiDataManager {
             presenter.onApiError(e.getMessage());
             Log.e(TAG, "Exception caught in " + e.getMessage().toString());
         }
+    }
+
+    public void addProductToCart(ProductPresenter presenter, Map<String, Object> objectMap) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+
+        firebaseFirestore.collection("cart")
+                .add(objectMap)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        presenter.onAddToCartResponse("Added to cart successfully");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        presenter.onApiError(e.getMessage());
+                        Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+                    }
+                });
     }
 
 }

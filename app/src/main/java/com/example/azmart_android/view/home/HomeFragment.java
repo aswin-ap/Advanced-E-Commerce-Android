@@ -105,7 +105,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void showLoading() {
-        showLoadingDialog(requireContext());
+        //showLoadingDialog(requireContext());
     }
 
     @Override
