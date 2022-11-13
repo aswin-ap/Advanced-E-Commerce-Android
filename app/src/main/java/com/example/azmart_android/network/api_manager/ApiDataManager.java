@@ -157,6 +157,46 @@ public class ApiDataManager {
 
     }
 
+    public void getSearchCategoriesList(HomePresenter presenter) {
+
+        try {
+            if (apiInterFace == null)
+                apiInterFace = ApiClient.getClientServerApi().create(ApiInterFace.class);
+
+            apiInterFace
+                    .getCategoriesList()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Observer<List<CategoriesResponse>>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                        }
+
+                        @Override
+                        public void onNext(List<CategoriesResponse> categoriesResponse) {
+                            presenter.onSearchCategoryResultResponse(categoriesResponse);
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "onError: " + e.getMessage());
+                            presenter.onApiError(e.getMessage());
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+
+
+        } catch (Exception e) {
+            presenter.onApiError(e.getMessage());
+            Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+        }
+
+    }
+
     public void getProductsByCategory(ProductsPresenter presenter, String categoryId) {
         try {
             if (apiInterFace == null)

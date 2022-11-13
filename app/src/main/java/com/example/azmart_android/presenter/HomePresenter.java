@@ -36,6 +36,12 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
+    public void getSearchCategories(){
+        mApiDataManager.getSearchCategoriesList(this);
+    }
+
+
+    @Override
     public void getCategoriesResponse(List<CategoriesResponse> categoriesResponse) {
         mView.showCategoriesResponse(categoriesResponse);
     }
@@ -44,5 +50,10 @@ public class HomePresenter implements HomeContract.Presenter {
     public void getBestProductsResponse(List<BestProductsResponse> bestProductsResponse) {
         mView.hideLoading();
         mView.showBestProductsResponse(bestProductsResponse);
+    }
+
+    @Override
+    public void onSearchCategoryResultResponse(List<CategoriesResponse> categoriesResponse) {
+        mView.showSearchCategoriesList(categoriesResponse);
     }
 }

@@ -1,11 +1,14 @@
 package com.example.azmart_android.view.home;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azmart_android.R;
 import com.example.azmart_android.adapter.BestProductHomeAdapter;
+import com.example.azmart_android.adapter.CategoryAdapter;
 import com.example.azmart_android.adapter.CategoryHomeAdapter;
 import com.example.azmart_android.adapter.DealsViewPagerAdapter;
+import com.example.azmart_android.adapter.SearchCatSugesstionAdaptor;
 import com.example.azmart_android.contracts.HomeContract;
 import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
@@ -40,6 +45,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private BestProductHomeAdapter bestProductHomeAdapter;
     private List<BestProductsResponse> bestProductsList = new ArrayList<>();
     private List<Integer> colorList = new ArrayList<>();
+    private SearchCatSugesstionAdaptor searchCatSugesstionAdaptor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +107,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             return false;
         });
          presenter.getHomeDetails();
+         presenter.getSearchCategories();
     }
 
     @Override
@@ -153,6 +160,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         binding.rvBestProducts.setVisibility(View.VISIBLE);
     }
 
+
+
     public int getRandomColor() {
         // This is the base color which will be mixed with the generated one
         final int baseColor = Color.WHITE;
@@ -167,6 +176,18 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
         return Color.rgb(red, green, blue);
         // return Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+    }
+
+    @Override
+    public void showSearchCategoriesList(List<CategoriesResponse> categoriesResponse) {
+        List<String> serachCategories= new ArrayList<>();
+        for (CategoriesResponse categoriesResponse1 :categoriesResponse){
+            serachCategories.add(categoriesResponse1.getCategoryName());
+            Log.e("name :",categoriesResponse1.getCategoryName());
+        }
+        searchCatSugesstionAdaptor=new SearchCatSugesstionAdaptor(getActivity().getBaseContext(), serachCategories,this);
+        binding.etSearch.setAdapter(searchCatSugesstionAdaptor);
+        binding.etSearch.setThreshold(1);
     }
 
     public void navigateToCategory() {

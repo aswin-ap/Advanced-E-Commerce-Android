@@ -10,11 +10,16 @@ public interface HomeContract {
     interface View extends BaseView {
         void showCategoriesResponse(List<CategoriesResponse> categoriesResponseList);
         void showBestProductsResponse(List<BestProductsResponse> bestProductsResponses);
+        void showSearchCategoriesList(List<CategoriesResponse> categoriesResponse);
     }
 
     interface Presenter extends BasePresenter {
+        void getSearchCategories();
+        void onSearchCategoryResultResponse(List<CategoriesResponse> categoriesResponse);
         void getHomeDetails();
         void getCategoriesResponse(List<CategoriesResponse> categoriesResponse);
         void getBestProductsResponse(List<BestProductsResponse> bestProductsResponse);
+
+
     }
 }

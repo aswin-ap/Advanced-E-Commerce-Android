@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/category_title"
         style="@style/itemTitleTextStyle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="2"
         android:paddingTop="10dp"

@@ -37,13 +37,17 @@
                     app:endIconMode="custom"
                     app:hintEnabled="false">
 
-                    <com.google.android.material.textfield.TextInputEditText
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/et_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/search_text"
+                        android:padding="17dp"
+                        android:textSize="16sp"
                         android:imeOptions="actionSearch"
                         android:inputType="textEmailAddress"
+                        android:scrollbars="none"
                         android:textColorHint="@android:color/tab_indicator_text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
