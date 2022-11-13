@@ -13,26 +13,33 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
             app:destination="@id/productFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
         <action
             android:id="@+id/action_homeFragment_to_productsFragment"
             app:destination="@id/productsFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
     </fragment>
     <fragment
@@ -62,23 +69,25 @@
         <action
             android:id="@+id/action_searchFragment_to_productFragment"
             app:destination="@id/productFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.azmart_android.view.categories.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" >
+        tools:layout="@layout/fragment_category">
 
         <action
             android:id="@+id/action_categoryFragment_to_productsFragment"
             app:destination="@id/productsFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
     </fragment>
     <fragment
@@ -91,20 +100,21 @@
             app:argType="string" />
         <argument
             android:name="categoryName"
-            app:argType="string"/>
+            app:argType="string" />
 
         <action
             android:id="@+id/action_productsFragment_to_productFragment"
             app:destination="@id/productFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
     </fragment>
 
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.example.azmart_android.view.Products.ProductFragment"
+        android:name="com.example.azmart_android.view.Products.ProductDetailFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product">
         <argument
@@ -112,7 +122,7 @@
             app:argType="string" />
         <argument
             android:name="ProductName"
-            app:argType="string"/>
+            app:argType="string" />
     </fragment>
 
 </navigation>

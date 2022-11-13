@@ -47,6 +47,8 @@
                         android:textSize="16sp"
                         android:imeOptions="actionSearch"
                         android:inputType="textEmailAddress"
+                        android:textColorHint="@android:color/tab_indicator_text"
+                        tools:ignore="TouchTargetSizeCheck" />
                         android:scrollbars="none"
                         android:textColorHint="@android:color/tab_indicator_text" />
 

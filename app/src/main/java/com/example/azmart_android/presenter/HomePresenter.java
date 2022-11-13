@@ -17,9 +17,9 @@ public class HomePresenter implements HomeContract.Presenter {
         mApiDataManager = new ApiDataManager();
         this.mView = mView;
         dealsList.add("https://img.freepik.com/premium-vector/special-offer-sale-discount-banner_180786-46.jpg?w=2000");
-        dealsList.add("https://images.unsplash.com/photo-1621551122354-e96737d64b70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTU3MDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM2OTk4MjI&ixlib=rb-1.2.1&q=80&w=1080");
-        dealsList.add("https://images.unsplash.com/photo-1621616875450-79f024a8c42c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTU3MDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM2OTk4MjI&ixlib=rb-1.2.1&q=80&w=1080");
-        dealsList.add("https://images.unsplash.com/photo-1621687947404-e41b3d139088?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTU3MDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM2OTk4MjI&ixlib=rb-1.2.1&q=80&w=1080");
+        dealsList.add("https://img.freepik.com/free-vector/super-sale-horizontal-banner_52683-59532.jpg?w=2000");
+        dealsList.add("https://img.freepik.com/free-vector/sale-banner-with-product-description_1361-1333.jpg?w=2000");
+        dealsList.add("https://s.tmimgcdn.com/scr/1200x750/268600/product-promotion-social-media-banners-00273_268696-original.jpg");
     }
 
     @Override
