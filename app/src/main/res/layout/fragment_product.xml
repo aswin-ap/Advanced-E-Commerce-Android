@@ -40,17 +40,30 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <com.sackcentury.shinebuttonlib.ShineButton
                         android:id="@+id/iv_wishlist"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_favorite" />
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_gravity="center"
+                        android:src="@android:color/darker_gray"
+                        app:allow_random_color="false"
+                        app:btn_color="@android:color/darker_gray"
+                        app:btn_fill_color="@color/black"
+                        app:siShape="@raw/heart" />
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/iv_wishlist"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:src="@drawable/ic_favorite" />-->
 
                     <ImageView
                         android:id="@+id/iv_cart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_width="30dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginEnd="10dp"
                         android:src="@drawable/ic_shopping_bag" />
 
                 </LinearLayout>

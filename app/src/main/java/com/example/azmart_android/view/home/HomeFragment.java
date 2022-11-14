@@ -183,7 +183,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         List<String> serachCategories= new ArrayList<>();
         for (CategoriesResponse categoriesResponse1 :categoriesResponse){
             serachCategories.add(categoriesResponse1.getCategoryName());
-            Log.e("name :",categoriesResponse1.getCategoryName());
         }
         searchCatSugesstionAdaptor=new SearchCatSugesstionAdaptor(getActivity().getBaseContext(), serachCategories,this);
         binding.etSearch.setAdapter(searchCatSugesstionAdaptor);

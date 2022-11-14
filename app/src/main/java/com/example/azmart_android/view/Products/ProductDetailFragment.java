@@ -36,7 +36,6 @@ public class ProductDetailFragment extends Fragment implements ProductContract.V
         productPresenter = new ProductPresenter(this);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        ;
     }
 
     @Override
@@ -72,12 +71,28 @@ public class ProductDetailFragment extends Fragment implements ProductContract.V
         } else {
             binding.tvNetworkWorning.setVisibility(View.VISIBLE);
         }
+        productPresenter.isExistProductInWishlist(productId, currentUser.getUid());
         binding.btnProductAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 productPresenter.addProductToCart(
                         productDetailsResponse.getProductId(), currentUser.getUid()
                 );
+            }
+        });
+        binding.ivWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (binding.ivWishlist.isChecked()){
+                    productPresenter.addProductToWishlist(
+                            productDetailsResponse.getProductId(), currentUser.getUid()
+                    );
+                }else {
+                    productPresenter.deleteProductInWishlist(
+                            productDetailsResponse.getProductId(), currentUser.getUid()
+                    );
+                }
+
             }
         });
     }
@@ -119,6 +134,22 @@ public class ProductDetailFragment extends Fragment implements ProductContract.V
     public void showAddedToCartResponse(String message) {
         showToast(requireContext(), message);
     }
+
+    @Override
+    public void showAddedToWishlistResponse(String message) {
+        showToast(requireContext(), message);
+    }
+
+    @Override
+    public void showisExistwishlist(String message) {
+        binding.ivWishlist.setChecked(true);
+    }
+
+    @Override
+    public void showdeleteProductwishlist(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
 
     public void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

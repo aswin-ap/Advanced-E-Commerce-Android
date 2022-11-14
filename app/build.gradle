@@ -100,4 +100,7 @@ dependencies {
     //shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    // Button Animation
+    implementation 'com.sackcentury:shinebutton:1.0.0'
+
 }

@@ -45,7 +45,7 @@
             android:text="My Whishlist" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srf_product"
+            android:id="@+id/srf_wishlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -55,7 +55,7 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_search"
+                    android:id="@+id/rv_wishlist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Products Not Found!"
+        android:text="Wishlist Empty"
         android:textColor="@color/green_700"
         android:visibility="gone"/>
 

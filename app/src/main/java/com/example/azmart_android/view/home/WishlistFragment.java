@@ -1,66 +1,90 @@
 package com.example.azmart_android.view.home;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.azmart_android.R;
+import com.example.azmart_android.contracts.WishlistContract;
+import com.example.azmart_android.databinding.FragmentCategoryBinding;
+import com.example.azmart_android.databinding.FragmentWishlistBinding;
+import com.example.azmart_android.presenter.WishlistPresenter;
+import com.example.azmart_android.utils.NetworkManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WishlistFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class WishlistFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class WishlistFragment extends Fragment implements WishlistContract.View {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FirebaseUser currentUser;
+    private WishlistPresenter presenter;
+    private FragmentWishlistBinding binding;
 
-    public WishlistFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WishlistFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static WishlistFragment newInstance(String param1, String param2) {
-        WishlistFragment fragment = new WishlistFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        presenter=new WishlistPresenter(this);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wishlist, container, false);
+        binding = FragmentWishlistBinding.inflate(inflater, container, false);
+        binding.srfWishlist.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initView();
+                binding.srfWishlist.setRefreshing(false);
+            }
+        });
+        initView();
+        return binding.getRoot();
+    }
+
+    private void initView() {
+        if (NetworkManager.isNetworkAvailable(requireContext())) {
+            binding.tvNetworkWorning.setVisibility(View.GONE);
+            presenter.getProductsFromWishlist(currentUser.getUid());
+        } else{
+            binding.tvNetworkWorning.setVisibility(View.VISIBLE);
+            binding.rvWishlist.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void showLoading() {
+        binding.progressCircularLayout.getRoot().setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showApiErrorWarning(String string) {
+        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+        showToast(requireActivity(), string);
+    }
+
+    @Override
+    public void showWishlistProducts(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }

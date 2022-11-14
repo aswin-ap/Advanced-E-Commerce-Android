@@ -48,4 +48,47 @@ public class ProductPresenter implements ProductContract.Presenter {
     public void onAddToCartResponse(String messge) {
         mView.showAddedToCartResponse(messge);
     }
+
+    @Override
+    public void addProductToWishlist(String productId, String userId) {
+        // mView.showLoading();
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("user_id", userId);
+        dataMap.put("product_id", productId);
+        mApiDataManager.addProductToWishlist(this, dataMap);
+    }
+
+    @Override
+    public void isExistProductInWishlist(String productId, String userId) {
+        // mView.showLoading();
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("user_id", userId);
+        dataMap.put("product_id", productId);
+        mApiDataManager.isExistProductInWishlist(this,dataMap);
+    }
+
+    @Override
+    public void onAddToWishlistResponse(String messge) {
+        mView.showAddedToWishlistResponse(messge);
+    }
+
+    @Override
+    public void isExistWishlistResponse(String messge) {
+        mView.showisExistwishlist(messge);
+    }
+
+    @Override
+    public void deleteProductInWishlist(String productId, String userId) {
+        // mView.showLoading();
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("user_id", userId);
+        dataMap.put("product_id", productId);
+        mApiDataManager.deleteProductFromWishlist(this,dataMap);
+    }
+
+    @Override
+    public void deleteProductInWishlistResponse(String messge) {
+        mView.showdeleteProductwishlist(messge);
+    }
+
 }
