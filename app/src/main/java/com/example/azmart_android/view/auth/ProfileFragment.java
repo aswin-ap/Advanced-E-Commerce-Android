@@ -1,4 +1,4 @@
-package com.example.azmart_android.view.home;
+package com.example.azmart_android.view.auth;
 
 import android.content.Intent;
 import android.os.Bundle;

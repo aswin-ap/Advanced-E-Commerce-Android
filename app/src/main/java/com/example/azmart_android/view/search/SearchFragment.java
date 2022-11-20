@@ -1,6 +1,5 @@
 package com.example.azmart_android.view.search;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +12,10 @@ import androidx.navigation.Navigation;
 
 import com.example.azmart_android.adapter.SearchAdapter;
 import com.example.azmart_android.contracts.SearchContract;
-import com.example.azmart_android.databinding.FragmentSearchBinding;
 import com.example.azmart_android.data.model.SearchResponse;
+import com.example.azmart_android.databinding.FragmentSearchBinding;
 import com.example.azmart_android.presenter.SearchPresenter;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.Products.ProductsFragmentDirections;
 
 
 public class SearchFragment extends BaseFragment implements SearchContract.View {

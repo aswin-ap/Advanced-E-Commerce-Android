@@ -10,7 +10,7 @@
         android:title="Wishlist" />
     <item
         android:id="@+id/cartFragment"
-        android:icon="@drawable/ic_shopping_bag"
+        android:icon="@drawable/ic_shopping_cart"
         android:title="Cart" />
 
     <item

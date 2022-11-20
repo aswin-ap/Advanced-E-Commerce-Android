@@ -1,14 +1,11 @@
 package com.example.azmart_android.view.home;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.azmart_android.R;
 import com.example.azmart_android.adapter.BestProductHomeAdapter;
-import com.example.azmart_android.adapter.CategoryAdapter;
 import com.example.azmart_android.adapter.CategoryHomeAdapter;
 import com.example.azmart_android.adapter.DealsViewPagerAdapter;
 import com.example.azmart_android.adapter.SearchCatSugesstionAdaptor;
@@ -27,7 +23,6 @@ import com.example.azmart_android.databinding.FragmentHomeBinding;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.utils.Validation;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.Products.ProductsFragmentDirections;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;

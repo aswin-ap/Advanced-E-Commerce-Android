@@ -1,37 +1,40 @@
-package com.example.azmart_android.view.home;
+package com.example.azmart_android.view.wishlist;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.azmart_android.R;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.example.azmart_android.adapter.WishlistAdapter;
 import com.example.azmart_android.contracts.WishlistContract;
-import com.example.azmart_android.databinding.FragmentCategoryBinding;
+import com.example.azmart_android.data.model.WishListModel;
 import com.example.azmart_android.databinding.FragmentWishlistBinding;
 import com.example.azmart_android.presenter.WishlistPresenter;
 import com.example.azmart_android.utils.NetworkManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.List;
+
 
 public class WishlistFragment extends Fragment implements WishlistContract.View {
-
     FirebaseUser currentUser;
     private WishlistPresenter presenter;
     private FragmentWishlistBinding binding;
+    private WishlistAdapter wishlistAdapter;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter=new WishlistPresenter(this);
+        presenter = new WishlistPresenter(this);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -53,10 +56,13 @@ public class WishlistFragment extends Fragment implements WishlistContract.View 
     }
 
     private void initView() {
+        binding.rvWishlist.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvWishlist.setHasFixedSize(true);
+
         if (NetworkManager.isNetworkAvailable(requireContext())) {
             binding.tvNetworkWorning.setVisibility(View.GONE);
             presenter.getProductsFromWishlist(currentUser.getUid());
-        } else{
+        } else {
             binding.tvNetworkWorning.setVisibility(View.VISIBLE);
             binding.rvWishlist.setVisibility(View.GONE);
         }
@@ -66,6 +72,7 @@ public class WishlistFragment extends Fragment implements WishlistContract.View 
     @Override
     public void showLoading() {
         binding.progressCircularLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.seearchListLayout.setVisibility(View.GONE);
     }
 
     @Override
@@ -80,8 +87,22 @@ public class WishlistFragment extends Fragment implements WishlistContract.View 
     }
 
     @Override
-    public void showWishlistProducts(String message) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    public void showWishlistProducts(List<WishListModel> modelList) {
+        if (modelList.size() > 0) {
+            wishlistAdapter = new WishlistAdapter(modelList, position -> {
+                Navigation.findNavController(requireView()).navigate(WishlistFragmentDirections.actionWishlistFragmentToProductFragment(
+                        modelList.get(position).getId(), modelList.get(position).getTitle()
+                ));
+            });
+            binding.rvWishlist.setAdapter(wishlistAdapter);
+            binding.seearchListLayout.setVisibility(View.VISIBLE);
+            binding.tvNoData.setVisibility(View.GONE);
+
+        } else {
+            binding.seearchListLayout.setVisibility(View.GONE);
+            binding.tvNoData.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void showToast(Context context, String message) {

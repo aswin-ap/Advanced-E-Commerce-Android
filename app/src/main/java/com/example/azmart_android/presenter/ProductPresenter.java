@@ -36,59 +36,81 @@ public class ProductPresenter implements ProductContract.Presenter {
     }
 
     @Override
-    public void addProductToCart(String productId, String userId) {
-       // mView.showLoading();
+    public void addProductToCart(String productId, String userId, String title, String rating, String price,
+                                 String imageUrl) {
+        mView.showLoadingDialog();
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("user_id", userId);
         dataMap.put("product_id", productId);
-        mApiDataManager.addProductToCart(this, dataMap);
+        dataMap.put("title", title);
+        dataMap.put("rating", rating);
+        dataMap.put("price", price);
+        dataMap.put("imageUrl", imageUrl);
+        mApiDataManager.isProductExistInCart(this, dataMap);
+    }
+
+    @Override
+    public void onCheckProductExistInCartResponse(Boolean isExist, Map<String, Object> objectMap) {
+        if (isExist) {
+            mView.hideLoadingDialogue();
+            mView.showApiErrorWarning("Product already in the cart");
+        } else {
+            mApiDataManager.addProductToCart(this, objectMap);
+        }
     }
 
     @Override
     public void onAddToCartResponse(String messge) {
+        mView.hideLoadingDialogue();
         mView.showAddedToCartResponse(messge);
     }
 
     @Override
-    public void addProductToWishlist(String productId, String userId) {
-        // mView.showLoading();
+    public void addProductToWishlist(String productId, String userId, String title, String rating, String price,
+                                     String imageUrl) {
+        mView.showLoadingDialog();
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("user_id", userId);
         dataMap.put("product_id", productId);
+        dataMap.put("title", title);
+        dataMap.put("rating", rating);
+        dataMap.put("price", price);
+        dataMap.put("imageUrl", imageUrl);
         mApiDataManager.addProductToWishlist(this, dataMap);
     }
 
     @Override
     public void isExistProductInWishlist(String productId, String userId) {
-        // mView.showLoading();
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("user_id", userId);
         dataMap.put("product_id", productId);
-        mApiDataManager.isExistProductInWishlist(this,dataMap);
+        mApiDataManager.isExistProductInWishlist(this, dataMap);
     }
 
     @Override
     public void onAddToWishlistResponse(String messge) {
+        mView.hideLoadingDialogue();
         mView.showAddedToWishlistResponse(messge);
     }
 
     @Override
     public void isExistWishlistResponse(String messge) {
-        mView.showisExistwishlist(messge);
+        mView.showIsExistWishlist(messge);
     }
 
     @Override
     public void deleteProductInWishlist(String productId, String userId) {
-        // mView.showLoading();
+        mView.showLoadingDialog();
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("user_id", userId);
         dataMap.put("product_id", productId);
-        mApiDataManager.deleteProductFromWishlist(this,dataMap);
+        mApiDataManager.deleteProductFromWishlist(this, dataMap);
     }
 
     @Override
     public void deleteProductInWishlistResponse(String messge) {
-        mView.showdeleteProductwishlist(messge);
+        mView.hideLoadingDialogue();
+        mView.showDeleteProductWishlist(messge);
     }
 
 }

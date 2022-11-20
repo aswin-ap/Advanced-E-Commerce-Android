@@ -1,8 +1,6 @@
 package com.example.azmart_android.network.api_manager;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +8,7 @@ import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.data.model.ProductDetails.ProductDetailsResponse;
 import com.example.azmart_android.data.model.SearchResponse;
+import com.example.azmart_android.presenter.CartPresenter;
 import com.example.azmart_android.presenter.CategoryPresenter;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.presenter.ProductPresenter;
@@ -23,7 +22,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
@@ -308,6 +306,23 @@ public class ApiDataManager {
                 });
     }
 
+    public void isProductExistInCart(ProductPresenter presenter, Map<String, Object> objectMap) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+
+        firebaseFirestore.collection("cart").whereEqualTo("product_id", objectMap.get("product_id")).whereEqualTo("user_id", objectMap.get("user_id"))
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            presenter.onCheckProductExistInCartResponse(true, objectMap);
+                        } else
+                            presenter.onCheckProductExistInCartResponse(false, objectMap);
+                    }
+                });
+    }
+
     public void addProductToWishlist(ProductPresenter presenter, Map<String, Object> objectMap) {
         if (firebaseFirestore == null)
             firebaseFirestore = FirebaseFirestore.getInstance();
@@ -320,88 +335,145 @@ public class ApiDataManager {
                         presenter.onAddToWishlistResponse("Added to wishlist successfully");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                presenter.onApiError(e.getMessage());
-                Log.e(TAG, "Exception caught in " + e.getMessage().toString());
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        presenter.onApiError(e.getMessage());
+                        Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+                    }
+                });
     }
 
     public void isExistProductInWishlist(ProductPresenter presenter, Map<String, Object> objectMap) {
         if (firebaseFirestore == null)
             firebaseFirestore = FirebaseFirestore.getInstance();
 
-        firebaseFirestore.collection("wishlist").whereEqualTo("product_id",objectMap.get("product_id")).whereEqualTo("user_id",objectMap.get("user_id"))
+        firebaseFirestore.collection("wishlist").whereEqualTo("product_id", objectMap.get("product_id")).whereEqualTo("user_id", objectMap.get("user_id"))
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
                             presenter.isExistWishlistResponse("isExist");
-                        }else {
-                            Log.e("database data :","Data Not rerived");
+                        } else {
+                            Log.e("database data :", "Data Not rerived");
                         }
                     }
 
-        });
+                });
     }
 
     public void deleteProductFromWishlist(ProductPresenter presenter, Map<String, Object> objectMap) {
         if (firebaseFirestore == null)
             firebaseFirestore = FirebaseFirestore.getInstance();
 
-        firebaseFirestore.collection("wishlist").whereEqualTo("product_id",objectMap.get("product_id")).whereEqualTo("user_id",objectMap.get("user_id"))
+        firebaseFirestore.collection("wishlist").whereEqualTo("product_id", objectMap.get("product_id")).whereEqualTo("user_id", objectMap.get("user_id"))
                 .get()
-        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()  && !task.getResult().isEmpty()) {
-                    DocumentSnapshot document = task.getResult().getDocuments().get(0);
-                    String documentId = document.getId();
-                    firebaseFirestore.collection("wishlist")
-                            .document(documentId)
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    presenter.deleteProductInWishlistResponse("Removed From Wishlist");
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            presenter.deleteProductInWishlistResponse("Error Removed From Wishlist");
-                        }
-                    });
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                            String documentId = document.getId();
+                            firebaseFirestore.collection("wishlist")
+                                    .document(documentId)
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            presenter.deleteProductInWishlistResponse("Removed From Wishlist");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            presenter.deleteProductInWishlistResponse("Error Removed From Wishlist");
+                                        }
+                                    });
 
-                }
-            }
-        });
+                        }
+                    }
+                });
     }
 
     public void getProductsFromWishlist(WishlistPresenter presenter, String userId) {
         if (firebaseFirestore == null)
             firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("wishlist").whereEqualTo("user_id",userId)
+        firebaseFirestore.collection("wishlist").whereEqualTo("user_id", userId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            presenter.onWishlistProductResultResponse("wishlist");
-//                            presenter.onWishlistProductResultResponse(task.getResult());
-                        }else {
-                            Log.e("message","Error");
+                        if (task.isSuccessful()) {
+                            // presenter.onWishlistProductResultResponse("wishlist");
+                            presenter.onWishlistProductResultResponse(task.getResult());
+                        } else {
+                            Log.e("message", "Error");
                         }
                     }
 
                 }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                presenter.onApiError(e.getMessage());
-                Log.e(TAG, "Exception caught in " + e.getMessage().toString());
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        presenter.onApiError(e.getMessage());
+                        Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+                    }
+                });
+    }
+
+    public void getProductsFromCart(CartPresenter presenter, String userId) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("cart").whereEqualTo("user_id", userId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // presenter.onWishlistProductResultResponse("wishlist");
+                            presenter.onCartResultResponse(task.getResult());
+                        } else {
+                            Log.e("message", "Error");
+                        }
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        presenter.onApiError(e.getMessage());
+                        Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+                    }
+                });
+    }
+
+    public void deleteProductFromCart(CartPresenter presenter, Map<String, Object> objectMap) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+
+        firebaseFirestore.collection("cart").whereEqualTo("product_id", objectMap.get("product_id")).whereEqualTo("user_id", objectMap.get("user_id"))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                            String documentId = document.getId();
+                            firebaseFirestore.collection("cart")
+                                    .document(documentId)
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            presenter.onDeleteProductFromCartResponse("Removed From Cart");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            presenter.onApiError("Error Deleting From Cart");
+                                        }
+                                    });
+
+                        }
+                    }
+                });
     }
 
 }

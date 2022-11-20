@@ -1,16 +1,13 @@
-package com.example.azmart_android.view.Products;
+package com.example.azmart_android.view.product;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.azmart_android.R;
@@ -20,10 +17,11 @@ import com.example.azmart_android.data.model.ProductDetails.ProductDetailsRespon
 import com.example.azmart_android.databinding.FragmentProductBinding;
 import com.example.azmart_android.presenter.ProductPresenter;
 import com.example.azmart_android.utils.NetworkManager;
+import com.example.azmart_android.view.BaseFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class ProductDetailFragment extends Fragment implements ProductContract.View {
+public class ProductDetailFragment extends BaseFragment implements ProductContract.View {
 
     FirebaseUser currentUser;
     private ProductPresenter productPresenter;
@@ -76,18 +74,23 @@ public class ProductDetailFragment extends Fragment implements ProductContract.V
             @Override
             public void onClick(View view) {
                 productPresenter.addProductToCart(
-                        productDetailsResponse.getProductId(), currentUser.getUid()
+                        productDetailsResponse.getProductId(), currentUser.getUid(), productDetailsResponse.getMetadata().getTitleModule().getProductTitle(),
+                        productDetailsResponse.getFeedBackRating().getEvarageStar(), String.valueOf(productDetailsResponse.getAppSalePrice()),
+                        productDetailsResponse.getProductSmallImageUrls().getString().get(0)
                 );
             }
         });
         binding.ivWishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.ivWishlist.isChecked()){
+                if (binding.ivWishlist.isChecked()) {
                     productPresenter.addProductToWishlist(
-                            productDetailsResponse.getProductId(), currentUser.getUid()
+                            productDetailsResponse.getProductId(), currentUser.getUid(), productDetailsResponse.getMetadata().getTitleModule().getProductTitle(),
+                            productDetailsResponse.getFeedBackRating().getEvarageStar(), productDetailsResponse.getMetadata().getPriceModule().getFormatedPrice(),
+                            productDetailsResponse.getProductSmallImageUrls().getString().get(0)
+
                     );
-                }else {
+                } else {
                     productPresenter.deleteProductInWishlist(
                             productDetailsResponse.getProductId(), currentUser.getUid()
                     );
@@ -110,7 +113,7 @@ public class ProductDetailFragment extends Fragment implements ProductContract.V
     @Override
     public void showApiErrorWarning(String string) {
         binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
-        showToast(requireActivity(), string);
+        showSnackBar(requireView(), string);
     }
 
     @Override
@@ -132,26 +135,34 @@ public class ProductDetailFragment extends Fragment implements ProductContract.V
 
     @Override
     public void showAddedToCartResponse(String message) {
-        showToast(requireContext(), message);
+        // hideLoadingDialogue();
+        showSnackBar(requireView(), message);
     }
 
     @Override
     public void showAddedToWishlistResponse(String message) {
-        showToast(requireContext(), message);
+        hideLoadingDialogue();
+        showSnackBar(requireView(), message);
     }
 
     @Override
-    public void showisExistwishlist(String message) {
+    public void showIsExistWishlist(String message) {
         binding.ivWishlist.setChecked(true);
     }
 
     @Override
-    public void showdeleteProductwishlist(String message) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    public void showDeleteProductWishlist(String message) {
+        hideLoadingDialogue();
+        showSnackBar(requireView(), message);
     }
 
+    @Override
+    public void showLoadingDialog() {
+        super.showLoadingDialog(requireContext());
+    }
 
-    public void showToast(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    @Override
+    public void hideLoadingDialogue() {
+        super.hideLoadingDialog();
     }
 }

@@ -1,6 +1,5 @@
 package com.example.azmart_android.adapter;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.azmart_android.R;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.databinding.SearchItemBinding;
-import com.example.azmart_android.view.Products.ProductsFragment;
+import com.example.azmart_android.view.product.ProductsFragment;
 
 import java.util.List;
 

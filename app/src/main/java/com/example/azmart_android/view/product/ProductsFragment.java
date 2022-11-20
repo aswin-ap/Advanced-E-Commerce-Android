@@ -1,4 +1,4 @@
-package com.example.azmart_android.view.Products;
+package com.example.azmart_android.view.product;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,13 +15,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.azmart_android.R;
 import com.example.azmart_android.adapter.ProductsAdapter;
-import com.example.azmart_android.adapter.SearchAdapter;
 import com.example.azmart_android.contracts.ProductsContract;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.databinding.FragmentProductsBinding;
 import com.example.azmart_android.presenter.ProductsPresenter;
 import com.example.azmart_android.utils.NetworkManager;
-import com.example.azmart_android.view.categories.CategoryFragmentDirections;
 
 
 public class ProductsFragment extends Fragment implements ProductsContract.View {
