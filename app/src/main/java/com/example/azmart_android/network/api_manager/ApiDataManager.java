@@ -8,6 +8,7 @@ import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.data.model.ProductDetails.ProductDetailsResponse;
 import com.example.azmart_android.data.model.SearchResponse;
+import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.presenter.CartPresenter;
 import com.example.azmart_android.presenter.CategoryPresenter;
 import com.example.azmart_android.presenter.HomePresenter;
@@ -475,5 +476,50 @@ public class ApiDataManager {
                     }
                 });
     }
+
+    public void addUserAddress(AddressPresenter presenter, Map<String, Object> objectMap) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+
+        firebaseFirestore.collection("address")
+                .add(objectMap)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        presenter.onSaveAddressResponse("Address saved successfully");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        presenter.onApiError(e.getMessage());
+                        Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+                    }
+                });
+    }
+
+    public void getAddress(AddressPresenter presenter, String userId) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("address").whereEqualTo("user_id", userId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            presenter.onAddressResponse(task.getResult());
+                        } else {
+                            Log.e("message", "Error");
+                        }
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        presenter.onApiError(e.getMessage());
+                        Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+                    }
+                });
+    }
+
 
 }

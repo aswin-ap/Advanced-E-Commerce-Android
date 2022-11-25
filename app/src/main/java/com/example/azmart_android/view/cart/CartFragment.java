@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.azmart_android.R;
 import com.example.azmart_android.adapter.CartAdapter;
 import com.example.azmart_android.contracts.CartContract;
 import com.example.azmart_android.data.model.CartModel;
@@ -23,15 +25,13 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartFragment extends BaseFragment implements CartAdapter.onCartItemClickListener, ConfirmDialog.ConfirmCheckoutListener, CartContract.View {
+public class CartFragment extends BaseFragment implements CartAdapter.onCartItemClickListener, CartContract.View {
     FirebaseUser currentUser;
     private FragmentCartBinding binding;
     private CartAdapter cartAdapter;
     private CartPresenter presenter;
     private ArrayList<CartModel> cartModelArrayList = new ArrayList<>();
-    private float total = 0;
-    private String formattedString;
-    private ConfirmDialog dialog;
+    private boolean hasDeliveryCharge = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +52,6 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         presenter = new CartPresenter(this, requireContext());
-        dialog = new ConfirmDialog(requireContext(), this, "Are you sure to proceed to payment ?");
         presenter.getCart(currentUser.getUid());
 
         setupCartRecyclerView();
@@ -68,7 +67,9 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
         binding.placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.show();
+                // dialog.show();
+                //  Navigation.findNavController(requireView()).navigate(R.id.action_cartFragment_to_addressFragment);
+                Navigation.findNavController(requireView()).navigate(R.id.action_cartFragment_to_addressFragment);
             }
         });
     }
@@ -103,24 +104,35 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
     }
 
     private void setGrandTotal() {
-        total = 0;
+        float total = 0;
+        float cartTotal=0;
         for (int i = 0; i < cartModelArrayList.size(); i++) {
             for (int j = 1; j <= cartModelArrayList.get(i).getQuantity(); j++) {
                 total += Float.parseFloat(cartModelArrayList.get(i).getPrice());
+                cartTotal += Float.parseFloat(cartModelArrayList.get(i).getPrice());
             }
         }
-        formattedString = String.format("%.02f", total);
+         if (total < 1000.0)
+             total += 49.0f;
+
+        String formattedString = String.format("%.02f", total);
+        binding.tvPriceItems.setText("Price (" + (cartModelArrayList.size()) + ") items");
+        binding.tvPrice.setText("$" + String.format("%.02f", cartTotal));
         binding.textTotal.setText("$" + formattedString);
-    }
+        binding.tvTotalAmount.setText(formattedString);
 
-    @Override
-    public void checkOut() {
-
+        if (total > 1000.0) {
+           binding.tvDeliveryCharge.setText("FREE DELIVERY");
+           binding.tvDeliveryCharge.setTextColor(getResources().getColor(R.color.green_500));
+        } else {
+            binding.tvDeliveryCharge.setText("$49");
+            binding.tvDeliveryCharge.setTextColor(getResources().getColor(R.color.black));
+        }
     }
 
     @Override
     public void showLoading() {
-        binding.progressCircularLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.shimmerLayout.setVisibility(View.VISIBLE);
         binding.cartLayout.setVisibility(View.GONE);
         binding.layoutTotal.setVisibility(View.GONE);
         binding.totalMargin.setVisibility(View.GONE);
@@ -128,19 +140,19 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
 
     @Override
     public void hideLoading() {
-        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
-
+        binding.shimmerLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void showApiErrorWarning(String string) {
-        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+        binding.shimmerLayout.setVisibility(View.GONE);
         showToast(requireActivity(), string);
     }
 
     @Override
     public void showCartList(List<CartModel> cartModelList) {
         if (cartModelList.size() > 0) {
+            cartModelArrayList.clear();
             cartModelArrayList.addAll(cartModelList);
             cartAdapter.notifyDataSetChanged();
             setGrandTotal();

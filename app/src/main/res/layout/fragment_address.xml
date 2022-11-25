@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/green_500">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/iv_back"
+                android:text="Select Address"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="8dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:drawableStart="@drawable/ic_baseline_add"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="16dp"
+                    android:text="Add a new address"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:text="My Addresses"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/srf_wishlist"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <include
+                                layout="@layout/shimmer_best_product_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp" />
+
+                            <include
+                                layout="@layout/shimmer_best_product_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp" />
+
+                            <include
+                                layout="@layout/shimmer_details_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <include
+                                layout="@layout/shimmer_details_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <include
+                                layout="@layout/shimmer_details_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <LinearLayout
+                        android:id="@+id/address_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="1"
+                            tools:listitem="@layout/address_item" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/encrypted_image" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Your data is securely Encrypted"
+                            android:textColor="#505050"
+                            android:textSize="12sp"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_proceed_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0"
+                android:text="Proceed to Payment"
+                android:textAllCaps="false"
+                android:textColor="#DD000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

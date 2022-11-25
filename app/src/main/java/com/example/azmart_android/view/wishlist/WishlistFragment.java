@@ -71,18 +71,18 @@ public class WishlistFragment extends Fragment implements WishlistContract.View 
 
     @Override
     public void showLoading() {
-        binding.progressCircularLayout.getRoot().setVisibility(View.VISIBLE);
-        binding.seearchListLayout.setVisibility(View.GONE);
+        binding.shimmerLayout.setVisibility(View.VISIBLE);
+        binding.rvWishlist.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+        binding.shimmerLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void showApiErrorWarning(String string) {
-        binding.progressCircularLayout.getRoot().setVisibility(View.GONE);
+        binding.shimmerLayout.setVisibility(View.GONE);
         showToast(requireActivity(), string);
     }
 
@@ -95,11 +95,13 @@ public class WishlistFragment extends Fragment implements WishlistContract.View 
                 ));
             });
             binding.rvWishlist.setAdapter(wishlistAdapter);
-            binding.seearchListLayout.setVisibility(View.VISIBLE);
+            binding.rvWishlist.setVisibility(View.VISIBLE);
+            binding.shimmerLayout.setVisibility(View.GONE);
             binding.tvNoData.setVisibility(View.GONE);
 
         } else {
-            binding.seearchListLayout.setVisibility(View.GONE);
+            binding.shimmerLayout.setVisibility(View.GONE);
+            binding.rvWishlist.setVisibility(View.GONE);
             binding.tvNoData.setVisibility(View.VISIBLE);
         }
 

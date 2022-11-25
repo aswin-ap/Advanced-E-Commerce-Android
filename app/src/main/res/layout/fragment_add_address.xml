@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/iv_back"
-                android:text="Add address details"
+                android:text="Add delivery address"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -36,28 +36,213 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="12dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/full_name_layout"
                 style="@style/addressMaterialTextInputTheme"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:hint="Full Name"
                 app:hintTextAppearance="@style/hintTextStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_full_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_layout"
+                style="@style/addressMaterialTextInputTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Phone number"
+                app:hintTextAppearance="@style/hintTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/pin_code_layout"
+                    style="@style/addressMaterialTextInputTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Pin code"
+                    app:hintTextAppearance="@style/hintTextStyle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_pin_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tv_my_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Use my location"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_my_location"
+                    app:iconTint="#5E5E5E" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/state_layout"
+                    style="@style/addressMaterialTextInputTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="State"
+                    app:hintTextAppearance="@style/hintTextStyle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/city_layout"
+                    style="@style/addressMaterialTextInputTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="City"
+                    app:hintTextAppearance="@style/hintTextStyle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/house_layout"
+                style="@style/addressMaterialTextInputTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="House No.,Building name"
+                app:hintTextAppearance="@style/hintTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_house_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/road_layout"
+                style="@style/addressMaterialTextInputTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Road name, Area, Colony"
+                app:hintTextAppearance="@style/hintTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_road_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/encrypted_image" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Don't worry, Your data is securely Encrypted"
+                    android:textColor="#505050"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save address"
+                android:textAllCaps="false"
+                android:textColor="@color/black" />
+
 
         </LinearLayout>
     </ScrollView>
