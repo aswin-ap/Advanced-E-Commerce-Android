@@ -40,13 +40,24 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
-
     </fragment>
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.azmart_android.view.cart.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.example.azmart_android.view.wishlist.WishlistFragment"
@@ -56,11 +67,13 @@
             android:id="@+id/action_wishlistFragment_to_productFragment"
             app:destination="@id/productFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.azmart_android.view.auth.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.azmart_android.view.search.SearchFragment"
@@ -79,6 +92,7 @@
             app:popExitAnim="@anim/to_right" />
 
     </fragment>
+
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.azmart_android.view.categories.CategoryFragment"
@@ -94,6 +108,7 @@
             app:popExitAnim="@anim/to_right" />
 
     </fragment>
+
     <fragment
         android:id="@+id/productsFragment"
         android:name="com.example.azmart_android.view.product.ProductsFragment"

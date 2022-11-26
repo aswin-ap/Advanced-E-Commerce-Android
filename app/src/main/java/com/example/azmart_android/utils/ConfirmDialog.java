@@ -56,6 +56,7 @@ public class ConfirmDialog extends Dialog {
             public void onClick(View v) {
                 clearCartListener.checkOut();
                 cancel();
+                clearCartListener.navigateToPayment();
             }
         });
 
@@ -63,6 +64,7 @@ public class ConfirmDialog extends Dialog {
 
     public interface ConfirmCheckoutListener {
         void checkOut();
+        void navigateToPayment();
     }
 
 

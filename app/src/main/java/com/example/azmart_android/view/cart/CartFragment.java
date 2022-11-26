@@ -1,12 +1,15 @@
 package com.example.azmart_android.view.cart;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -17,6 +20,9 @@ import com.example.azmart_android.databinding.FragmentCartBinding;
 import com.example.azmart_android.presenter.CartPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.view.BaseFragment;
+import com.example.azmart_android.view.Payment.PaymentActivity;
+import com.example.azmart_android.view.home.HomeActivity;
+import com.example.azmart_android.view.home.HomeFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -173,4 +179,13 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
     public void hideLoadingDialogue() {
         super.hideLoadingDialog();
     }
+
+    public void navigateToPayment() {
+        Intent intent = new Intent(requireContext(), PaymentActivity.class);
+        intent.putExtra("total",total);
+        startActivity(intent);
+//        Navigation.findNavController(requireView()).navigate(CartFragmentDirections.actionCartFragmentToPaymentFragment(total));
+
+    }
+
 }
