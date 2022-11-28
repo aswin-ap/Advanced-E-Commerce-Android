@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,19 +23,19 @@ import com.example.azmart_android.databinding.FragmentAddressBinding;
 import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.categories.CategoryFragmentDirections;
 import com.example.azmart_android.view.wishlist.WishlistFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class AddressFragment extends BaseFragment implements AddressContract.View, ConfirmDialog.ConfirmCheckoutListener {
+public class AddressFragment extends BaseFragment implements AddressContract.View, ConfirmDialog.ConfirmCheckoutListener, OnItemClickListener {
     private FragmentAddressBinding binding;
     AddressPresenter addressPresenter;
     AddressAdapter addressAdapter;
     FirebaseUser currentUser;
     ConfirmDialog dialog;
+    private int selectedPosition = 0;
 
 
     @Override
@@ -95,7 +96,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     @Override
     public void showAddressResponse(List<AddressModel> addressModelList) {
         if (addressModelList.size() > 0) {
-            addressAdapter = new AddressAdapter(addressModelList);
+            addressAdapter = new AddressAdapter(addressModelList, requireContext(), selectedPosition,this);
             binding.rvAddress.setAdapter(addressAdapter);
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.addressLayout.setVisibility(View.VISIBLE);
@@ -128,6 +129,13 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     @Override
     public void checkOut() {
 
+    }
+
+    @Override
+    public void onItemClick(Integer position) {
+        Log.d("Click", "onItemClick: ");
+        selectedPosition = position;
+        addressAdapter.notifyDataSetChanged();
     }
 
     @Override
