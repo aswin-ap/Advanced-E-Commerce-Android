@@ -21,6 +21,7 @@ import com.example.azmart_android.databinding.FragmentCartBinding;
 import com.example.azmart_android.presenter.CartPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.view.BaseFragment;
+import com.example.azmart_android.view.checkout.AddressFragmentDirections;
 import com.example.azmart_android.view.home.HomeActivity;
 import com.example.azmart_android.view.home.HomeFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
     private CartPresenter presenter;
     private ArrayList<CartModel> cartModelArrayList = new ArrayList<>();
     private boolean hasDeliveryCharge = true;
+    private float totalPrice;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,7 +75,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
             public void onClick(View view) {
                 // dialog.show();
                 //  Navigation.findNavController(requireView()).navigate(R.id.action_cartFragment_to_addressFragment);
-                Navigation.findNavController(requireView()).navigate(R.id.action_cartFragment_to_addressFragment);
+                Navigation.findNavController(requireView()).navigate(CartFragmentDirections.actionCartFragmentToAddressFragment(totalPrice));
             }
         });
     }
@@ -124,6 +126,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
         binding.tvPrice.setText("$" + String.format("%.02f", cartTotal));
         binding.textTotal.setText("$" + formattedString);
         binding.tvTotalAmount.setText(formattedString);
+        totalPrice=cartTotal;
 
         if (total > 1000.0) {
            binding.tvDeliveryCharge.setText("FREE DELIVERY");

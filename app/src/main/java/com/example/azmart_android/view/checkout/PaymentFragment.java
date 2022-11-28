@@ -75,6 +75,8 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
     }
 
     private void initView() {
+        totalPrice=PaymentFragmentArgs.fromBundle(getArguments()).getTotalPrice();
+        binding.btnProceedPayment.setText("Pay"+" "+totalPrice);
         dialog = new ConfirmDialog(requireContext(), this, "Are you sure to proceed to payment ?");
 //        binding.srfWishlist.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 //            @Override
@@ -88,23 +90,13 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
         });
 
         binding.shimmerLayout.setVisibility(View.VISIBLE);
-        binding.llPayament.setVisibility(View.GONE);
-        binding.llAddNewCard.setVisibility(View.GONE);
-        binding.llPayLayout.setVisibility(View.GONE);
-
-//            float total = getActivity().getIntent().getFloatExtra("total",0.0F);
-//            formattedString = String.format("%.02f", total);
-//            binding.btnProceedPayment.setText(formattedString+"-"+"Proceed to Payment");
-//            binding.shimmerLayout.setVisibility(View.GONE);
-
+        binding.rbCard.setChecked(false);
+        binding.rbCash.setChecked(false);
 
         binding.rbCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 binding.llCardDetails.setVisibility(View.VISIBLE);
-                binding.btnAddCard.setVisibility(View.VISIBLE);
-                binding.llExistNewCard.setVisibility(View.VISIBLE);
-                binding.llAddNewCard.setVisibility(View.VISIBLE);
                 binding.rbCash.setChecked(false);
             }
         });
@@ -144,6 +136,8 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
     @Override
     public void hideLoading() {
         binding.shimmerLayout.setVisibility(View.GONE);
+        binding.rbCard.setChecked(false);
+        binding.rbCash.setChecked(false);
     }
 
     @Override
@@ -161,28 +155,13 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
     @Override
     public void showCardResponse(List<CardsModel> cardModelList) {
         if (cardModelList.size() > 0) {
-            for (CardsModel cardsModel:cardModelList) {
-                Log.e("name11100000",cardsModel.getCardHolderName()+"999999");
-                Log.e("name11100000",cardsModel.getCardNumber()+"8888");
-                Log.e("name11100000",cardsModel.getCardType()+"7777");
-                Log.e("name11100000",cardsModel.getCvv()+"66666");
-            }
-            Log.e("length", String.valueOf(cardModelList.size()));
             cardAdapter = new CardAdapter(cardModelList, requireContext(), selectedPosition, this);
             binding.rvCardList.setAdapter(cardAdapter);
             binding.shimmerLayout.setVisibility(View.GONE);
-            binding.llCardDetails.setVisibility(View.VISIBLE);
-            binding.btnAddCard.setVisibility(View.VISIBLE);
-            binding.llExistNewCard.setVisibility(View.VISIBLE);
-            binding.llAddNewCard.setVisibility(View.VISIBLE);
             binding.llPayament.setVisibility(View.VISIBLE);
             binding.llPayLayout.setVisibility(View.VISIBLE);
         } else {
             binding.shimmerLayout.setVisibility(View.GONE);
-            binding.llCardDetails.setVisibility(View.VISIBLE);
-            binding.btnAddCard.setVisibility(View.VISIBLE);
-            binding.llExistNewCard.setVisibility(View.VISIBLE);
-            binding.llAddNewCard.setVisibility(View.VISIBLE);
             binding.llPayament.setVisibility(View.VISIBLE);
             binding.llPayLayout.setVisibility(View.VISIBLE);
         }

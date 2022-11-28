@@ -152,6 +152,12 @@
         android:id="@+id/addressFragment"
         android:name="com.example.azmart_android.view.checkout.AddressFragment"
         android:label="AddressFragment">
+
+        <argument
+            android:name="total_price"
+            app:argType="float" />
+
+
         <action
             android:id="@+id/action_addressFragment_to_addAddressFragment"
             app:destination="@id/addAddressFragment"
@@ -175,6 +181,10 @@
         android:name="com.example.azmart_android.view.checkout.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" >
+
+        <argument
+            android:name="total_price"
+            app:argType="float" />
 
         <action
             android:id="@+id/action_paymentFragment_to_addPaymentFragment"

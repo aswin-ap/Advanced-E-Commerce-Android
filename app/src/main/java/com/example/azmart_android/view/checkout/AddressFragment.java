@@ -20,6 +20,8 @@ import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.utils.OnItemClickListener;
 import com.example.azmart_android.view.BaseFragment;
+import com.example.azmart_android.view.cart.CartFragment;
+import com.example.azmart_android.view.product.ProductsFragmentArgs;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -32,6 +34,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     FirebaseUser currentUser;
     ConfirmDialog dialog;
     private int selectedPosition = 0;
+    private float totalPrice;
 
 
     @Override
@@ -52,6 +55,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        totalPrice= AddressFragmentArgs.fromBundle(getArguments()).getTotalPrice();
         initView();
     }
 
@@ -136,7 +140,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
 
     @Override
     public void navigateToPayment() {
-        Navigation.findNavController(requireView()).navigate(AddressFragmentDirections.actionAddressFragmentToPaymentFragment());
+        Navigation.findNavController(requireView()).navigate(AddressFragmentDirections.actionAddressFragmentToPaymentFragment(totalPrice));
 
     }
 }

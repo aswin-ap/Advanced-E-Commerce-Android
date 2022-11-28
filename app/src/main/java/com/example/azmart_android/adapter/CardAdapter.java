@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.azmart_android.R;
 import com.example.azmart_android.data.model.CardsModel;
 import com.example.azmart_android.databinding.AddressItemBinding;
+import com.example.azmart_android.databinding.CardItemBinding;
 import com.example.azmart_android.utils.OnItemClickListener;
 
 import java.util.List;
@@ -31,16 +32,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.AdapterViewHol
     @NonNull
     @Override
     public AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AdapterViewHolder(AddressItemBinding.inflate(LayoutInflater.from(parent.getContext()),
+        return new AdapterViewHolder(CardItemBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
-        holder.setData(cardModelList.get(position), position, this.selectedPosition);
-        holder.itemView.setOnClickListener(v -> {
-            clickListener.onItemClick(position);
-        });
+        holder.setData(cardModelList.get(position), position, this.selectedPosition,holder);
+
     }
 
     @Override
@@ -49,25 +48,30 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.AdapterViewHol
     }
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
-        private AddressItemBinding addressItemBinding;
+        private CardItemBinding cardItemBinding;
 
-        public AdapterViewHolder(AddressItemBinding itemView) {
+        public AdapterViewHolder(CardItemBinding itemView) {
             super(itemView.getRoot());
-            this.addressItemBinding = itemView;
+            this.cardItemBinding = itemView;
         }
 
-        void setData(CardsModel cardModelList, int position, int selectedPosition) {
+        void setData(CardsModel cardModelList, int position, int selectedPosition, AdapterViewHolder holder) {
             try {
-                if (position == selectedPosition)
-                    addressItemBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.green_500));
-                else
-                    addressItemBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
-                addressItemBinding.tvName.setText(cardModelList.getCardNumber());
-                addressItemBinding.tvAddress.setText(cardModelList.getCardHolderName());
+//                if (position == selectedPosition)
+//                    cardItemBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.green_500));
+//                else
+//                    cardItemBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+                    cardItemBinding.tvName.setText(cardModelList.getCardNumber());
+                    cardItemBinding.tvNumber.setText(cardModelList.getCardHolderName());
 
             } catch (Exception e) {
                 Log.e("error :", e.toString());
             }
+
+            holder.itemView.setOnClickListener(v -> {
+                clickListener.onItemClick(position);
+                holder.cardItemBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.green_500));
+            });
 
         }
     }
