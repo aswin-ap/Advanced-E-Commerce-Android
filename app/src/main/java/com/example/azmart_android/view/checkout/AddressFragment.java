@@ -22,6 +22,7 @@ import com.example.azmart_android.databinding.FragmentAddressBinding;
 import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.view.BaseFragment;
+import com.example.azmart_android.view.categories.CategoryFragmentDirections;
 import com.example.azmart_android.view.wishlist.WishlistFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -126,6 +127,12 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
 
     @Override
     public void checkOut() {
+
+    }
+
+    @Override
+    public void navigateToPayment() {
+        Navigation.findNavController(requireView()).navigate(AddressFragmentDirections.actionAddressFragmentToPaymentFragment());
 
     }
 }

@@ -9,6 +9,7 @@ import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.data.model.ProductDetails.ProductDetailsResponse;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.presenter.AddressPresenter;
+import com.example.azmart_android.presenter.CardPresenter;
 import com.example.azmart_android.presenter.CartPresenter;
 import com.example.azmart_android.presenter.CategoryPresenter;
 import com.example.azmart_android.presenter.HomePresenter;
@@ -520,6 +521,53 @@ public class ApiDataManager {
                     }
                 });
     }
+
+
+    public void addUserCard(CardPresenter presenter, Map<String, Object> objectMap) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+
+        firebaseFirestore.collection("card")
+                .add(objectMap)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        presenter.onSaveCardResponse("Card saved successfully");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                presenter.onApiError(e.getMessage());
+                Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+            }
+        });
+    }
+
+    public void getCard(CardPresenter presenter, String userId) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("card").whereEqualTo("user_id", userId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            presenter.onCardResponse(task.getResult());
+                        } else {
+                            Log.e("message", "Error");
+                        }
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                presenter.onApiError(e.getMessage());
+                Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+            }
+        });
+    }
+
+
 
 
 }

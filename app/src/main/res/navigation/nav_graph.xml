@@ -49,25 +49,15 @@
         tools:layout="@layout/fragment_cart" >
 
         <action
-            android:id="@+id/action_cartFragment_to_paymentFragment"
-            app:destination="@id/paymentFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
-
-    </fragment>
-
-        tools:layout="@layout/fragment_cart">
-
-        <action
             android:id="@+id/action_cartFragment_to_addressFragment"
             app:destination="@id/addressFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+
     </fragment>
+
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.example.azmart_android.view.wishlist.WishlistFragment"
@@ -157,6 +147,7 @@
         android:id="@+id/addAddressFragment"
         android:name="com.example.azmart_android.view.checkout.AddAddressFragment"
         android:label="AddAddressFragment" />
+
     <fragment
         android:id="@+id/addressFragment"
         android:name="com.example.azmart_android.view.checkout.AddressFragment"
@@ -168,6 +159,39 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+
+        <action
+            android:id="@+id/action_addressFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.azmart_android.view.checkout.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
+
+        <action
+            android:id="@+id/action_paymentFragment_to_addPaymentFragment"
+            app:destination="@id/addPaymentFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addPaymentFragment"
+        android:name="com.example.azmart_android.view.checkout.PaymentFragment"
+        android:label="fragment_add_payment"
+        tools:layout="@layout/fragment_add_payment" >
+
     </fragment>
 
 </navigation>

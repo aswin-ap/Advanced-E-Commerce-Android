@@ -21,7 +21,6 @@ import com.example.azmart_android.databinding.FragmentCartBinding;
 import com.example.azmart_android.presenter.CartPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.Payment.PaymentActivity;
 import com.example.azmart_android.view.home.HomeActivity;
 import com.example.azmart_android.view.home.HomeFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
@@ -191,12 +190,5 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
         super.hideLoadingDialog();
     }
 
-    public void navigateToPayment() {
-        Intent intent = new Intent(requireContext(), PaymentActivity.class);
-        intent.putExtra("total",total);
-        startActivity(intent);
-//        Navigation.findNavController(requireView()).navigate(CartFragmentDirections.actionCartFragmentToPaymentFragment(total));
-
-    }
 
 }
