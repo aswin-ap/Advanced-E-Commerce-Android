@@ -1,12 +1,18 @@
 package com.example.azmart_android.view.home;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,14 +28,19 @@ import com.example.azmart_android.data.model.CategoriesResponse;
 import com.example.azmart_android.databinding.FragmentHomeBinding;
 import com.example.azmart_android.presenter.HomePresenter;
 import com.example.azmart_android.utils.Validation;
+import com.example.azmart_android.utils.VoiceCommandUtil;
+import com.example.azmart_android.utils.VoiceDialog;
 import com.example.azmart_android.view.BaseFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class HomeFragment extends BaseFragment implements HomeContract.View {
+public class HomeFragment extends BaseFragment implements HomeContract.View, VoiceDialog.OnVoiceReceivedListener {
+    private static final int RECORD_REQUEST_CODE = 100;
+    VoiceCommandUtil voiceCommandUtil;
     Random rand = new Random();
     private FragmentHomeBinding binding;
     private HomePresenter presenter;
@@ -76,6 +87,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_categoryFragment);
         });
 
+        binding.ivMic.setOnClickListener(v -> {
+            checkPermissions();
+        });
+
         colorList.clear();
         for (int i = 0; i <= 15; i++) {
             colorList.add(getRandomColor());
@@ -101,8 +116,33 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             }
             return false;
         });
-         presenter.getHomeDetails();
-         presenter.getSearchCategories();
+        presenter.getHomeDetails();
+        presenter.getSearchCategories();
+    }
+
+    private void checkPermissions() {
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    RECORD_REQUEST_CODE);
+        } else {
+            VoiceDialog voiceDialog = new VoiceDialog(requireContext(), this);
+            voiceDialog.show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == RECORD_REQUEST_CODE && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                VoiceDialog voiceDialog = new VoiceDialog(requireContext(), this);
+                voiceDialog.show();
+            } else
+                showSnackBar(requireView(), "Please give access to microphone");
+        }
     }
 
     @Override
@@ -156,7 +196,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
 
-
     public int getRandomColor() {
         // This is the base color which will be mixed with the generated one
         final int baseColor = Color.WHITE;
@@ -175,11 +214,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void showSearchCategoriesList(List<CategoriesResponse> categoriesResponse) {
-        List<String> serachCategories= new ArrayList<>();
-        for (CategoriesResponse categoriesResponse1 :categoriesResponse){
+        List<String> serachCategories = new ArrayList<>();
+        for (CategoriesResponse categoriesResponse1 : categoriesResponse) {
             serachCategories.add(categoriesResponse1.getCategoryName());
         }
-        searchCatSugesstionAdaptor=new SearchCatSugesstionAdaptor(getActivity().getBaseContext(), serachCategories,this);
+        searchCatSugesstionAdaptor = new SearchCatSugesstionAdaptor(getActivity().getBaseContext(), serachCategories, this);
         binding.etSearch.setAdapter(searchCatSugesstionAdaptor);
         binding.etSearch.setThreshold(1);
     }
@@ -189,12 +228,21 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     public void navigateToProduct(Long productId, String productName) {
-        Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToProductFragment(productId.toString(),productName));
+        Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToProductFragment(productId.toString(), productName));
 
     }
 
     public void navigateToProducts(String apiCategoryId, String categoryName) {
-        Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToProductsFragment(apiCategoryId,categoryName));
+        Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToProductsFragment(apiCategoryId, categoryName));
 
+    }
+
+    @Override
+    public void onReceiveText(String value) {
+        Log.d("Voice command", "onReceiveText: "+value);
+        if (voiceCommandUtil == null)
+            voiceCommandUtil = new VoiceCommandUtil(value.toUpperCase(), getActivity().findViewById(R.id.bottomNavigationView));
+        else
+            voiceCommandUtil.performCommand(value.toUpperCase());
     }
 }
