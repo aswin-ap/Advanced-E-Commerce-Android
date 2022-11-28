@@ -87,10 +87,10 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
             Navigation.findNavController(requireView()).popBackStack();
         });
 
-//        binding.shimmerLayout.setVisibility(View.VISIBLE);
-//        binding.llPayament.setVisibility(View.GONE);
-//        binding.llAddNewCard.setVisibility(View.GONE);
-//        binding.llPayLayout.setVisibility(View.GONE);
+        binding.shimmerLayout.setVisibility(View.VISIBLE);
+        binding.llPayament.setVisibility(View.GONE);
+        binding.llAddNewCard.setVisibility(View.GONE);
+        binding.llPayLayout.setVisibility(View.GONE);
 
 //            float total = getActivity().getIntent().getFloatExtra("total",0.0F);
 //            formattedString = String.format("%.02f", total);
