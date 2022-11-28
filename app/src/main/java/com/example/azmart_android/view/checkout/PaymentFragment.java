@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.example.azmart_android.databinding.FragmentPaymentBinding;
 import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.presenter.CardPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
+import com.example.azmart_android.utils.OnItemClickListener;
 import com.example.azmart_android.view.BaseFragment;
 import com.example.azmart_android.view.SplashActivity;
 import com.example.azmart_android.view.auth.AuthActivity;
@@ -37,7 +39,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 
-public class PaymentFragment extends BaseFragment implements CardContract.View , ConfirmDialog.ConfirmCheckoutListener{
+public class PaymentFragment extends BaseFragment implements CardContract.View ,  ConfirmDialog.ConfirmCheckoutListener, OnItemClickListener{
 
     private FragmentPaymentBinding binding;
     private String formattedString;
@@ -46,6 +48,7 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
     ConfirmDialog dialog;
     private CardPresenter cardPresenter;
     private CardAdapter cardAdapter;
+    private int selectedPosition = 0;
 
 
     @Override
@@ -84,11 +87,14 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
             Navigation.findNavController(requireView()).popBackStack();
         });
 
-        binding.shimmerLayout.setVisibility(View.VISIBLE);
-        binding.llPayament.setVisibility(View.GONE);
+//        binding.shimmerLayout.setVisibility(View.VISIBLE);
+//        binding.llPayament.setVisibility(View.GONE);
+//        binding.llAddNewCard.setVisibility(View.GONE);
+//        binding.llPayLayout.setVisibility(View.GONE);
 
 //            float total = getActivity().getIntent().getFloatExtra("total",0.0F);
 //            formattedString = String.format("%.02f", total);
+//            binding.btnProceedPayment.setText(formattedString+"-"+"Proceed to Payment");
 //            binding.shimmerLayout.setVisibility(View.GONE);
 
 
@@ -98,6 +104,7 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
                 binding.llCardDetails.setVisibility(View.VISIBLE);
                 binding.btnAddCard.setVisibility(View.VISIBLE);
                 binding.llExistNewCard.setVisibility(View.VISIBLE);
+                binding.llAddNewCard.setVisibility(View.VISIBLE);
                 binding.rbCash.setChecked(false);
             }
         });
@@ -154,13 +161,30 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
     @Override
     public void showCardResponse(List<CardsModel> cardModelList) {
         if (cardModelList.size() > 0) {
-            cardAdapter = new CardAdapter(cardModelList);
+            for (CardsModel cardsModel:cardModelList) {
+                Log.e("name11100000",cardsModel.getCardHolderName()+"999999");
+                Log.e("name11100000",cardsModel.getCardNumber()+"8888");
+                Log.e("name11100000",cardsModel.getCardType()+"7777");
+                Log.e("name11100000",cardsModel.getCvv()+"66666");
+            }
+            Log.e("length", String.valueOf(cardModelList.size()));
+            cardAdapter = new CardAdapter(cardModelList, requireContext(), selectedPosition, this);
             binding.rvCardList.setAdapter(cardAdapter);
-            binding.shimmerLayout.setVisibility(View.GONE);
-            binding.btnProceedPayment.setVisibility(View.VISIBLE);
+//            binding.shimmerLayout.setVisibility(View.GONE);
+//            binding.llCardDetails.setVisibility(View.VISIBLE);
+//            binding.btnAddCard.setVisibility(View.VISIBLE);
+//            binding.llExistNewCard.setVisibility(View.VISIBLE);
+//            binding.llAddNewCard.setVisibility(View.VISIBLE);
+//            binding.llPayament.setVisibility(View.VISIBLE);
+//            binding.llPayLayout.setVisibility(View.VISIBLE);
         } else {
-            binding.shimmerLayout.setVisibility(View.GONE);
-            binding.llPayament.setVisibility(View.VISIBLE);
+//            binding.shimmerLayout.setVisibility(View.GONE);
+//            binding.llCardDetails.setVisibility(View.VISIBLE);
+//            binding.btnAddCard.setVisibility(View.VISIBLE);
+//            binding.llExistNewCard.setVisibility(View.VISIBLE);
+//            binding.llAddNewCard.setVisibility(View.VISIBLE);
+//            binding.llPayament.setVisibility(View.VISIBLE);
+//            binding.llPayLayout.setVisibility(View.VISIBLE);
         }
 
     }
@@ -172,6 +196,11 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
 
     @Override
     public void navigateToPayment() {
+
+    }
+
+    @Override
+    public void onItemClick(Integer position) {
 
     }
 }

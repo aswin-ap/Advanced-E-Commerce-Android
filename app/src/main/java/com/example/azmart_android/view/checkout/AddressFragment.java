@@ -1,29 +1,25 @@
 package com.example.azmart_android.view.checkout;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.azmart_android.R;
 import com.example.azmart_android.adapter.AddressAdapter;
-import com.example.azmart_android.adapter.WishlistAdapter;
 import com.example.azmart_android.contracts.AddressContract;
 import com.example.azmart_android.data.model.AddressModel;
-import com.example.azmart_android.databinding.FragmentAddAddressBinding;
 import com.example.azmart_android.databinding.FragmentAddressBinding;
 import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
+import com.example.azmart_android.utils.OnItemClickListener;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.wishlist.WishlistFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -96,7 +92,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     @Override
     public void showAddressResponse(List<AddressModel> addressModelList) {
         if (addressModelList.size() > 0) {
-            addressAdapter = new AddressAdapter(addressModelList, requireContext(), selectedPosition,this);
+            addressAdapter = new AddressAdapter(addressModelList, requireContext(), selectedPosition, (OnItemClickListener) this);
             binding.rvAddress.setAdapter(addressAdapter);
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.addressLayout.setVisibility(View.VISIBLE);

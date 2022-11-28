@@ -2,6 +2,7 @@ package com.example.azmart_android.presenter;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -118,5 +119,6 @@ public class CardPresenter implements CardContract.Presenter {
             }
         }
         mView.showCardResponse(modelList);
+        Log.e("result", modelList.toString());
     }
 }

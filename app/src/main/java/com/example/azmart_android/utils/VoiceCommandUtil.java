@@ -24,6 +24,18 @@ public class VoiceCommandUtil {
                 bottomNavigationView.setSelectedItemId(R.id.wishlistFragment);
                 break;
             }
+            case "GO TO ADD ADDRESS": {
+                bottomNavigationView.setSelectedItemId(R.id.addAddressFragment);
+                break;
+            }
+            case "GO TO ADD PAYMENT CARD": {
+                bottomNavigationView.setSelectedItemId(R.id.addPaymentFragment);
+                break;
+            }
+            case "GO TO CATEGORY LIST": {
+                bottomNavigationView.setSelectedItemId(R.id.categoryFragment);
+                break;
+            }
             default: {
                 return;
             }

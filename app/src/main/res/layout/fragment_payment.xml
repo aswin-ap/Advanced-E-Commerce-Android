@@ -162,7 +162,9 @@
                                 android:id="@+id/rv_card_list"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"/>
+                                android:layout_marginTop="10dp"
+                                tools:itemCount="1"
+                                tools:listitem="@layout/address_item"/>
 
                             <LinearLayout
                                     android:id="@+id/ll_add_new_card"
@@ -254,29 +256,30 @@
 
         </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_proceed_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:letterSpacing="0"
-                android:text="Proceed to Payment"
-                android:textAllCaps="false"
-                android:textColor="#DD000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_pay_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_proceed_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0"
+            android:text="Proceed to Payment"
+            android:textAllCaps="false"
+            android:textColor="#DD000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

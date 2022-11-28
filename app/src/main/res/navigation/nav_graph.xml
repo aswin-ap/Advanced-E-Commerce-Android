@@ -188,7 +188,7 @@
 
     <fragment
         android:id="@+id/addPaymentFragment"
-        android:name="com.example.azmart_android.view.checkout.PaymentFragment"
+        android:name="com.example.azmart_android.view.checkout.AddPaymentFragment"
         android:label="fragment_add_payment"
         tools:layout="@layout/fragment_add_payment" >
 

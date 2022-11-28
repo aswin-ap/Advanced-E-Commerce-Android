@@ -2,15 +2,15 @@ package com.example.azmart_android.data.model;
 
 public class CardsModel {
     private String cardNumber;
-    private String cardType;
     private String cardHolderName;
+    private String cardType;
     private String expiryDate;
     private String cvv;
 
-    public CardsModel(String cardNumber, String cardType, String cardHolderName, String expiryDate, String cvv) {
+    public CardsModel(String cardNumber, String cardHolderName, String cardType, String expiryDate, String cvv) {
         this.cardNumber = cardNumber;
-        this.cardType = cardType;
         this.cardHolderName = cardHolderName;
+        this.cardType = cardType;
         this.expiryDate = expiryDate;
         this.cvv = cvv;
     }
