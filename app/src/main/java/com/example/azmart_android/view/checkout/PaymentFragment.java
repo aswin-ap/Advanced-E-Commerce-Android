@@ -170,21 +170,21 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
             Log.e("length", String.valueOf(cardModelList.size()));
             cardAdapter = new CardAdapter(cardModelList, requireContext(), selectedPosition, this);
             binding.rvCardList.setAdapter(cardAdapter);
-//            binding.shimmerLayout.setVisibility(View.GONE);
-//            binding.llCardDetails.setVisibility(View.VISIBLE);
-//            binding.btnAddCard.setVisibility(View.VISIBLE);
-//            binding.llExistNewCard.setVisibility(View.VISIBLE);
-//            binding.llAddNewCard.setVisibility(View.VISIBLE);
-//            binding.llPayament.setVisibility(View.VISIBLE);
-//            binding.llPayLayout.setVisibility(View.VISIBLE);
+            binding.shimmerLayout.setVisibility(View.GONE);
+            binding.llCardDetails.setVisibility(View.VISIBLE);
+            binding.btnAddCard.setVisibility(View.VISIBLE);
+            binding.llExistNewCard.setVisibility(View.VISIBLE);
+            binding.llAddNewCard.setVisibility(View.VISIBLE);
+            binding.llPayament.setVisibility(View.VISIBLE);
+            binding.llPayLayout.setVisibility(View.VISIBLE);
         } else {
-//            binding.shimmerLayout.setVisibility(View.GONE);
-//            binding.llCardDetails.setVisibility(View.VISIBLE);
-//            binding.btnAddCard.setVisibility(View.VISIBLE);
-//            binding.llExistNewCard.setVisibility(View.VISIBLE);
-//            binding.llAddNewCard.setVisibility(View.VISIBLE);
-//            binding.llPayament.setVisibility(View.VISIBLE);
-//            binding.llPayLayout.setVisibility(View.VISIBLE);
+            binding.shimmerLayout.setVisibility(View.GONE);
+            binding.llCardDetails.setVisibility(View.VISIBLE);
+            binding.btnAddCard.setVisibility(View.VISIBLE);
+            binding.llExistNewCard.setVisibility(View.VISIBLE);
+            binding.llAddNewCard.setVisibility(View.VISIBLE);
+            binding.llPayament.setVisibility(View.VISIBLE);
+            binding.llPayLayout.setVisibility(View.VISIBLE);
         }
 
     }
