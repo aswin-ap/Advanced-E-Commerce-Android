@@ -1,5 +1,6 @@
 package com.example.azmart_android.adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.azmart_android.R;
 import com.example.azmart_android.data.model.SearchResponse;
 import com.example.azmart_android.databinding.SearchItemBinding;
@@ -21,10 +24,23 @@ import java.util.List;
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.SearchViewHolder> {
     SearchResponse searchResponseList;
     ProductsFragment productsFragment;
+    CircularProgressDrawable circularProgressDrawable;
+    RequestOptions requestOptions;
 
     public ProductsAdapter(SearchResponse searchResponseList, ProductsFragment productsFragment) {
         this.searchResponseList = searchResponseList;
-        this.productsFragment=productsFragment;
+        this.productsFragment = productsFragment;
+
+        circularProgressDrawable = new CircularProgressDrawable(productsFragment.getContext());
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.start();
+
+        requestOptions = new RequestOptions();
+        requestOptions.placeholder(circularProgressDrawable);
+        requestOptions.error(R.drawable.ic_image_error);
+        requestOptions.skipMemoryCache(true);
+        requestOptions.fitCenter();
     }
 
     @NonNull
@@ -36,7 +52,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Search
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        holder.setData(searchResponseList.getDocs().get(position),holder);
+        holder.setData(searchResponseList.getDocs().get(position), holder);
     }
 
     @Override
@@ -58,33 +74,23 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Search
                 searchItemBinding.ratingItem.setRating((float) docs.getMetadata().getEvaluation().getStarRating());
                 Glide.with(searchItemBinding.getRoot().getContext())
                         .load(docs.getProductMainImageUrl())
-                        .placeholder(R.drawable.ic_image_placeholder)
-                        .error(R.drawable.ic_image_error)
+                        .apply(requestOptions)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(searchItemBinding.ivProduct);
                 searchItemBinding.tvPrice.setText(docs.getMetadata().getPrices().getSalePrice().getFormattedPrice());
 
-            }catch (Exception e){
-                Log.e("error :",e.toString());
+            } catch (Exception e) {
+                Log.e("error :", e.toString());
             }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    productsFragment.navigateToProduct(docs.getProductId(),docs.getProductTitle());
+                    productsFragment.navigateToProduct(docs.getProductId(), docs.getProductTitle());
                 }
             });
 
         }
-    }
-
-    public void updateSearchListItems(List<SearchResponse.Docs> searchResponseList) {
-        final SearchDiffCallback diffCallback = new SearchDiffCallback(this.searchResponseList.getDocs(), searchResponseList);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        this.searchResponseList.getDocs().clear();
-        this.searchResponseList.getDocs().addAll(searchResponseList);
-        diffResult.dispatchUpdatesTo(this);
     }
 }
 

@@ -8,10 +8,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.azmart_android.R;
 
 import java.util.ArrayList;
@@ -21,11 +24,24 @@ public class ProductViewPagerAdaptor extends PagerAdapter {
     List<String> imageList;
     Context context;
     LayoutInflater mLayoutInflater;
+    CircularProgressDrawable circularProgressDrawable;
+    RequestOptions requestOptions;
 
     public ProductViewPagerAdaptor(Context context, List<String> imageList) {
     this.imageList=imageList;
     this.context=context;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        circularProgressDrawable = new CircularProgressDrawable(context);
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.start();
+
+        requestOptions = new RequestOptions();
+        requestOptions.placeholder(circularProgressDrawable);
+        requestOptions.error(R.drawable.ic_image_error);
+        requestOptions.skipMemoryCache(true);
+        requestOptions.fitCenter();
     }
 
     @Override
@@ -50,8 +66,8 @@ public class ProductViewPagerAdaptor extends PagerAdapter {
 
         // setting the image in the imageView
         Glide.with(context).load(imageList.get(position))
-                .placeholder(R.drawable.ic_image_placeholder)
-                .error(R.drawable.ic_image_error)
+                .apply(requestOptions)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
 
         ViewPager vp = (ViewPager) container;

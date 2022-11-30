@@ -12,21 +12,30 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/green_500">
 
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/titleTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="6dp"
+            android:padding="10dp"
+            android:text="My Whishlist" />
+
     </androidx.appcompat.widget.Toolbar>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/titleTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:padding="10dp"
-            android:text="My Whishlist" />
+        <include
+            android:id="@+id/empty_layout"
+            layout="@layout/empty_wishlist"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/srf_wishlist"
@@ -77,16 +86,6 @@
             </LinearLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_no_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Wishlist Empty"
-        android:textColor="@color/green_700"
-        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,14 +1,17 @@
 package com.example.azmart_android.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.azmart_android.R;
 import com.example.azmart_android.data.model.BestProductsResponse;
 import com.example.azmart_android.databinding.BestProductItemBinding;
@@ -19,10 +22,23 @@ import java.util.List;
 public class BestProductHomeAdapter extends RecyclerView.Adapter<BestProductHomeAdapter.BestProductHomeViewHolder> {
     List<BestProductsResponse> bestProductsResponses;
     HomeFragment homeFragment;
+    CircularProgressDrawable circularProgressDrawable;
+    RequestOptions requestOptions;
 
     public BestProductHomeAdapter(List<BestProductsResponse> bestProductsResponses, HomeFragment homeFragment) {
         this.bestProductsResponses = bestProductsResponses;
         this.homeFragment = homeFragment;
+
+        circularProgressDrawable = new CircularProgressDrawable(homeFragment.requireContext());
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.start();
+
+        requestOptions = new RequestOptions();
+        requestOptions.placeholder(circularProgressDrawable);
+        requestOptions.error(R.drawable.ic_image_error);
+        requestOptions.skipMemoryCache(true);
+        requestOptions.fitCenter();
     }
 
     @NonNull
@@ -55,8 +71,7 @@ public class BestProductHomeAdapter extends RecyclerView.Adapter<BestProductHome
             bestProductItemBinding.tvTitle.setText(categoriesResponse.getProductTitle());
             Glide.with(bestProductItemBinding.getRoot().getContext())
                     .load(categoriesResponse.getProductSmallImageUrls().getString().get(0))
-                    .placeholder(R.drawable.ic_image_placeholder)
-                    .error(R.drawable.ic_image_error)
+                    .apply(requestOptions)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(bestProductItemBinding.ivProduct);
             bestProductItemBinding.tvPrice.setText("USD " + String.valueOf(categoriesResponse.getAppSalePrice()));
@@ -64,7 +79,7 @@ public class BestProductHomeAdapter extends RecyclerView.Adapter<BestProductHome
                 @Override
                 public void onClick(View view) {
                     // homeFragment.find;
-                    homeFragment.navigateToProduct(categoriesResponse.getProductId(),categoriesResponse.getProductTitle());
+                    homeFragment.navigateToProduct(categoriesResponse.getProductId(), categoriesResponse.getProductTitle());
                 }
             });
 

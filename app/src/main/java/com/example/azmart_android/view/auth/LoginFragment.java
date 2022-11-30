@@ -46,7 +46,8 @@ public class LoginFragment extends BaseFragment {
         mAuth = FirebaseAuth.getInstance();
         sessionManager = new SessionManager(requireContext());
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+               // .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("336267693710-2ucpg4kv9p593vt4c0dnfhj9iufn4kkj.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
@@ -95,6 +96,7 @@ public class LoginFragment extends BaseFragment {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 hideLoadingDialog();
+                Log.e("Google Signin", e.toString());
                 showSnackBar(requireView(), "Sign in with google failed!");
             }
         }

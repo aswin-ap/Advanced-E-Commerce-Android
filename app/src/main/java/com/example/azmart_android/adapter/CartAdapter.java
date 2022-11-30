@@ -9,9 +9,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.azmart_android.R;
 import com.example.azmart_android.data.model.CartModel;
 import com.example.azmart_android.databinding.ItemCartProductBinding;
@@ -23,12 +25,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private onCartItemClickListener listener;
     private List<CartModel> list;
     private float itemPrice;
+    CircularProgressDrawable circularProgressDrawable;
+    RequestOptions requestOptions;
 
 
     public CartAdapter(Context context, List<CartModel> list, onCartItemClickListener listener) {
         this.context = context;
         this.listener = listener;
         this.list = list;
+
+        circularProgressDrawable = new CircularProgressDrawable(context);
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.start();
+
+        requestOptions = new RequestOptions();
+        requestOptions.placeholder(circularProgressDrawable);
+        requestOptions.error(R.drawable.ic_image_error);
+        requestOptions.skipMemoryCache(true);
+        requestOptions.fitCenter();
     }
 
     @NonNull
@@ -48,8 +63,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.binding.productItem.ratingItem.setRating(Float.parseFloat(model.getRating()));
         Glide.with(holder.binding.getRoot().getContext())
                 .load(model.getImageUrl())
-                .placeholder(R.drawable.ic_image_placeholder)
-                .error(R.drawable.ic_image_error)
+                .apply(requestOptions)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.binding.productItem.ivProduct);
         holder.binding.productItem.tvPrice.setText("USD$ " + model.getPrice());

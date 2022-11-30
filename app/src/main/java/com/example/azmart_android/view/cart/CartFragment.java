@@ -111,26 +111,26 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
 
     private void setGrandTotal() {
         float total = 0;
-        float cartTotal=0;
+        float cartTotal = 0;
         for (int i = 0; i < cartModelArrayList.size(); i++) {
             for (int j = 1; j <= cartModelArrayList.get(i).getQuantity(); j++) {
                 total += Float.parseFloat(cartModelArrayList.get(i).getPrice());
                 cartTotal += Float.parseFloat(cartModelArrayList.get(i).getPrice());
             }
         }
-         if (total < 1000.0)
-             total += 49.0f;
+        if (total < 1000.0)
+            total += 49.0f;
 
         String formattedString = String.format("%.02f", total);
         binding.tvPriceItems.setText("Price (" + (cartModelArrayList.size()) + ") items");
         binding.tvPrice.setText("$" + String.format("%.02f", cartTotal));
         binding.textTotal.setText("$" + formattedString);
         binding.tvTotalAmount.setText(formattedString);
-        totalPrice=cartTotal;
+        totalPrice = cartTotal;
 
         if (total > 1000.0) {
-           binding.tvDeliveryCharge.setText("FREE DELIVERY");
-           binding.tvDeliveryCharge.setTextColor(getResources().getColor(R.color.green_500));
+            binding.tvDeliveryCharge.setText("FREE DELIVERY");
+            binding.tvDeliveryCharge.setTextColor(getResources().getColor(R.color.green_500));
         } else {
             binding.tvDeliveryCharge.setText("$49");
             binding.tvDeliveryCharge.setTextColor(getResources().getColor(R.color.black));
@@ -163,16 +163,19 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
             cartModelArrayList.addAll(cartModelList);
             cartAdapter.notifyDataSetChanged();
             setGrandTotal();
+            binding.shimmerLayout.setVisibility(View.VISIBLE);
             binding.cartLayout.setVisibility(View.VISIBLE);
             binding.layoutTotal.setVisibility(View.VISIBLE);
             binding.totalMargin.setVisibility(View.VISIBLE);
+            binding.emptyLayout.getRoot().setVisibility(View.GONE);
             //  binding.tvNoData.setVisibility(View.GONE);
             //TODO Handle the no data of cart
         } else {
+            binding.shimmerLayout.setVisibility(View.GONE);
+            binding.emptyLayout.getRoot().setVisibility(View.VISIBLE);
             binding.cartLayout.setVisibility(View.GONE);
             binding.layoutTotal.setVisibility(View.GONE);
             binding.totalMargin.setVisibility(View.GONE);
-            showToast(requireContext(), "No items");
             //  binding.tvNoData.setVisibility(View.VISIBLE);
         }
     }

@@ -93,16 +93,15 @@ public class WishlistFragment extends Fragment implements WishlistContract.View 
                 Navigation.findNavController(requireView()).navigate(WishlistFragmentDirections.actionWishlistFragmentToProductFragment(
                         modelList.get(position).getId(), modelList.get(position).getTitle()
                 ));
-            });
+            }, requireContext());
             binding.rvWishlist.setAdapter(wishlistAdapter);
             binding.rvWishlist.setVisibility(View.VISIBLE);
             binding.shimmerLayout.setVisibility(View.GONE);
-            binding.tvNoData.setVisibility(View.GONE);
-
+            binding.emptyLayout.getRoot().setVisibility(View.GONE);
         } else {
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.rvWishlist.setVisibility(View.GONE);
-            binding.tvNoData.setVisibility(View.VISIBLE);
+            binding.emptyLayout.getRoot().setVisibility(View.VISIBLE);
         }
 
     }

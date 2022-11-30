@@ -7,26 +7,29 @@
     tools:context=".view.cart.CartFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/green_500" />
+        android:background="@color/green_500">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/titleTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="My Cart" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/total_margin"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/tool_bar"
         android:orientation="vertical">
-
-        <TextView
-            style="@style/titleTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:padding="10dp"
-            android:text="My Cart" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/srf_cart"
@@ -37,6 +40,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <include
+                    android:id="@+id/empty_layout"
+                    layout="@layout/empty_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmer_layout"

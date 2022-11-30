@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.azmart_android.R;
+import com.example.azmart_android.adapter.ProfileAdapter;
 import com.example.azmart_android.data.preference.SessionManager;
 import com.example.azmart_android.databinding.FragmentProfileBinding;
 import com.example.azmart_android.view.auth.AuthActivity;
@@ -21,8 +22,10 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private FirebaseAuth mAuth;
+    private ProfileAdapter adapter;
     GoogleSignInClient mGoogleSignInClient;
     private SessionManager sessionManager;
+    private String[] settingsList = {"My Profile", "Settings"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initView() {
+        adapter = new ProfileAdapter(requireActivity(),settingsList);
+        binding.profileList.setAdapter(adapter);
         binding.btnLogout.setOnClickListener(v -> {
             showLogoutDialog();
         });

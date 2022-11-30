@@ -14,12 +14,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterFace {
-/*    @FormUrlEncoded
-    @POST("driver/notifications")
-    Call<Notification> postNotificationDetails(
-            @Header("Authorization") String token,
-            @Field("offset") String offset,
-            @Field("limit") String limit);*/
 
     @GET("api/v2/categories")
     Observable<List<CategoriesResponse>> getCategories();

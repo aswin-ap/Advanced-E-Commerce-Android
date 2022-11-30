@@ -5,4 +5,5 @@
     <string name="firebase_error">Oops, Something went wrong. Please try again later</string>
     <string name="no_internet">Internet not available, Cross check your internet connectivity and try again</string>
     <string name="search_text">Search A-Z Mart</string>
+    <id name="viewBinding" />
 </resources>

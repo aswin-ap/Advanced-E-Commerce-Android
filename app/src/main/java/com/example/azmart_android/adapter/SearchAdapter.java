@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -25,18 +26,23 @@ import java.util.List;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
     SearchResponse searchResponseList;
     SearchFragment searchFragment;
-    RequestOptions options;
+    CircularProgressDrawable circularProgressDrawable;
+    RequestOptions requestOptions;
 
     public SearchAdapter(SearchResponse searchResponseList, SearchFragment searchFragment) {
         this.searchResponseList = searchResponseList;
-        this.searchFragment=searchFragment;
-         options = new RequestOptions()
-                 .override(150,150)
-                .centerCrop()
-                .placeholder(R.drawable.ic_image_placeholder)
-                .error(R.drawable.ic_image_error)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
+        this.searchFragment = searchFragment;
+
+        circularProgressDrawable = new CircularProgressDrawable(searchFragment.getContext());
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.start();
+
+        requestOptions = new RequestOptions();
+        requestOptions.placeholder(circularProgressDrawable);
+        requestOptions.error(R.drawable.ic_image_error);
+        requestOptions.skipMemoryCache(true);
+        requestOptions.fitCenter();
 
     }
 
@@ -49,21 +55,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        holder.setData(searchResponseList.getDocs().get(position),holder);
+        holder.setData(searchResponseList.getDocs().get(position), holder);
     }
 
     @Override
     public int getItemCount() {
         return searchResponseList != null ? searchResponseList.getDocs().size() : 0;
-    }
-
-    public void updateSearchListItems(List<SearchResponse.Docs> searchResponseList) {
-        final SearchDiffCallback diffCallback = new SearchDiffCallback(this.searchResponseList.getDocs(), searchResponseList);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        this.searchResponseList.getDocs().clear();
-        this.searchResponseList.getDocs().addAll(searchResponseList);
-        diffResult.dispatchUpdatesTo(this);
     }
 
     public class SearchViewHolder extends RecyclerView.ViewHolder {
@@ -81,7 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                 Glide.with(searchItemBinding.getRoot().getContext())
                         .load(docs.getMetadata().getImage().getImgUrl())
                         //.load(docs.getProductMainImageUrl())
-                        .apply(options)
+                        .apply(requestOptions)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(searchItemBinding.ivProduct);
                 searchItemBinding.tvPrice.setText(docs.getMetadata().getPrices().getSalePrice().getFormattedPrice());
@@ -93,7 +90,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    searchFragment.navigateToProducts(docs.getProductId(),docs.getProductTitle());
+                    searchFragment.navigateToProducts(docs.getProductId(), docs.getProductTitle());
 
                 }
             });
@@ -101,42 +98,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         }
     }
 
-}
-
-class SearchDiffCallback extends DiffUtil.Callback {
-
-    private final List<SearchResponse.Docs> mOldSearchList;
-    private final List<SearchResponse.Docs> mNewSearchList;
-
-    SearchDiffCallback(List<SearchResponse.Docs> mOldSearchList, List<SearchResponse.Docs> mNewSearchList) {
-        this.mOldSearchList = mOldSearchList;
-        this.mNewSearchList = mNewSearchList;
-    }
-
-    @Override
-    public int getOldListSize() {
-        return mOldSearchList != null ? mOldSearchList.size() : 0;
-    }
-
-    @Override
-    public int getNewListSize() {
-        return mNewSearchList != null ? mNewSearchList.size() : 0;
-    }
-
-    @Override
-    public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        /*return mOldSearchList.get(oldItemPosition).get == mNewSearchList.get(
-                newItemPosition).getDocs();*/
-        return true;
-    }
-
-    @Override
-    public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        final SearchResponse.Docs oldSearch = mOldSearchList.get(oldItemPosition);
-        final SearchResponse.Docs newSearch = mNewSearchList.get(newItemPosition);
-
-        return oldSearch.equals(newSearch);
-    }
 }
 
 
