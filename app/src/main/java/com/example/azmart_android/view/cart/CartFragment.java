@@ -1,6 +1,5 @@
 package com.example.azmart_android.view.cart;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +18,7 @@ import com.example.azmart_android.contracts.CartContract;
 import com.example.azmart_android.data.model.CartModel;
 import com.example.azmart_android.databinding.FragmentCartBinding;
 import com.example.azmart_android.presenter.CartPresenter;
-import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.checkout.AddressFragmentDirections;
-import com.example.azmart_android.view.home.HomeActivity;
-import com.example.azmart_android.view.home.HomeFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -90,17 +85,24 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
     @Override
     public void onQuantityAdd(int position) {
         CartModel model = cartModelArrayList.get(position);
-        model.setQuantity(model.getQuantity() + 1);
-        cartAdapter.notifyDataSetChanged();
-        setGrandTotal();
+        if (model.getQuantity() < 5) {
+            model.setQuantity(model.getQuantity() + 1);
+            cartAdapter.notifyDataSetChanged();
+            setGrandTotal();
+        }
+        Log.d("CartFragment", "onQuantitySub: "+ model.getQuantity());
+
     }
 
     @Override
     public void onQuantitySub(int position) {
         CartModel model = cartModelArrayList.get(position);
-        model.setQuantity(model.getQuantity() - 1);
-        cartAdapter.notifyDataSetChanged();
-        setGrandTotal();
+        if (model.getQuantity() > 1) {
+            model.setQuantity(model.getQuantity() - 1);
+            cartAdapter.notifyDataSetChanged();
+            setGrandTotal();
+        }
+        Log.d("CartFragment", "onQuantitySub: "+ model.getQuantity());
     }
 
     @Override
@@ -122,11 +124,11 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
             total += 49.0f;
 
         String formattedString = String.format("%.02f", total);
-        binding.tvPriceItems.setText("Price (" + (cartModelArrayList.size()) + ") items");
-        binding.tvPrice.setText("$" + String.format("%.02f", cartTotal));
+        binding.tvItems.setText("Price (" + (cartModelArrayList.size()) + ") items");
+        binding.tvPriceItems.setText("$" + String.format("%.02f", cartTotal));
         binding.textTotal.setText("$" + formattedString);
         binding.tvTotalAmount.setText(formattedString);
-        totalPrice = cartTotal;
+        totalPrice = total;
 
         if (total > 1000.0) {
             binding.tvDeliveryCharge.setText("FREE DELIVERY");
@@ -163,20 +165,17 @@ public class CartFragment extends BaseFragment implements CartAdapter.onCartItem
             cartModelArrayList.addAll(cartModelList);
             cartAdapter.notifyDataSetChanged();
             setGrandTotal();
-            binding.shimmerLayout.setVisibility(View.VISIBLE);
+            binding.shimmerLayout.setVisibility(View.GONE);
             binding.cartLayout.setVisibility(View.VISIBLE);
             binding.layoutTotal.setVisibility(View.VISIBLE);
             binding.totalMargin.setVisibility(View.VISIBLE);
             binding.emptyLayout.getRoot().setVisibility(View.GONE);
-            //  binding.tvNoData.setVisibility(View.GONE);
-            //TODO Handle the no data of cart
         } else {
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.emptyLayout.getRoot().setVisibility(View.VISIBLE);
             binding.cartLayout.setVisibility(View.GONE);
             binding.layoutTotal.setVisibility(View.GONE);
             binding.totalMargin.setVisibility(View.GONE);
-            //  binding.tvNoData.setVisibility(View.VISIBLE);
         }
     }
 

@@ -60,7 +60,7 @@
                     android:layout_gravity="center"
                     android:paddingRight="16dp"
                     android:src="@drawable/ic_baseline_keyboard_voice_24"
-                    app:tint="@color/cardview_dark_background" />
+                    app:tint="@color/white" />
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -82,7 +82,8 @@
                 style="@style/titleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today's Deals" />
+                android:text="Today's Deals"
+                android:textColor="@color/black" />
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/deals_slider_view"
@@ -112,7 +113,8 @@
                     style="@style/titleTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categories" />
+                    android:text="Categories"
+                    android:textColor="@color/black" />
 
                 <View
                     android:layout_width="wrap_content"
@@ -157,7 +159,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Best Products" />
+                android:text="Best Products"
+                android:textColor="@color/black" />
 
 
             <LinearLayout

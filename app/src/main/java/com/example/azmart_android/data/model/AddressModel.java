@@ -2,7 +2,9 @@ package com.example.azmart_android.data.model;
 
 import com.google.gson.Gson;
 
-public class AddressModel {
+import java.io.Serializable;
+
+public class AddressModel implements Serializable {
     private String fullName;
     private String phoneNumber;
     private String pinCode;

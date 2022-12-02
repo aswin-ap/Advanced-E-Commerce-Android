@@ -10,6 +10,7 @@ public interface CardContract {
 
     interface View extends BaseView {
         void showSuccessResponse(String message);
+        void showAuthenticationWarning(String message);
         void showCardResponse(List<CardsModel> addressModelList);
     }
 
@@ -18,6 +19,7 @@ public interface CardContract {
         void onSaveCardResponse(String message);
         void getCard(String userId);
         void onCardResponse(QuerySnapshot documentSnapshot);
+        void authenticate();
     }
 
 }

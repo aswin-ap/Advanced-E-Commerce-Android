@@ -5,14 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.azmart_android.R;
 import com.example.azmart_android.adapter.ProfileAdapter;
 import com.example.azmart_android.data.preference.SessionManager;
 import com.example.azmart_android.databinding.FragmentProfileBinding;
-import com.example.azmart_android.view.auth.AuthActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -20,12 +21,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
+    GoogleSignInClient mGoogleSignInClient;
     private FragmentProfileBinding binding;
     private FirebaseAuth mAuth;
     private ProfileAdapter adapter;
-    GoogleSignInClient mGoogleSignInClient;
     private SessionManager sessionManager;
-    private String[] settingsList = {"My Profile", "Settings"};
+    private String[] settingsList = {"My Profile", "History", "Encryption Performance", "Settings",};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,29 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initView() {
-        adapter = new ProfileAdapter(requireActivity(),settingsList);
+        adapter = new ProfileAdapter(requireActivity(), settingsList);
         binding.profileList.setAdapter(adapter);
         binding.btnLogout.setOnClickListener(v -> {
             showLogoutDialog();
         });
+        binding.profileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                navigate(i);
+            }
+        });
+    }
+
+    private void navigate(int i) {
+        switch (i) {
+            case 2: {
+                Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_performanceCheckFragment);
+            }
+            break;
+            default: {
+            }
+
+        }
     }
 
     private void showLogoutDialog() {

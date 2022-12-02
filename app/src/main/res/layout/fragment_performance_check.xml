@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context=".view.performance.PerformanceCheckFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/green_500">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/titleTextStyle3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Scale and don't break\nPrivacy >_"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/performance_slider"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_margin="15dp"
+            app:sliderAnimationDuration="1000"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorEnabled="false"
+            app:sliderScrollTimeInSec="1" />
+
+        <LinearLayout
+            android:id="@+id/performance_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/pb_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:indicatorColor="@color/green_700"
+                app:trackColor="@color/white"
+                app:trackThickness="8dp" />
+
+            <TextView
+                style="@style/hintTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                tools:text="Our encryption " />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="@color/green_500"
+            android:letterSpacing="0"
+            android:padding="10dp"
+            android:text="Run performance test"
+            android:textAllCaps="false"
+            android:textColor="#C4000000"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:cornerRadius="7dp" />
+
+
+    </LinearLayout>
+
+</ScrollView>

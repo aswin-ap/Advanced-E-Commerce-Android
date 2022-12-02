@@ -1,55 +1,36 @@
-package com.example.azmart_android.view.checkout;
+package com.example.azmart_android.view.payment;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
+
 import com.example.azmart_android.R;
-import com.example.azmart_android.adapter.AddressAdapter;
 import com.example.azmart_android.adapter.CardAdapter;
 import com.example.azmart_android.contracts.CardContract;
-import com.example.azmart_android.contracts.PaymentContract;
 import com.example.azmart_android.data.model.CardsModel;
-import com.example.azmart_android.databinding.FragmentCartBinding;
 import com.example.azmart_android.databinding.FragmentPaymentBinding;
-import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.presenter.CardPresenter;
-import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.utils.OnItemClickListener;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.SplashActivity;
-import com.example.azmart_android.view.auth.AuthActivity;
-import com.example.azmart_android.view.home.HomeActivity;
-import com.example.azmart_android.view.product.ProductDetailFragmentArgs;
-import com.example.azmart_android.view.product.ProductsFragmentArgs;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
 
-public class PaymentFragment extends BaseFragment implements CardContract.View ,  ConfirmDialog.ConfirmCheckoutListener, OnItemClickListener{
+public class PaymentFragment extends BaseFragment implements CardContract.View, OnItemClickListener {
 
-    private FragmentPaymentBinding binding;
-    private String formattedString;
+    private final int selectedPosition = 0;
     public float totalPrice;
     FirebaseUser currentUser;
-    ConfirmDialog dialog;
+    private FragmentPaymentBinding binding;
     private CardPresenter cardPresenter;
     private CardAdapter cardAdapter;
-    private int selectedPosition = 0;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,9 +56,8 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
     }
 
     private void initView() {
-        totalPrice=PaymentFragmentArgs.fromBundle(getArguments()).getTotalPrice();
-        binding.btnProceedPayment.setText("Pay"+" "+totalPrice);
-        dialog = new ConfirmDialog(requireContext(), this, "Are you sure to proceed to payment ?");
+        totalPrice = PaymentFragmentArgs.fromBundle(getArguments()).getTotalPrice();
+        binding.btnProceedPayment.setText("Pay $" + " " + totalPrice);
 //        binding.srfWishlist.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 //            @Override
 //            public void onRefresh() {
@@ -112,7 +92,7 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
         binding.btnProceedPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.show();
+                cardPresenter.authenticate();
             }
         });
 
@@ -153,33 +133,29 @@ public class PaymentFragment extends BaseFragment implements CardContract.View ,
     }
 
     @Override
+    public void showAuthenticationWarning(String message) {
+        showSnackBar(requireView(), message);
+    }
+
+    @Override
     public void showCardResponse(List<CardsModel> cardModelList) {
         if (cardModelList.size() > 0) {
             cardAdapter = new CardAdapter(cardModelList, requireContext(), selectedPosition, this);
             binding.rvCardList.setAdapter(cardAdapter);
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.llPayament.setVisibility(View.VISIBLE);
-            binding.llPayLayout.setVisibility(View.VISIBLE);
+            binding.btnProceedPayment.setVisibility(View.VISIBLE);
         } else {
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.llPayament.setVisibility(View.VISIBLE);
-            binding.llPayLayout.setVisibility(View.VISIBLE);
+            binding.btnProceedPayment.setVisibility(View.VISIBLE);
         }
 
     }
 
     @Override
-    public void checkOut() {
-
-    }
-
-    @Override
-    public void navigateToPayment() {
-
-    }
-
-    @Override
     public void onItemClick(Integer position) {
-
+        cardAdapter.updatePosition(position);
+        cardAdapter.notifyDataSetChanged();
     }
 }

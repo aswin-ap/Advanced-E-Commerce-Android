@@ -46,7 +46,7 @@
         android:id="@+id/cartFragment"
         android:name="com.example.azmart_android.view.cart.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
 
         <action
             android:id="@+id/action_cartFragment_to_addressFragment"
@@ -72,7 +72,15 @@
         android:id="@+id/profileFragment"
         android:name="com.example.azmart_android.view.auth.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_performanceCheckFragment"
+            app:destination="@id/performanceCheckFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
@@ -145,12 +153,12 @@
     </fragment>
     <fragment
         android:id="@+id/addAddressFragment"
-        android:name="com.example.azmart_android.view.checkout.AddAddressFragment"
+        android:name="com.example.azmart_android.view.address.AddAddressFragment"
         android:label="AddAddressFragment" />
 
     <fragment
         android:id="@+id/addressFragment"
-        android:name="com.example.azmart_android.view.checkout.AddressFragment"
+        android:name="com.example.azmart_android.view.address.AddressFragment"
         android:label="AddressFragment">
 
         <argument
@@ -178,9 +186,9 @@
 
     <fragment
         android:id="@+id/paymentFragment"
-        android:name="com.example.azmart_android.view.checkout.PaymentFragment"
+        android:name="com.example.azmart_android.view.payment.PaymentFragment"
         android:label="fragment_payment"
-        tools:layout="@layout/fragment_payment" >
+        tools:layout="@layout/fragment_payment">
 
         <argument
             android:name="total_price"
@@ -193,15 +201,23 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <argument
+            android:name="address"
+            app:argType="com.example.azmart_android.data.model.AddressModel" />
 
     </fragment>
 
     <fragment
         android:id="@+id/addPaymentFragment"
-        android:name="com.example.azmart_android.view.checkout.AddPaymentFragment"
+        android:name="com.example.azmart_android.view.payment.AddPaymentFragment"
         android:label="fragment_add_payment"
-        tools:layout="@layout/fragment_add_payment" >
+        tools:layout="@layout/fragment_add_payment">
 
     </fragment>
+    <fragment
+        android:id="@+id/performanceCheckFragment"
+        android:name="com.example.azmart_android.view.performance.PerformanceCheckFragment"
+        android:label="fragment_performance_check"
+        tools:layout="@layout/fragment_performance_check" />
 
 </navigation>

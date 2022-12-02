@@ -1,7 +1,7 @@
-package com.example.azmart_android.view.checkout;
+package com.example.azmart_android.view.address;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +20,20 @@ import com.example.azmart_android.presenter.AddressPresenter;
 import com.example.azmart_android.utils.ConfirmDialog;
 import com.example.azmart_android.utils.OnItemClickListener;
 import com.example.azmart_android.view.BaseFragment;
-import com.example.azmart_android.view.cart.CartFragment;
-import com.example.azmart_android.view.product.ProductsFragmentArgs;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddressFragment extends BaseFragment implements AddressContract.View, ConfirmDialog.ConfirmCheckoutListener, OnItemClickListener {
-    private FragmentAddressBinding binding;
     AddressPresenter addressPresenter;
     AddressAdapter addressAdapter;
     FirebaseUser currentUser;
     ConfirmDialog dialog;
-    private int selectedPosition = 0;
+    List<AddressModel> addressList = new ArrayList<>();
+    AddressModel selectedAddress;
+    private FragmentAddressBinding binding;
     private float totalPrice;
 
 
@@ -55,7 +55,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        totalPrice= AddressFragmentArgs.fromBundle(getArguments()).getTotalPrice();
+        totalPrice = AddressFragmentArgs.fromBundle(getArguments()).getTotalPrice();
         initView();
     }
 
@@ -81,7 +81,10 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
         binding.btnProceedPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.show();
+                if (selectedAddress != null)
+                    dialog.show();
+                else
+                    showSnackBar(requireView(), "Please choose address");
             }
         });
         addressPresenter.getAddress(currentUser.getUid());
@@ -96,7 +99,8 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     @Override
     public void showAddressResponse(List<AddressModel> addressModelList) {
         if (addressModelList.size() > 0) {
-            addressAdapter = new AddressAdapter(addressModelList, requireContext(), selectedPosition, (OnItemClickListener) this);
+            addressList.addAll(addressModelList);
+            addressAdapter = new AddressAdapter(addressList, requireContext(), -1, this);
             binding.rvAddress.setAdapter(addressAdapter);
             binding.shimmerLayout.setVisibility(View.GONE);
             binding.addressLayout.setVisibility(View.VISIBLE);
@@ -131,16 +135,16 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onItemClick(Integer position) {
-        Log.d("Click", "onItemClick: ");
-        selectedPosition = position;
+        addressAdapter.updatePosition(position);
+        selectedAddress = addressList.get(position);
         addressAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void navigateToPayment() {
-        Navigation.findNavController(requireView()).navigate(AddressFragmentDirections.actionAddressFragmentToPaymentFragment(totalPrice));
-
+        Navigation.findNavController(requireView()).navigate(AddressFragmentDirections.actionAddressFragmentToPaymentFragment(totalPrice, selectedAddress));
     }
 }

@@ -74,6 +74,10 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AdapterV
 
         }
     }
+
+    public void updatePosition(int selectedPosition) {
+        this.selectedPosition = selectedPosition;
+    }
 }
 
 

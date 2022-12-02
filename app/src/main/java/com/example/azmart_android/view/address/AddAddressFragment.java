@@ -1,4 +1,4 @@
-package com.example.azmart_android.view.checkout;
+package com.example.azmart_android.view.address;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -18,8 +18,6 @@ import com.example.azmart_android.utils.Validation;
 import com.example.azmart_android.view.BaseFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;

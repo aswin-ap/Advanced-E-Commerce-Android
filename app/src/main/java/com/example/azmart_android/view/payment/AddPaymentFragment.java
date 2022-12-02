@@ -1,4 +1,4 @@
-package com.example.azmart_android.view.checkout;
+package com.example.azmart_android.view.payment;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -149,6 +149,11 @@ public class AddPaymentFragment extends BaseFragment implements CardContract.Vie
     public void showSuccessResponse(String message) {
         showSnackBar(requireView(), message);
         Navigation.findNavController(requireView()).popBackStack();
+    }
+
+    @Override
+    public void showAuthenticationWarning(String message) {
+
     }
 
     @Override
