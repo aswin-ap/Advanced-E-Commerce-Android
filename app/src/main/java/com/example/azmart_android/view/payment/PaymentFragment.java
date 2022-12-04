@@ -154,6 +154,11 @@ public class PaymentFragment extends BaseFragment implements CardContract.View, 
     }
 
     @Override
+    public void navigationToOrder() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_paymentFragment_to_orderSuccessFragment);
+    }
+
+    @Override
     public void onItemClick(Integer position) {
         cardAdapter.updatePosition(position);
         cardAdapter.notifyDataSetChanged();

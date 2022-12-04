@@ -12,6 +12,7 @@ public interface CardContract {
         void showSuccessResponse(String message);
         void showAuthenticationWarning(String message);
         void showCardResponse(List<CardsModel> addressModelList);
+        void navigationToOrder();
     }
 
     interface Presenter extends BasePresenter {

@@ -162,6 +162,7 @@ public class CardPresenter implements CardContract.Presenter {
                     public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
                         mView.showAuthenticationWarning("Authentication Success");
+                        mView.navigationToOrder();
                     }
 
                     @Override

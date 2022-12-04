@@ -160,4 +160,9 @@ public class AddPaymentFragment extends BaseFragment implements CardContract.Vie
     public void showCardResponse(List<CardsModel> addressModelList) {
 
     }
+
+    @Override
+    public void navigationToOrder() {
+
+    }
 }
