@@ -1,27 +1,27 @@
 package com.example.azmart_android.data.model;
 
 public class PerformanceModel {
-    private int imageId;
-    private String description;
+    private String type;
+    private long timeTookToProcess;
 
-    public PerformanceModel(int imageId, String description) {
-        this.imageId = imageId;
-        this.description = description;
+    public PerformanceModel(String type, long timeTookToProcess) {
+        this.type = type;
+        this.timeTookToProcess = timeTookToProcess;
     }
 
-    public int getImageId() {
-        return imageId;
+    @Override
+    public String toString() {
+        return "PerformanceModel{" +
+                "type='" + type + '\'' +
+                ", timeTookToProcess=" + timeTookToProcess +
+                '}';
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public String getType() {
+        return type;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public long getTimeTookToProcess() {
+        return timeTookToProcess;
     }
 }

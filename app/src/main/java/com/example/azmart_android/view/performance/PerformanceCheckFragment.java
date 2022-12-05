@@ -2,6 +2,7 @@ package com.example.azmart_android.view.performance;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,15 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.example.azmart_android.adapter.PerformanceViewPagerAdapter;
 import com.example.azmart_android.contracts.PerformanceContract;
+import com.example.azmart_android.data.model.PerformanceModel;
 import com.example.azmart_android.databinding.FragmentPerformanceCheckBinding;
+import com.example.azmart_android.databinding.PerformanceItemBinding;
 import com.example.azmart_android.presenter.PerformancePresenter;
 import com.example.azmart_android.view.BaseFragment;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.smarteist.autoimageslider.SliderView;
+
+import java.util.List;
 
 public class PerformanceCheckFragment extends BaseFragment implements PerformanceContract.View {
     private FragmentPerformanceCheckBinding binding;
@@ -41,8 +46,20 @@ public class PerformanceCheckFragment extends BaseFragment implements Performanc
     }
 
     @Override
-    public void showPerformance() {
+    public void showPerformance(List<PerformanceModel> performanceModelList) {
+        for (int i = 0; i < performanceModelList.size(); i++) {
+            String substr = String.valueOf(performanceModelList.get(i).getTimeTookToProcess()).substring(String.valueOf(performanceModelList.get(i).getTimeTookToProcess()).length() - 4);
 
+            Log.d("ProgressValue", "showPerformance: " + performanceModelList.get(i).getTimeTookToProcess());
+            Log.d("ProgressValue", "showConvertedValute: " + substr);
+            PerformanceItemBinding performanceItemBinding = PerformanceItemBinding.inflate(getLayoutInflater());
+
+            setProgressMax(performanceItemBinding.progressLinear, 10000);
+            performanceItemBinding.tvType.setText(performanceModelList.get(i).getType());
+            performanceItemBinding.tvTime.setText(String.valueOf(performanceModelList.get(i).getTimeTookToProcess()));
+            setProgressAnimate(performanceItemBinding.progressLinear, Integer.parseInt(substr));
+            binding.performanceLayout.addView(performanceItemBinding.getRoot());
+        }
     }
 
     @Override
@@ -63,13 +80,11 @@ public class PerformanceCheckFragment extends BaseFragment implements Performanc
         binding.performanceSlider.setAutoCycle(true);
         binding.performanceSlider.startAutoCycle();
 
-        performancePresenter.getPerformance();
 
         binding.btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setProgressMax(binding.pbLoading, 100);
-                setProgressAnimate(binding.pbLoading, 50);
+                performancePresenter.getPerformance();
             }
         });
 
