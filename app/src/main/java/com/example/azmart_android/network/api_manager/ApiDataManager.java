@@ -13,6 +13,7 @@ import com.example.azmart_android.presenter.CardPresenter;
 import com.example.azmart_android.presenter.CartPresenter;
 import com.example.azmart_android.presenter.CategoryPresenter;
 import com.example.azmart_android.presenter.HomePresenter;
+import com.example.azmart_android.presenter.OrderHistoryPresenter;
 import com.example.azmart_android.presenter.ProductPresenter;
 import com.example.azmart_android.presenter.ProductsPresenter;
 import com.example.azmart_android.presenter.SearchPresenter;
@@ -568,6 +569,29 @@ public class ApiDataManager {
     }
 
 
+    public void getOrdersHistory(OrderHistoryPresenter presenter, String userId) {
+        if (firebaseFirestore == null)
+            firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("order").whereEqualTo("user_id", userId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            presenter.onOrderHistoryResultResponse(task.getResult());
+                        } else {
+                            Log.e("message", "Error");
+                        }
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        presenter.onApiError(e.getMessage());
+                        Log.e(TAG, "Exception caught in " + e.getMessage().toString());
+                    }
+                });
+    }
 
 
 }

@@ -80,6 +80,24 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_orderHistoryFragment"
+            app:destination="@id/orderHistoryFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="com.example.azmart_android.view.Order.OrderHistoryFragment"
+        android:label="fragment_order_history"
+        tools:layout="@layout/fragment_order_history">
+
+
     </fragment>
 
     <fragment
@@ -204,6 +222,22 @@
         <argument
             android:name="address"
             app:argType="com.example.azmart_android.data.model.AddressModel" />
+
+        <action
+            android:id="@+id/action_paymentFragment_to_orderSuccessFragment"
+            app:destination="@id/orderSuccessFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderSuccessFragment"
+        android:name="com.example.azmart_android.view.Order.OrderSuccessFragment"
+        android:label="fragment_orderSuccess"
+        tools:layout="@layout/fragment_order_success">
 
     </fragment>
 

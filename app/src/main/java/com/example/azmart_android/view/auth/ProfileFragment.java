@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -26,7 +27,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private ProfileAdapter adapter;
     private SessionManager sessionManager;
-    private String[] settingsList = {"My Profile", "History", "Encryption Performance", "Settings",};
+    private String[] settingsList = {"My Profile", "Order History", "Encryption Performance", "Settings",};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,10 @@ public class ProfileFragment extends Fragment {
 
     private void navigate(int i) {
         switch (i) {
+            case 1: {
+                Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_orderHistoryFragment);
+            }
+            break;
             case 2: {
                 Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_performanceCheckFragment);
             }
